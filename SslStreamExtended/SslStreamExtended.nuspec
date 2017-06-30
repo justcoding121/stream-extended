@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/justcoding121/SslStreamExtended/blob/develop/LICENSE</licenseUrl>
     <projectUrl>https://github.com/justcoding121/SslStreamExtended</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>SslStreamExtended supports ALPN & SNI for SslStream.</description>
+    <description>SslStreamExtended supports ALPN and SNI for SslStream.</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright &#x00A9; SslStreamExtended All rights reserved.</copyright>
     <tags></tags>
