@@ -1,12 +1,12 @@
 ﻿using System.Collections.Concurrent;
 
-namespace SslStreamExtended.Helpers
+namespace StreamExtended.Helpers
 {
-    internal static class BufferPool
+    public static class BufferPool
     {
         private static readonly ConcurrentQueue<byte[]> buffers = new ConcurrentQueue<byte[]>();
 
-        internal static byte[] GetBuffer(int bufferSize)
+        public static byte[] GetBuffer(int bufferSize)
         {
             byte[] buffer;
             if (!buffers.TryDequeue(out buffer) || buffer.Length != bufferSize)
@@ -17,7 +17,7 @@ namespace SslStreamExtended.Helpers
             return buffer;
         }
 
-        internal static void ReturnBuffer(byte[] buffer)
+        public static void ReturnBuffer(byte[] buffer)
         {
             if (buffer != null)
             {
