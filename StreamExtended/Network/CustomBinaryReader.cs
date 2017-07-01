@@ -18,9 +18,9 @@ namespace StreamExtended.Network
 
         private bool disposed;
 
-        internal byte[] Buffer { get; }
+        public byte[] Buffer { get; }
 
-        internal CustomBinaryReader(CustomBufferedStream stream, int bufferSize)
+        public CustomBinaryReader(CustomBufferedStream stream, int bufferSize)
         {
             this.stream = stream;
             Buffer = BufferPool.GetBuffer(bufferSize);
@@ -33,7 +33,7 @@ namespace StreamExtended.Network
         /// Read a line from the byte stream
         /// </summary>
         /// <returns></returns>
-        internal async Task<string> ReadLineAsync()
+        public async Task<string> ReadLineAsync()
         {
             byte lastChar = default(byte);
 
@@ -82,7 +82,7 @@ namespace StreamExtended.Network
         /// Read until the last new line
         /// </summary>
         /// <returns></returns>
-        internal async Task<List<string>> ReadAllLinesAsync()
+        public async Task<List<string>> ReadAllLinesAsync()
         {
             string tmpLine;
             var requestLines = new List<string>();
@@ -98,7 +98,7 @@ namespace StreamExtended.Network
         /// Read until the last new line, ignores the result
         /// </summary>
         /// <returns></returns>
-        internal async Task ReadAndIgnoreAllLinesAsync()
+        public async Task ReadAndIgnoreAllLinesAsync()
         {
             while (!string.IsNullOrEmpty(await ReadLineAsync()))
             {
@@ -111,7 +111,7 @@ namespace StreamExtended.Network
         /// <param name="buffer"></param>
         /// <param name="bytesToRead"></param>
         /// <returns>The number of bytes read</returns>
-        internal Task<int> ReadBytesAsync(byte[] buffer, int bytesToRead)
+        public Task<int> ReadBytesAsync(byte[] buffer, int bytesToRead)
         {
             return stream.ReadAsync(buffer, 0, bytesToRead);
         }
