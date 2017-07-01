@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace SslStreamExtended.Network
+namespace StreamExtended.Network
 {
-    internal class CustomBufferedPeekStream
+    public class CustomBufferedPeekStream
     {
         private readonly CustomBufferedStream baseStream;
 

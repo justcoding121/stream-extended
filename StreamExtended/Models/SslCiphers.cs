@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SslStreamExtended.Models
+namespace StreamExtended.Models
 {
     internal static class SslCiphers
     {

@@ -1,12 +1,12 @@
-using SslStreamExtended.Models;
+using StreamExtended.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SslStreamExtended
+namespace StreamExtended
 {
-    public class ServerHelloInfo
+    public class ClientHelloInfo
     {
         private static readonly string[] compressions = {
             "null",
@@ -36,11 +36,11 @@ namespace SslStreamExtended
 
         public byte[] SessionId { get; set; }
 
-        public int CipherSuite { get; set; }
+        public int[] Ciphers { get; set; }
 
-        public byte CompressionMethod { get; set; }
+        public byte[] CompressionData { get; set; }
 
-        internal int ServerHelloLength { get; set; }
+        internal int ClientHelloLength { get; set; }
 
         internal int EntensionsStartPosition { get; set; }
 
@@ -72,7 +72,7 @@ namespace SslStreamExtended
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("A SSLv3-compatible ServerHello handshake was found. Titanium extracted the parameters below.");
+            sb.AppendLine("A SSLv3-compatible ClientHello handshake was found. Titanium extracted the parameters below.");
             sb.AppendLine();
             sb.AppendLine($"Version: {SslVersionToString(MajorVersion, MinorVersion)}");
             sb.AppendLine($"Random: {string.Join(" ", Random.Select(x => x.ToString("X2")))}");
@@ -88,19 +88,29 @@ namespace SslStreamExtended
                 }
             }
 
-            string compression = compressions.Length > CompressionMethod 
-                ? compressions[CompressionMethod] 
-                : $"unknown [0x{CompressionMethod:X2}]";
-            sb.AppendLine($"Compression: {compression}");
-
-            sb.Append("Cipher:");
-            string cipherStr;
-            if (!SslCiphers.Ciphers.TryGetValue(CipherSuite, out cipherStr))
+            if (CompressionData.Length > 0)
             {
-                cipherStr = "unknown";
+                int compressionMethod = CompressionData[0];
+                string compression = compressions.Length > compressionMethod 
+                    ? compressions[compressionMethod] 
+                    : $"unknown [0x{compressionMethod:X2}]";
+                sb.AppendLine($"Compression: {compression}");
             }
 
-            sb.AppendLine($"[0x{CipherSuite:X4}] {cipherStr}");
+            if (Ciphers.Length > 0)
+            {
+                sb.AppendLine("Ciphers:");
+                foreach (int cipherSuite in Ciphers)
+                {
+                    string cipherStr;
+                    if (!SslCiphers.Ciphers.TryGetValue(cipherSuite, out cipherStr))
+                    {
+                        cipherStr = "unknown";
+                    }
+
+                    sb.AppendLine($"[0x{cipherSuite:X4}] {cipherStr}");
+                }
+            }
 
             return sb.ToString();
         }
