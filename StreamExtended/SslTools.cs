@@ -9,18 +9,17 @@ namespace StreamExtended
 {
     public class SslTools
     {
-        public static async Task<bool> IsClientHello(Stream stream, int bufferSize = 4096)
+        public static async Task<bool> IsClientHello(CustomBufferedStream stream)
         {
-            var clientHello = await GetClientHelloInfo(new CustomBufferedStream(stream, bufferSize));
+            var clientHello = await GetClientHelloInfo(stream);
             return clientHello != null;
         }
 
-        public static async Task<ClientHelloInfo> GetClientHelloInfo(Stream stream, int bufferSize = 4096)
+        public static async Task<ClientHelloInfo> GetClientHelloInfo(CustomBufferedStream clientStream)
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
-            var clientStream = new CustomBufferedStream(stream, bufferSize);
             int recordType = await clientStream.PeekByteAsync(0);
             if (recordType == 0x80)
             {
@@ -116,8 +115,6 @@ namespace StreamExtended
 
                 var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream);
 
-                //var rawBytes = new CustomBufferedPeekStream(clientStream).ReadBytes(peekStream.Position);
-
                 var clientHelloInfo = new ClientHelloInfo
                 {
                     MajorVersion = majorVersion,
@@ -164,18 +161,16 @@ namespace StreamExtended
             return extensions;
         }
 
-        public static async Task<bool> IsServerHello(Stream stream, int bufferSize = 4096)
+        public static async Task<bool> IsServerHello(CustomBufferedStream stream)
         {
-            var serverHello = await GetServerHelloInfo(new CustomBufferedStream(stream, bufferSize));
+            var serverHello = await GetServerHelloInfo(stream);
             return serverHello != null;
         }
 
-        public static async Task<ServerHelloInfo> GetServerHelloInfo(Stream stream, int bufferSize = 4096)
+        public static async Task<ServerHelloInfo> GetServerHelloInfo(CustomBufferedStream serverStream)
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
-
-            var serverStream = new CustomBufferedStream(stream, bufferSize);
 
             int recordType = await serverStream.PeekByteAsync(0);
             if (recordType == 0x80)
