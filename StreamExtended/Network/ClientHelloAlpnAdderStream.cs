@@ -9,9 +9,9 @@ namespace StreamExtended.Network
 
         private bool called;
 
-        public ClientHelloAlpnAdderStream(Stream stream, int bufferSize = 4096)
+        public ClientHelloAlpnAdderStream(CustomBufferedStream stream)
         {
-            this.stream = new CustomBufferedStream(stream, bufferSize);
+            this.stream = stream;
         }
 
         public override void Flush()
