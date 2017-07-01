@@ -4,7 +4,7 @@ $Here = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
 $SolutionRoot = (Split-Path -parent $Here)
 
-$ProjectName = "SslStreamExtended"
+$ProjectName = "StreamExtended"
 
 $SolutionFile = "$SolutionRoot\$ProjectName.sln"
 
@@ -42,7 +42,7 @@ Task Build {
 }
 
 Task Package -depends Build {
-	exec { . $NuGet pack "$SolutionRoot\SslStreamExtended\SslStreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
+	exec { . $NuGet pack "$SolutionRoot\StreamExtended\StreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
 }
 
 Task Clean -depends Install-BuildTools {

@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{AC9AE37A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BC1E0789-D348-49CF-8B67-5E99D50EDF64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SslStreamExtended", "SslStreamExtended\SslStreamExtended.csproj", "{C53D0AC0-6A6A-450B-931E-BD06EB95FD38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamExtended", "StreamExtended\StreamExtended.csproj", "{C53D0AC0-6A6A-450B-931E-BD06EB95FD38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

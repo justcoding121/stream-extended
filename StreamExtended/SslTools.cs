@@ -1,11 +1,11 @@
-﻿using SslStreamExtended.Models;
-using SslStreamExtended.Network;
+﻿using StreamExtended.Models;
+using StreamExtended.Network;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
 
-namespace SslStreamExtended
+namespace StreamExtended
 {
     public class SslTools
     {

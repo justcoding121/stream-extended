@@ -1,18 +1,18 @@
-﻿using SslStreamExtended.Helpers;
+﻿using StreamExtended.Helpers;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SslStreamExtended.Network
+namespace StreamExtended.Network
 {
     /// <summary>
     /// A custom network stream inherited from stream
     /// with an underlying buffer 
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
-    internal class CustomBufferedStream : Stream
+    public class CustomBufferedStream : Stream
     {
 #if NET45
         private AsyncCallback readCallback;
