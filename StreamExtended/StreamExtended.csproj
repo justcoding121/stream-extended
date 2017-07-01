@@ -7,8 +7,8 @@
     <ProjectGuid>{C53D0AC0-6A6A-450B-931E-BD06EB95FD38}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SslStreamExtended</RootNamespace>
-    <AssemblyName>SslStreamExtended</AssemblyName>
+    <RootNamespace>StreamExtended</RootNamespace>
+    <AssemblyName>StreamExtended</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Helpers\BufferPool.cs" />
     <Compile Include="Network\ClientHelloAlpnAdderStream.cs" />
+    <Compile Include="Network\CustomBinaryReader.cs" />
     <Compile Include="Network\CustomBufferedPeekStream.cs" />
     <Compile Include="Network\CustomBufferedStream.cs" />
     <Compile Include="Network\ServerHelloAlpnAdderStream.cs" />

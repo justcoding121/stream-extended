@@ -1,9 +1,9 @@
-﻿using SslStreamExtended.Models;
+﻿using StreamExtended.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SslStreamExtended
+namespace StreamExtended
 {
     internal class SslExtensions
     {

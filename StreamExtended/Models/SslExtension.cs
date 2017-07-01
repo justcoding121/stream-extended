@@ -1,4 +1,4 @@
-namespace SslStreamExtended.Models
+namespace StreamExtended.Models
 {
     public class SslExtension
     {
