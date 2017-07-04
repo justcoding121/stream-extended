@@ -31,15 +31,17 @@ Import-Module "$Here\Common" -DisableNameChecking
 
 $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
-$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild"
+$MSBuild = ";${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"
 $MSBuild -replace ' ', '` '
+$env:Path += $MSBuild;
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 
 Task default -depends Clean, Build, Package
 
 Task Build {
-	exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
+
+	exec { . msbuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
 }
 
 Task Package -depends Build {
@@ -48,15 +50,12 @@ Task Package -depends Build {
 
 Task Clean -depends Install-BuildTools {
 	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
-	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
+	exec { . msbuild $SolutionFile /t:Clean /v:quiet }
 }
 
 
 Task Install-MSBuild {
-    if(!(Test-Path $MSBuild)) 
-	{ 
-		cinst microsoft-build-tools -y
-	}
+  
 }
 
 Task Install-BuildTools -depends Install-MSBuild
