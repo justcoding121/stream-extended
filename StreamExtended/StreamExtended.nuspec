@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata minClientVersion="3.2">
+    <id>StreamExtended</id>
+    <version>$version$</version>
+    <title>Extended SslStream and BufferedStream</title>
+    <authors>honfika, justcoding121</authors>
+    <owners></owners>
+    <licenseUrl>https://github.com/justcoding121/StreamExtended/blob/develop/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/justcoding121/StreamExtended</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>StreamExtended supports ALPN and SNI for SslStream.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright &#x00A9; StreamExtended All rights reserved.</copyright>
+    <tags></tags>
+  </metadata>
+  <files>
+	<file src="bin\$configuration$\netstandard1.3\StreamExtended.*" target="lib\dotnet"  />
+  </files>
+</package>
