@@ -3,13 +3,29 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>StreamExtended\StrongKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>
     <Version>1.0.0</Version>
     <Description>Package Description</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="StreamExtended\StreamExtended.csproj" />
+    <Compile Remove="StreamExtended\**" />
+    <EmbeddedResource Remove="StreamExtended\**" />
+    <None Remove="StreamExtended\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="StreamExtended.nuspec" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Network\" />
   </ItemGroup>
 
 </Project>
