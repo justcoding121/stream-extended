@@ -31,7 +31,7 @@ Import-Module "$Here\Common" -DisableNameChecking
 
 $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
-$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe"
+$MSBuild = $(cmd /c where msbuild)
 $MSBuild -replace ' ', '` '
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
