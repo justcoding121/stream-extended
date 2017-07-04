@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package >
-  <metadata minClientVersion="3.2">
+  <metadata>
     <id>StreamExtended</id>
     <version>$version$</version>
     <title>Extended SslStream and BufferedStream</title>
@@ -15,6 +15,7 @@
     <tags></tags>
   </metadata>
   <files>
-	<file src="bin\$configuration$\netstandard1.3\StreamExtended.*" target="lib\dotnet"  />
+	<file src="bin\$configuration$\netstandard1.3\StreamExtended.*" target="lib\netstandard1.3"  />
+	<file src="bin\$configuration$\netstandard1.3\StreamExtended.*" target="lib\net45"  />
   </files>
 </package>
