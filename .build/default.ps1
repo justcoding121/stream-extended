@@ -31,7 +31,7 @@ Import-Module "$Here\Common" -DisableNameChecking
 
 $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
-$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
+$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe"
 $MSBuild -replace ' ', '` '
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
@@ -53,7 +53,7 @@ Task Clean -depends Install-BuildTools {
 
 
 Task Install-MSBuild {
-    if(!(Test-Path "${env:ProgramFiles(x86)}\MSBuild\14.0\Bin\msbuild.exe")) 
+    if(!(Test-Path $MSBuild)) 
 	{ 
 		cinst microsoft-build-tools -y
 	}
