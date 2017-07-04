@@ -53,7 +53,7 @@ Task Clean -depends Install-BuildTools {
 
 
 Task Install-MSBuild {
-    if(!(Test-Path $MSBuild)) 
+    if(!(Test-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe")) 
 	{ 
 		cinst microsoft-build-tools -y
 	}
