@@ -10,7 +10,7 @@ $SolutionFile = "$SolutionRoot\$ProjectName.sln"
 
 ## This comes from the build server iteration
 if(!$BuildNumber) { $BuildNumber = $env:APPVEYOR_BUILD_NUMBER }
-if(!$BuildNumber) { $BuildNumber = "1"}
+if(!$BuildNumber) { $BuildNumber = "17"}
 
 ## This comes from the Hg commit hash used to build
 if(!$CommitHash) { $CommitHash = $env:APPVEYOR_REPO_COMMIT }
@@ -31,7 +31,7 @@ Import-Module "$Here\Common" -DisableNameChecking
 
 $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
-$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
+$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild"
 $MSBuild -replace ' ', '` '
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
@@ -53,7 +53,7 @@ Task Clean -depends Install-BuildTools {
 
 
 Task Install-MSBuild {
-    if(!(Test-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe")) 
+    if(!(Test-Path $MSBuild)) 
 	{ 
 		cinst microsoft-build-tools -y
 	}
