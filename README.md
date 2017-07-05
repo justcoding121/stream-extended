@@ -1,5 +1,5 @@
-Stream extended
-========
+# Stream extended
+
 * An extended SslStream with support for ALPN & SNI
 * An extended BufferedStream with support for reading bytes and string
 
@@ -7,14 +7,15 @@ Stream extended
 
 Forked as a separate repository from Titanium Web Proxy Project. 
 
-Installation
-========
+# Installation
+
 Install by nuget:
 
     Install-Package StreamExtended
 
-Usage
-======
+# Usage
+
+## ALPN
 
 When SslStream is used on client side.
 
@@ -37,3 +38,31 @@ var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : 
 //as usual
 await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
+
+## Server Name Indication
+
+```csharp
+var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
+
+if (clientSslHelloInfo != null)
+{
+    var sslStream = new SslStream(yourClientStream);
+    yourClientStream = new CustomBufferedStream(sslStream, BufferSize);
+
+    string sniHostName = clientSslHelloInfo.Extensions?.FirstOrDefault(x => x.Name == "server_name")?.Data;
+}
+```
+
+
+# Server & Client Hello Information
+
+## Peek Client SSL Hello
+```csharp
+var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
+```
+
+## Peek Server SSL Hello
+```csharp
+var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
+```
+
