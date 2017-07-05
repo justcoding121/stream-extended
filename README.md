@@ -9,10 +9,15 @@ Forked as a separate repository from Titanium Web Proxy Project.
 
 # Installation
 
-Install by nuget:
+Install by nuget 
 
     Install-Package StreamExtended
 
+Supports
+
+ * .Net Standard 1.3 or above
+ * .Net Framework 4.5 or above
+ 
 # Usage
 
 ## ALPN
