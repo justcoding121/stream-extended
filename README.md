@@ -27,7 +27,7 @@ var stream = new CustomBufferedStream(yourNetworkStreamToServer);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
 var sslStream = new SslStream(alpnStream, false, null, null);
-//as usual (but we have a bug currently! )
+//as usual (but we have a bug currently which makes this call fail!)
  await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
  
  //TODO add few lines inside ClientHelloAlpnAdderStream so that
@@ -41,7 +41,7 @@ var stream = new CustomBufferedStream(yourNetworkStreamToClient);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
 var sslStream = new SslStream(alpnStream);
-//as usual
+//as usual (but we have a bug currently which makes this call fail!)
 await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
 
