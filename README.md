@@ -26,7 +26,7 @@ When SslStream is used on client side.
 var stream = new CustomBufferedStream(yourNetworkStreamToServer);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
-sslStream = new SslStream(alpnStream);
+var sslStream = new SslStream(alpnStream);
 //as usual (have a bug currently)
  await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
  
@@ -40,7 +40,7 @@ When SslStream is used on server side.
 var stream = new CustomBufferedStream(yourNetworkStreamToClient);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
-sslStream = new SslStream(alpnStream);
+var sslStream = new SslStream(alpnStream);
 //as usual
 await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
