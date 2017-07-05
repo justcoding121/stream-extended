@@ -11,7 +11,7 @@ Installation
 ========
 Install by nuget:
 
-    Install-Package StreamExtendedInstallation
+    Install-Package StreamExtended
 
 Usage
 ======
