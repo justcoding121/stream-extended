@@ -27,7 +27,7 @@ var stream = new CustomBufferedStream(yourNetworkStreamToServer);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
 
-//as usual
+//as usual (have a bug currently)
  await alpnStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
  
  //TODO add few lines inside ClientHelloAlpnAdderStream so that
@@ -50,6 +50,7 @@ await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, Support
 ```csharp
 var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
 
+//will be null if no client hello was received (not a SSL connection)
 if (clientSslHelloInfo != null)
 {
     var sslStream = new SslStream(yourClientStream);
@@ -65,11 +66,27 @@ if (clientSslHelloInfo != null)
 ### Peek Client SSL Hello
 ```csharp
 var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
+
+//will be null if no client hello was received (not a SSL connection)
+if(clientSslHelloInfo!=null)ction)
+{
+    //as usual
+    await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+}
 ```
 
 ### Peek Server SSL Hello
 ```csharp
 var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
+
+//will be null if no server hello was received (not a SSL connection)
+if(serverSslHelloInfo!=null)
+{
+
+    //as usual
+     await alpnStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
+
+}
 ```
 
 ## Contributors
