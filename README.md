@@ -28,8 +28,10 @@ bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
 
 //as usual
- await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
+ await alpnStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
  
+ //TODO add few lines inside ClientHelloAlpnAdderStream so that
+ //we will be able to read server hello to find the chosen Http protocol
 ```
 
 When SslStream is used on server side.
@@ -40,7 +42,7 @@ bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
 
 //as usual
-await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
 
 ### Server Name Indication
