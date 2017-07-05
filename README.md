@@ -29,6 +29,9 @@ var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : 
 
 //as usual
  await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
+ 
+ //should return h2/http 1.1
+ var selectedHttpProtocol = clientSslHelloInfo.Extensions?.FirstOrDefault(x => x.Name == "alpn")?.Data;
 ```
 
 When SslStream is used on server side.
