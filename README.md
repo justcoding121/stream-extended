@@ -1,6 +1,6 @@
 ## Stream extended
 
-* An extended SslStream with support for ALPN & SNI
+* An extended SslStream with support for SNI
 * An extended BufferedStream with support for reading bytes and string
 
 <a href="https://ci.appveyor.com/project/justcoding121/Streamextended">![Build Status](https://ci.appveyor.com/api/projects/status/3vp1pdya9ncmlqwq?svg=true)</a>
@@ -64,33 +64,6 @@ if(serverSslHelloInfo!=null)
      await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
 
 }
-```
-
-### ALPN 
-
-When SslStream is used on client side.
-
-```csharp
-var stream = new CustomBufferedStream(yourNetworkStreamToServer);
-bool alpnEnabled = false;
-var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
-var sslStream = new SslStream(alpnStream, false, null, null);
-//as usual (but we have a bug currently which makes this call fail!)
- await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
- 
- //TODO add few lines inside ClientHelloAlpnAdderStream so that
- //we will be able to read server hello to find the chosen Http protocol
-```
-
-When SslStream is used on server side.
-
-```csharp
-var stream = new CustomBufferedStream(yourNetworkStreamToClient);
-bool alpnEnabled = false;
-var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
-var sslStream = new SslStream(alpnStream);
-//as usual (but we have a bug currently which makes this call fail!)
-await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
 
 ## Contributors
