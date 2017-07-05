@@ -26,8 +26,8 @@ When SslStream is used on client side.
 var stream = new CustomBufferedStream(yourNetworkStreamToServer);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
-var sslStream = new SslStream(alpnStream);
-//as usual (have a bug currently)
+var sslStream = new SslStream(alpnStream, false, null, null);
+//as usual (but we have a bug currently! )
  await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
  
  //TODO add few lines inside ClientHelloAlpnAdderStream so that
@@ -59,7 +59,7 @@ if (clientSslHelloInfo != null)
     
     //and now as usual
     var sslStream = new SslStream(yourClientStream);
-    await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+    await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 }
 ```
 
@@ -73,8 +73,9 @@ var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
 //will be null if no client hello was received (not a SSL connection)
 if(clientSslHelloInfo!=null)
 {
-    //as usual
-    await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+    //and now as usual
+    var sslStream = new SslStream(yourClientStream);
+    await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 }
 ```
 
@@ -85,8 +86,9 @@ var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
 //will be null if no server hello was received (not a SSL connection)
 if(serverSslHelloInfo!=null)
 {
-    //as usual
-     await alpnStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
+     //and now as usual
+     var sslStream = new SslStream(alpnStream, false, null, null);
+     await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
 
 }
 ```
