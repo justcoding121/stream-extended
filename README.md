@@ -87,7 +87,7 @@ var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
 if(serverSslHelloInfo!=null)
 {
      //and now as usual
-     var sslStream = new SslStream(alpnStream, false, null, null);
+     var sslStream = new SslStream(yourServerStream, false, null, null);
      await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
 
 }
