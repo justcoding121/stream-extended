@@ -95,4 +95,4 @@ if(serverSslHelloInfo!=null)
 
 ## Contributors
 
-Special thanks to [@honfika](https://github.com/honfika) who contributed this code originally in [Titanium Web Proxy](https://github.com/justcoding121/Titanium-Web-Proxy) project. 
+Special thanks to [@honfika](https://github.com/honfika) who contributed this code [originally in Titanium Web Proxy](https://github.com/justcoding121/Titanium-Web-Proxy/issues/293) project. 
