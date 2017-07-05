@@ -68,7 +68,7 @@ if (clientSslHelloInfo != null)
 var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
 
 //will be null if no client hello was received (not a SSL connection)
-if(clientSslHelloInfo!=null)ction)
+if(clientSslHelloInfo!=null)
 {
     //as usual
     await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
