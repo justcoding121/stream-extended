@@ -5,8 +5,6 @@
 
 <a href="https://ci.appveyor.com/project/justcoding121/Streamextended">![Build Status](https://ci.appveyor.com/api/projects/status/3vp1pdya9ncmlqwq?svg=true)</a>
 
-Forked as a separate repository from Titanium Web Proxy Project. 
-
 # Installation
 
 Install by nuget 
@@ -71,3 +69,6 @@ var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
 var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
 ```
 
+# Contributors
+
+Special thanks to [@honfika](https://github.com/honfika) who contributed this code originally in [Titanium Web Proxy](https://github.com/justcoding121/Titanium-Web-Proxy) project. 
