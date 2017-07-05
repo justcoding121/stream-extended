@@ -1,11 +1,11 @@
-# Stream extended
+## Stream extended
 
 * An extended SslStream with support for ALPN & SNI
 * An extended BufferedStream with support for reading bytes and string
 
 <a href="https://ci.appveyor.com/project/justcoding121/Streamextended">![Build Status](https://ci.appveyor.com/api/projects/status/3vp1pdya9ncmlqwq?svg=true)</a>
 
-# Installation
+## Installation
 
 Install by nuget 
 
@@ -16,9 +16,9 @@ Supports
  * .Net Standard 1.3 or above
  * .Net Framework 4.5 or above
  
-# Usage
+## Usage
 
-## ALPN
+### ALPN
 
 When SslStream is used on client side.
 
@@ -42,7 +42,7 @@ var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : 
 await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
 
-## Server Name Indication
+### Server Name Indication
 
 ```csharp
 var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
@@ -57,18 +57,18 @@ if (clientSslHelloInfo != null)
 ```
 
 
-# Server & Client Hello Information
+## Peek SSL Information
 
-## Peek Client SSL Hello
+### Peek Client SSL Hello
 ```csharp
 var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
 ```
 
-## Peek Server SSL Hello
+### Peek Server SSL Hello
 ```csharp
 var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
 ```
 
-# Contributors
+## Contributors
 
 Special thanks to [@honfika](https://github.com/honfika) who contributed this code originally in [Titanium Web Proxy](https://github.com/justcoding121/Titanium-Web-Proxy) project. 
