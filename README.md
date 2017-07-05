@@ -26,9 +26,9 @@ When SslStream is used on client side.
 var stream = new CustomBufferedStream(yourNetworkStreamToServer);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
-
+sslStream = new SslStream(alpnStream);
 //as usual (have a bug currently)
- await alpnStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
+ await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
  
  //TODO add few lines inside ClientHelloAlpnAdderStream so that
  //we will be able to read server hello to find the chosen Http protocol
@@ -40,9 +40,9 @@ When SslStream is used on server side.
 var stream = new CustomBufferedStream(yourNetworkStreamToClient);
 bool alpnEnabled = false;
 var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
-
+sslStream = new SslStream(alpnStream);
 //as usual
-await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
 
 ### Server Name Indication
@@ -53,10 +53,13 @@ var clientSslHelloInfo = await SslTools.GetClientHelloInfo(yourClientStream);
 //will be null if no client hello was received (not a SSL connection)
 if (clientSslHelloInfo != null)
 {
-    var sslStream = new SslStream(yourClientStream);
-    yourClientStream = new CustomBufferedStream(sslStream, BufferSize);
-
     string sniHostName = clientSslHelloInfo.Extensions?.FirstOrDefault(x => x.Name == "server_name")?.Data;
+   
+    //create yourClientCertificate based on sniHostName
+    
+    //and now as usual
+    var sslStream = new SslStream(yourClientStream);
+    await alpnStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 }
 ```
 
@@ -82,7 +85,6 @@ var serverSslHelloInfo = await SslTools.GetServerHelloInfo(yourServerStream);
 //will be null if no server hello was received (not a SSL connection)
 if(serverSslHelloInfo!=null)
 {
-
     //as usual
      await alpnStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
 
