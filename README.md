@@ -18,33 +18,6 @@ Supports
  
 ## Usage
 
-### ALPN
-
-When SslStream is used on client side.
-
-```csharp
-var stream = new CustomBufferedStream(yourNetworkStreamToServer);
-bool alpnEnabled = false;
-var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
-var sslStream = new SslStream(alpnStream, false, null, null);
-//as usual (but we have a bug currently which makes this call fail!)
- await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
- 
- //TODO add few lines inside ClientHelloAlpnAdderStream so that
- //we will be able to read server hello to find the chosen Http protocol
-```
-
-When SslStream is used on server side.
-
-```csharp
-var stream = new CustomBufferedStream(yourNetworkStreamToClient);
-bool alpnEnabled = false;
-var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
-var sslStream = new SslStream(alpnStream);
-//as usual (but we have a bug currently which makes this call fail!)
-await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
-```
-
 ### Server Name Indication
 
 ```csharp
@@ -91,6 +64,33 @@ if(serverSslHelloInfo!=null)
      await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
 
 }
+```
+
+### ALPN 
+
+When SslStream is used on client side.
+
+```csharp
+var stream = new CustomBufferedStream(yourNetworkStreamToServer);
+bool alpnEnabled = false;
+var alpnStream = alpnEnabled ? (Stream)new ClientHelloAlpnAdderStream(stream) : stream;
+var sslStream = new SslStream(alpnStream, false, null, null);
+//as usual (but we have a bug currently which makes this call fail!)
+ await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
+ 
+ //TODO add few lines inside ClientHelloAlpnAdderStream so that
+ //we will be able to read server hello to find the chosen Http protocol
+```
+
+When SslStream is used on server side.
+
+```csharp
+var stream = new CustomBufferedStream(yourNetworkStreamToClient);
+bool alpnEnabled = false;
+var alpnStream = alpnEnabled ? (Stream)new ServerHelloAlpnAdderStream(stream) : stream;
+var sslStream = new SslStream(alpnStream);
+//as usual (but we have a bug currently which makes this call fail!)
+await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
 ```
 
 ## Contributors
