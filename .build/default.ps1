@@ -6,11 +6,12 @@ $SolutionRoot = (Split-Path -parent $Here)
 
 $ProjectName = "StreamExtended"
 
-$SolutionFile = "$SolutionRoot\$ProjectName.sln"
+$SolutionFile14 = "$SolutionRoot\$ProjectName.sln"
+$SolutionFile = "$SolutionRoot\$ProjectName.Standard.sln"
 
 ## This comes from the build server iteration
 if(!$BuildNumber) { $BuildNumber = $env:APPVEYOR_BUILD_NUMBER }
-if(!$BuildNumber) { $BuildNumber = "17"}
+if(!$BuildNumber) { $BuildNumber = "18"}
 
 ## This comes from the Hg commit hash used to build
 if(!$CommitHash) { $CommitHash = $env:APPVEYOR_REPO_COMMIT }
@@ -31,15 +32,19 @@ Import-Module "$Here\Common" -DisableNameChecking
 
 $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
+$MSBuild14 = "${env:ProgramFiles(x86)}\MSBuild\14.0\Bin\msbuild.exe"
+
 $MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
 $MSBuild -replace ' ', '` '
+
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 
 Task default -depends Clean, Build, Package
 
 Task Build {
-	exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
+	exec { . $MSBuild14 $SolutionFile14 /t:Build /v:normal /p:Configuration=$Configuration  }
+    exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
 }
 
 Task Package -depends Build {
@@ -48,12 +53,14 @@ Task Package -depends Build {
 
 Task Clean -depends Install-BuildTools {
 	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
+    exec { . $MSBuild14 $SolutionFile14 /t:Clean /v:quiet }
 	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
+
 }
 
 
 Task Install-MSBuild {
-    if(!(Test-Path $MSBuild)) 
+    if(!(Test-Path $MSBuild14)) 
 	{ 
 		cinst microsoft-build-tools -y
 	}
