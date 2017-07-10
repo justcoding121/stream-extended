@@ -11,11 +11,7 @@ $SolutionFile = "$SolutionRoot\$ProjectName.Standard.sln"
 
 ## This comes from the build server iteration
 if(!$BuildNumber) { $BuildNumber = $env:APPVEYOR_BUILD_NUMBER }
-if(!$BuildNumber) { $BuildNumber = "18"}
-
-## This comes from the Hg commit hash used to build
-if(!$CommitHash) { $CommitHash = $env:APPVEYOR_REPO_COMMIT }
-if(!$CommitHash) { $CommitHash = "local-build" }
+if(!$BuildNumber) { $BuildNumber = "1"}
 
 ## The build configuration, i.e. Debug/Release
 if(!$Configuration) { $Configuration = $env:Configuration }
@@ -26,6 +22,7 @@ if(!$Version) { $Version = "1.0.$BuildNumber" }
 
 if(!$Branch) { $Branch = $env:APPVEYOR_REPO_BRANCH }
 if(!$Branch) { $Branch = "local" }
+
 if($Branch -eq "beta" ) { $Version = "$Version-beta" }
 
 Import-Module "$Here\Common" -DisableNameChecking
