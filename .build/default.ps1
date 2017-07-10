@@ -31,8 +31,10 @@ $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
 $MSBuild14 = "${env:ProgramFiles(x86)}\MSBuild\14.0\Bin\msbuild.exe"
 
-$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
-$MSBuild -replace ' ', '` '
+$MSBuild  = exec { . $Here\vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath }
+if ($MSBuild) {
+  $MSBuild  = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
+}
 
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
