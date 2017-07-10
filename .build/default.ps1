@@ -43,7 +43,7 @@ Task default -depends Clean, Build, Package
 
 Task Build {
 	
-    exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
+   
 }
 
 Task Package -depends Build {
@@ -53,7 +53,7 @@ Task Package -depends Build {
 Task Clean -depends Install-BuildTools {
 	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
 
-	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
+	
 
 }
 
