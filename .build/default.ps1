@@ -36,7 +36,7 @@ if ($MSBuild) {
   $MSBuild  = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
 }
 
-Write-Host $MSBuild
+Write-Host "$MSBuild"
 
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
