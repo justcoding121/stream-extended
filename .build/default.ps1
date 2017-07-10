@@ -42,7 +42,7 @@ FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 Task default -depends Clean, Build, Package
 
 Task Build {
-	exec { . $MSBuild14 $SolutionFile14 /t:Build /v:normal /p:Configuration=$Configuration  }
+	
     exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
 }
 
@@ -52,7 +52,7 @@ Task Package -depends Build {
 
 Task Clean -depends Install-BuildTools {
 	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
-    exec { . $MSBuild14 $SolutionFile14 /t:Clean /v:quiet }
+
 	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
 
 }
