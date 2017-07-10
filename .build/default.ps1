@@ -37,32 +37,11 @@ if ($MSBuild) {
 }
 
 
+& $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration 
+
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 
-Task default -depends Clean, Build, Package
-
-Task Build {
-	
-    & $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration 
-}
-
-Task Package -depends Build {
-	exec { . $NuGet pack "$SolutionRoot\StreamExtended\StreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
-}
-
-Task Clean -depends Install-BuildTools {
-	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
-
-	& $MSBuild $SolutionFile /t:Clean /v:quiet 
-
-}
+Task default 
 
 
-Task Install-MSBuild {
-    if(!(Test-Path $MSBuild14)) 
-	{ 
-		cinst microsoft-build-tools -y
-	}
-}
 
-Task Install-BuildTools -depends Install-MSBuild
