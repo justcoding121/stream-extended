@@ -49,7 +49,8 @@ Task Package -depends Build {
 }
 
 Task Restore-Packages  {
-    exec { . $NuGet restore $SolutionFile }
+    exec { . dotnet restore "$SolutionRoot\StreamExtended\StreamExtended.Standard.csproj" }
+
 }
 
 Task Clean -depends Install-BuildTools {
