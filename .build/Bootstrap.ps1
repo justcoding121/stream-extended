@@ -6,14 +6,26 @@ param (
 
 $Here = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 
+Import-Module "$Here\Common"
 
-$MSBuild  = & $Here\vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath 
-if ($MSBuild) {
-  $MSBuild  = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
+Install-Chocolatey
+
+Install-Psake
+
+$psakeDirectory = (Resolve-Path $env:ChocolateyInstall\lib\Psake*)
+
+Import-Module (Join-Path $psakeDirectory "tools\Psake.psm1")
+
+if($Help)
+{ 
+	try 
+	{
+		Write-Host "Available build tasks:"
+		psake -nologo -docs | Out-Host -paging
+	} 
+	catch {}
+
+	return
 }
 
-Write-Host "Writing MSBuild"
-
-Write-Host "$MSBuild"
-
-Write-Host "Finish Writing MSBuild"
+Invoke-Psake -buildFile "$Here\Default.ps1" -parameters $properties -tasklist $Action
