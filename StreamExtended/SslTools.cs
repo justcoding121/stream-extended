@@ -11,11 +11,11 @@ namespace StreamExtended
     {
         public static async Task<bool> IsClientHello(CustomBufferedStream stream)
         {
-            var clientHello = await GetClientHelloInfo(stream);
+            var clientHello = await PeekClientHello(stream);
             return clientHello != null;
         }
 
-        public static async Task<ClientHelloInfo> GetClientHelloInfo(CustomBufferedStream clientStream)
+        public static async Task<ClientHelloInfo> PeekClientHello(CustomBufferedStream clientStream)
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
@@ -163,11 +163,11 @@ namespace StreamExtended
 
         public static async Task<bool> IsServerHello(CustomBufferedStream stream)
         {
-            var serverHello = await GetServerHelloInfo(stream);
+            var serverHello = await PeekServerHello(stream);
             return serverHello != null;
         }
 
-        public static async Task<ServerHelloInfo> GetServerHelloInfo(CustomBufferedStream serverStream)
+        public static async Task<ServerHelloInfo> PeekServerHello(CustomBufferedStream serverStream)
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format

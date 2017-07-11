@@ -47,7 +47,7 @@ namespace StreamExtended.Network
             var ms = new MemoryStream(buffer, offset, count);
 
             //this can be non async, because reads from a memory stream
-            var clientHello = SslTools.GetClientHelloInfo(new CustomBufferedStream(ms, (int)ms.Length)).Result;
+            var clientHello = SslTools.PeekClientHello(new CustomBufferedStream(ms, (int)ms.Length)).Result;
             if (clientHello != null)
             {
                 // 0x00 0x10: ALPN identifier
