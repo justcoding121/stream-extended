@@ -49,8 +49,7 @@ Task Package -depends Build {
 }
 
 Task Restore-Packages  {
-
-
+    exec { . $NuGet restore $SolutionFile }
 }
 
 Task Clean -depends Install-BuildTools {
