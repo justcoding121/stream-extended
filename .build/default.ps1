@@ -31,17 +31,36 @@ $NuGet = Join-Path $SolutionRoot ".nuget\nuget.exe"
 
 $MSBuild14 = "${env:ProgramFiles(x86)}\MSBuild\14.0\Bin\msbuild.exe"
 
-$MSBuild  = exec { . $Here\vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath }
-if ($MSBuild) {
-  $MSBuild  = join-path $MSBuild 'MSBuild\15.0\Bin\MSBuild.exe'
-}
-
-Write-Host "$MSBuild"
+$MSBuild = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\msbuild.exe"
+$MSBuild -replace ' ', '` '
 
 
 FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 
-Task default 
+Task default -depends Clean, Build, Package
+
+Task Build {
+	exec { . $MSBuild14 $SolutionFile14 /t:Build /v:normal /p:Configuration=$Configuration  }
+    exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
+}
+
+Task Package -depends Build {
+	exec { . $NuGet pack "$SolutionRoot\StreamExtended\StreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
+}
+
+Task Clean -depends Install-BuildTools {
+	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
+    exec { . $MSBuild14 $SolutionFile14 /t:Clean /v:quiet }
+	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
+
+}
 
 
+Task Install-MSBuild {
+    if(!(Test-Path $MSBuild14)) 
+	{ 
+		cinst microsoft-build-tools -y
+	}
+}
 
+Task Install-BuildTools -depends Install-MSBuild
