@@ -39,13 +39,18 @@ FormatTaskName (("-"*25) + "[{0}]" + ("-"*25))
 
 Task default -depends Clean, Build, Package
 
-Task Build {
+Task Build -depends Restore-Packages{
 	exec { . $MSBuild14 $SolutionFile14 /t:Build /v:normal /p:Configuration=$Configuration  }
     exec { . $MSBuild $SolutionFile /t:Build /v:normal /p:Configuration=$Configuration  }
 }
 
 Task Package -depends Build {
 	exec { . $NuGet pack "$SolutionRoot\StreamExtended\StreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
+}
+
+Task Restore-Packages  {
+	exec { . $NuGet restore $SolutionFile14 }
+    exec { . $NuGet restore $SolutionFile }
 }
 
 Task Clean -depends Install-BuildTools {
