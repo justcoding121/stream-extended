@@ -7,7 +7,7 @@
 
 ## Installation
 
-Install by nuget 
+Install by [nuget](https://www.nuget.org/packages/StreamExtended)
 
     Install-Package StreamExtended
 
