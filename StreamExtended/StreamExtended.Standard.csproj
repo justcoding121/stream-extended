@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>
+    <Version>1.0.0</Version>
+    <Description>Package Description</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="StreamExtended\**" />
+    <EmbeddedResource Remove="StreamExtended\**" />
+    <None Remove="StreamExtended\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Network\ClientHelloAlpnAdderStream.cs" />
+    <Compile Remove="Network\ServerHelloAlpnAdderStream.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="StreamExtended.nuspec" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ValueTuple" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Network\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
