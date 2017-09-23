@@ -15,7 +15,7 @@
     <tags></tags>
   </metadata>
   <files>
-  	<file src="bin\$configuration$\StreamExtended.dll" target="lib\net45"  />
+  	<file src="bin\$configuration$\net45\StreamExtended.dll" target="lib\net45"  />
 	<file src="bin\$configuration$\netstandard1.3\StreamExtended.*" target="lib\netstandard1.3"  />
   </files>
 </package>
