@@ -41,26 +41,24 @@ Task Build -depends Restore-Packages{
 }
 
 Task Package -depends Build {
-	exec { . $NuGet pack "$SolutionRoot\StreamExtended\StreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
+    exec { . $NuGet pack "$SolutionRoot\StreamExtended\StreamExtended.nuspec" -Properties Configuration=$Configuration -OutputDirectory "$SolutionRoot" -Version "$Version" }
 }
 
 Task Restore-Packages  {
-	exec { . dotnet restore "$SolutionRoot\StreamExtended.sln" }
-    exec { . dotnet restore "$SolutionRoot\StreamExtended.Standard.sln" }
+    exec { . dotnet restore "$SolutionRoot\StreamExtended.sln" }
 }
 
 Task Clean -depends Install-BuildTools {
-	Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
-	exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
-
+    Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
+    exec { . $MSBuild $SolutionFile /t:Clean /v:quiet }
 }
 
 
 Task Install-MSBuild {
     if(!(Test-Path $MSBuild14)) 
-	{ 
-		cinst microsoft-build-tools -y
-	}
+    { 
+        cinst microsoft-build-tools -y
+    }
 }
 
 Task Install-BuildTools -depends Install-MSBuild
