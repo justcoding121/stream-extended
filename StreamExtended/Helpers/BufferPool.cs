@@ -8,8 +8,7 @@ namespace StreamExtended.Helpers
 
         public static byte[] GetBuffer(int bufferSize)
         {
-            byte[] buffer;
-            if (!buffers.TryDequeue(out buffer) || buffer.Length != bufferSize)
+            if (!buffers.TryDequeue(out var buffer) || buffer.Length != bufferSize)
             {
                 buffer = new byte[bufferSize];
             }

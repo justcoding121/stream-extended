@@ -127,8 +127,8 @@ namespace StreamExtended.Network
 
         public override long Position
         {
-            get { return stream.Position; }
-            set { stream.Position = value; }
+            get => stream.Position;
+            set => stream.Position = value;
         }
     }
 }
