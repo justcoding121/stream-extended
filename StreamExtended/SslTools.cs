@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-
 namespace StreamExtended
 {
     public class SslTools
@@ -134,9 +133,9 @@ namespace StreamExtended
             return null;
         }
 
-        private static async Task<List<SslExtension>> ReadExtensions(int majorVersion, int minorVersion, CustomBufferedPeekStream peekStream)
+        private static async Task<Dictionary<string, SslExtension>> ReadExtensions(int majorVersion, int minorVersion, CustomBufferedPeekStream peekStream)
         {
-            List<SslExtension> extensions = null;
+            Dictionary<string, SslExtension> extensions = null;
             if (majorVersion > 3 || majorVersion == 3 && minorVersion >= 1)
             {
                 if (await peekStream.EnsureBufferLength(2))
@@ -145,13 +144,15 @@ namespace StreamExtended
 
                     if (await peekStream.EnsureBufferLength(extensionsLength))
                     {
-                        extensions = new List<SslExtension>();
+                        extensions = new Dictionary<string, SslExtension>();
+                        int idx = 0;
                         while (extensionsLength > 3)
                         {
                             int id = peekStream.ReadInt16();
                             int length = peekStream.ReadInt16();
                             byte[] data = peekStream.ReadBytes(length);
-                            extensions.Add(SslExtensions.GetExtension(id, data));
+                            var extension = SslExtensions.GetExtension(id, data, idx++);
+                            extensions[extension.Name] = extension;
                             extensionsLength -= 4 + length;
                         }
                     }
