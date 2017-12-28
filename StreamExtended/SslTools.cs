@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-
 namespace StreamExtended
 {
     public class SslTools
@@ -153,7 +152,7 @@ namespace StreamExtended
                             int length = peekStream.ReadInt16();
                             byte[] data = peekStream.ReadBytes(length);
                             var extension = SslExtensions.GetExtension(id, data, idx++);
-                            extensions.Add(extension.Name, extension);
+                            extensions[extension.Name] = extension;
                             extensionsLength -= 4 + length;
                         }
                     }
