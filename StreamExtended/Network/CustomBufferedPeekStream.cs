@@ -2,19 +2,21 @@
 
 namespace StreamExtended.Network
 {
-    public class CustomBufferedPeekStream
+    public class CustomBufferedPeekStream : IBufferedStream
     {
         private readonly CustomBufferedStream baseStream;
 
         internal int Position { get; private set; }
 
-        internal CustomBufferedPeekStream(CustomBufferedStream baseStream, int startPosition = 0)
+        public CustomBufferedPeekStream(CustomBufferedStream baseStream, int startPosition = 0)
         {
             this.baseStream = baseStream;
             Position = startPosition;
         }
 
         internal int Available => baseStream.Available - Position;
+
+        bool IBufferedStream.DataAvailable => Available > 0;
 
         internal async Task<bool> EnsureBufferLength(int length)
         {
@@ -51,6 +53,21 @@ namespace StreamExtended.Network
             }
 
             return buffer;
+        }
+
+        Task<bool> IBufferedStream.FillBufferAsync()
+        {
+            return baseStream.FillBufferAsync();
+        }
+
+        byte IBufferedStream.ReadByteFromBuffer()
+        {
+            return ReadByte();
+        }
+
+        Task<int> IBufferedStream.ReadAsync(byte[] buffer, int offset, int count)
+        {
+            return baseStream.ReadAsync(buffer, offset, count);
         }
     }
 }
