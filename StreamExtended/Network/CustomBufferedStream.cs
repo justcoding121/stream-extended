@@ -12,7 +12,7 @@ namespace StreamExtended.Network
     /// with an underlying buffer 
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
-    public class CustomBufferedStream : Stream
+    public class CustomBufferedStream : Stream, IBufferedStream
     {
 #if NET45
         private AsyncCallback readCallback;
@@ -484,8 +484,14 @@ namespace StreamExtended.Network
                 Buffer.BlockCopy(streamBuffer, bufferPos, streamBuffer, 0, bufferLength);
             }
 
+            int bytesToRead = streamBuffer.Length - bufferLength;
+            if (bytesToRead == 0)
+            {
+                return false;
+            }
+
             bufferPos = 0;
-            int readBytes = await baseStream.ReadAsync(streamBuffer, bufferLength, streamBuffer.Length - bufferLength, cancellationToken);
+            int readBytes = await baseStream.ReadAsync(streamBuffer, bufferLength, bytesToRead, cancellationToken);
             if (readBytes > 0)
             {
                 OnDataReceived(streamBuffer, bufferLength, readBytes);

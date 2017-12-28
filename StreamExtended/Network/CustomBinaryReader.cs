@@ -13,14 +13,14 @@ namespace StreamExtended.Network
     /// </summary>
     public class CustomBinaryReader : IDisposable
     {
-        private readonly CustomBufferedStream stream;
+        private readonly IBufferedStream stream;
         private readonly Encoding encoding;
 
         private bool disposed;
 
         public byte[] Buffer { get; }
 
-        public CustomBinaryReader(CustomBufferedStream stream, int bufferSize)
+        public CustomBinaryReader(IBufferedStream stream, int bufferSize)
         {
             this.stream = stream;
             Buffer = BufferPool.GetBuffer(bufferSize);
