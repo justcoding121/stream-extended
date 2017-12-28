@@ -385,7 +385,7 @@ namespace StreamExtended
                 case 65281:
                     return "renegotiation_info";
                 default:
-                    return "unknown";
+                    return $"unknown_{value:x2}";
             }
         }
 
