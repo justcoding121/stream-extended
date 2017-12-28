@@ -7,11 +7,11 @@ namespace StreamExtended
 {
     internal class SslExtensions
     {
-        internal static SslExtension GetExtension(int value, byte[] data)
+        internal static SslExtension GetExtension(int value, byte[] data, int position)
         {
             string name = GetExtensionName(value);
             string dataStr = GetExtensionData(value, data);
-            return new SslExtension(value, name, dataStr);
+            return new SslExtension(value, name, dataStr, position);
         }
 
         private static string GetExtensionData(int value, byte[] data)
@@ -385,7 +385,7 @@ namespace StreamExtended
                 case 65281:
                     return "renegotiation_info";
                 default:
-                    return "unknown";
+                    return $"unknown_{value:x2}";
             }
         }
 
