@@ -2,17 +2,20 @@ namespace StreamExtended.Models
 {
     public class SslExtension
     {
-        public int Value { get; set; }
+        public int Value { get; }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public string Data { get; set; }
+        public string Data { get; }
 
-        public SslExtension(int value, string name, string data)
+        public int Position { get; }
+
+        public SslExtension(int value, string name, string data, int position)
         {
             Value = value;
             Name = name;
             Data = data;
+            Position = position;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace StreamExtended
 
         internal int EntensionsStartPosition { get; set; }
 
-        public List<SslExtension> Extensions { get; set; }
+        public Dictionary<string, SslExtension> Extensions { get; set; }
 
         private static string SslVersionToString(int major, int minor)
         {
@@ -82,7 +82,7 @@ namespace StreamExtended
             if (Extensions != null)
             {
                 sb.AppendLine("Extensions:");
-                foreach (var extension in Extensions)
+                foreach (var extension in Extensions.Values.OrderBy(x => x.Position))
                 {
                     sb.AppendLine($"{extension.Name}: {extension.Data}");
                 }
@@ -102,8 +102,7 @@ namespace StreamExtended
                 sb.AppendLine("Ciphers:");
                 foreach (int cipherSuite in Ciphers)
                 {
-                    string cipherStr;
-                    if (!SslCiphers.Ciphers.TryGetValue(cipherSuite, out cipherStr))
+                    if (!SslCiphers.Ciphers.TryGetValue(cipherSuite, out string cipherStr))
                     {
                         cipherStr = "unknown";
                     }
