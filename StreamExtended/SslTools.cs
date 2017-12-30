@@ -38,8 +38,8 @@ namespace StreamExtended
                     return null;
                 }
 
-                int majorVersion = clientStream.ReadByte();
-                int minorVersion = clientStream.ReadByte();
+                int majorVersion = peekStream.ReadByte();
+                int minorVersion = peekStream.ReadByte();
                 return new ClientHelloInfo();
             }
             else if (recordType == 0x16)
@@ -193,8 +193,8 @@ namespace StreamExtended
                     return null;
                 }
 
-                int majorVersion = serverStream.ReadByte();
-                int minorVersion = serverStream.ReadByte();
+                int majorVersion = peekStream.ReadByte();
+                int minorVersion = peekStream.ReadByte();
                 return new ServerHelloInfo();
             }
             else if (recordType == 0x16)
