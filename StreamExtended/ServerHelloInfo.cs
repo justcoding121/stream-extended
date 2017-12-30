@@ -13,6 +13,8 @@ namespace StreamExtended
             "DEFLATE"
         };
 
+        public int HandshakeVersion { get; set; }
+
         public int MajorVersion { get; set; }
 
         public int MinorVersion { get; set; }
@@ -72,7 +74,7 @@ namespace StreamExtended
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("A SSLv3-compatible ServerHello handshake was found. Titanium extracted the parameters below.");
+            sb.AppendLine($"A SSLv{HandshakeVersion}-compatible ServerHello handshake was found. Titanium extracted the parameters below.");
             sb.AppendLine();
             sb.AppendLine($"Version: {SslVersionToString(MajorVersion, MinorVersion)}");
             sb.AppendLine($"Random: {string.Join(" ", Random.Select(x => x.ToString("X2")))}");

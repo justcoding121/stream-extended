@@ -342,7 +342,7 @@ namespace StreamExtended
                 case 9:
                     return "cert_type";
                 case 10:
-                    return "supported_groups"; // renamed from "elliptic_curves"
+                    return "supported_groups"; // renamed from "elliptic_curves" (RFC 7919 / TLS 1.3)
                 case 11:
                     return "ec_point_formats";
                 case 12:
@@ -373,17 +373,60 @@ namespace StreamExtended
                     return "token_binding"; // TEMPORARY - registered 2016-02-04, extension registered 2017-01-12, expires 2018-02-04
                 case 25:
                     return "cached_info";
+                case 26:
+                    return "quic_transports_parameters"; // Not yet assigned by IANA (QUIC-TLS Draft04)
                 case 35:
                     return "SessionTicket TLS";
+                // TLS 1.3 draft: https://tools.ietf.org/html/draft-ietf-tls-tls13
+                case 40:
+                    return "key_share";
+                case 41:
+                    return "pre_shared_key";
+                case 42:
+                    return "early_data";
+                case 43:
+                    return "supported_versions";
+                case 44:
+                    return "cookie";
+                case 45:
+                    return "psk_key_exchange_modes";
+                case 46:
+                    return "ticket_early_data_info";
+                case 47:
+                    return "certificate_authorities";
+                case 48:
+                    return "oid_filters";
+                case 49:
+                    return "post_handshake_auth";
+                case 2570: // 0a0a
+                case 6682: // 1a1a
+                case 10794: // 2a2a
+                case 14906: // 3a3a
+                case 19018: // 4a4a
+                case 23130: // 5a5a
+                case 27242: // 6a6a
+                case 31354: // 7a7a
+                case 35466: // 8a8a
+                case 39578: // 9a9a
+                case 43690: // aaaa
+                case 47802: // baba
+                case 51914: // caca
+                case 56026: // dada
+                case 60138: // eaea
+                case 64250: // fafa
+                    return "Reserved (GREASE)";
                 case 13172:
                     return "next_protocol_negotiation";
                 case 30031:
+                    return "channel_id_old"; // Google
                 case 30032:
                     return "channel_id"; // Google
                 case 35655:
                     return "draft-agl-tls-padding";
                 case 65281:
                     return "renegotiation_info";
+                case 65282:
+                    return "Draft version of TLS 1.3"; // for experimentation only  https://www.ietf.org/mail-archive/web/tls/current/msg20853.html
                 default:
                     return $"unknown_{value:x2}";
             }
