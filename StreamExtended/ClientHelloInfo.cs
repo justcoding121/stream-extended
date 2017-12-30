@@ -13,6 +13,8 @@ namespace StreamExtended
             "DEFLATE"
         };
 
+        public int HandshakeVersion { get; set; }
+
         public int MajorVersion { get; set; }
 
         public int MinorVersion { get; set; }
@@ -72,7 +74,7 @@ namespace StreamExtended
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine("A SSLv3-compatible ClientHello handshake was found. Titanium extracted the parameters below.");
+            sb.AppendLine($"A SSLv{HandshakeVersion}-compatible ClientHello handshake was found. Titanium extracted the parameters below.");
             sb.AppendLine();
             sb.AppendLine($"Version: {SslVersionToString(MajorVersion, MinorVersion)}");
             sb.AppendLine($"Random: {string.Join(" ", Random.Select(x => x.ToString("X2")))}");
@@ -88,7 +90,7 @@ namespace StreamExtended
                 }
             }
 
-            if (CompressionData.Length > 0)
+            if (CompressionData != null && CompressionData.Length > 0)
             {
                 int compressionMethod = CompressionData[0];
                 string compression = compressions.Length > compressionMethod 

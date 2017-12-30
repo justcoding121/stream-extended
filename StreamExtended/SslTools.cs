@@ -20,12 +20,18 @@ namespace StreamExtended
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
             int recordType = await clientStream.PeekByteAsync(0);
-            if (recordType == 0x80)
+            if ((recordType & 0x80) == 0x80)
             {
+                //SSL 2
                 var peekStream = new CustomBufferedPeekStream(clientStream, 1);
 
-                //SSL 2
-                int length = peekStream.ReadByte();
+                // length value + minimum length
+                if (!await peekStream.EnsureBufferLength(10))
+                {
+                    return null;
+                }
+
+                int length = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
                 if (length < 9)
                 {
                     // Message body too short.
@@ -40,7 +46,37 @@ namespace StreamExtended
 
                 int majorVersion = peekStream.ReadByte();
                 int minorVersion = peekStream.ReadByte();
-                return new ClientHelloInfo();
+
+                int ciphersCount = peekStream.ReadInt16() / 3;
+                int sessionIdLength = peekStream.ReadInt16();
+                int randomLength = peekStream.ReadInt16();
+
+                if (!await peekStream.EnsureBufferLength(ciphersCount * 3 + sessionIdLength + randomLength))
+                {
+                    return null;
+                }
+
+                int[] ciphers = new int[ciphersCount];
+                for (int i = 0; i < ciphers.Length; i++)
+                {
+                    ciphers[i] = (peekStream.ReadByte() << 16) + (peekStream.ReadByte() << 8) + peekStream.ReadByte();
+                }
+
+                byte[] sessionId = peekStream.ReadBytes(sessionIdLength);
+                byte[] random = peekStream.ReadBytes(randomLength);
+
+                var clientHelloInfo = new ClientHelloInfo
+                {
+                    HandshakeVersion = 2,
+                    MajorVersion = majorVersion,
+                    MinorVersion = minorVersion,
+                    Random = random,
+                    SessionId = sessionId,
+                    Ciphers = ciphers,
+                    ClientHelloLength = peekStream.Position,
+                };
+
+                return clientHelloInfo;
             }
             else if (recordType == 0x16)
             {
@@ -116,6 +152,7 @@ namespace StreamExtended
 
                 var clientHelloInfo = new ClientHelloInfo
                 {
+                    HandshakeVersion = 3,
                     MajorVersion = majorVersion,
                     MinorVersion = minorVersion,
                     Random = random,
@@ -174,20 +211,26 @@ namespace StreamExtended
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
             int recordType = await serverStream.PeekByteAsync(0);
-            if (recordType == 0x80)
+            if ((recordType & 0x80) == 0x80)
             {
-                // copied from client hello, not tested. SSL2 is deprecated
+                //SSL 2
+                // not tested. SSL2 is deprecated
                 var peekStream = new CustomBufferedPeekStream(serverStream, 1);
 
-                //SSL 2
-                int length = peekStream.ReadByte();
-                if (length < 9)
+                // length value + minimum length
+                if (!await peekStream.EnsureBufferLength(39))
+                {
+                    return null;
+                }
+
+                int length = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
+                if (length < 38)
                 {
                     // Message body too short.
                     return null;
                 }
 
-                if (peekStream.ReadByte() != 0x02)
+                if (peekStream.ReadByte() != 0x04)
                 {
                     // should be ServerHello
                     return null;
@@ -195,7 +238,29 @@ namespace StreamExtended
 
                 int majorVersion = peekStream.ReadByte();
                 int minorVersion = peekStream.ReadByte();
-                return new ServerHelloInfo();
+
+                // 32 bytes random + 1 byte sessionId + 2 bytes cipherSuite
+                if (!await peekStream.EnsureBufferLength(35))
+                {
+                    return null;
+                }
+
+                byte[] random = peekStream.ReadBytes(32);
+                byte[] sessionId = peekStream.ReadBytes(1);
+                int cipherSuite = peekStream.ReadInt16();
+
+                var serverHelloInfo = new ServerHelloInfo
+                {
+                    HandshakeVersion = 2,
+                    MajorVersion = majorVersion,
+                    MinorVersion = minorVersion,
+                    Random = random,
+                    SessionId = sessionId,
+                    CipherSuite = cipherSuite,
+                    ServerHelloLength = peekStream.Position,
+                };
+
+                return serverHelloInfo;
             }
             else if (recordType == 0x16)
             {
@@ -247,6 +312,7 @@ namespace StreamExtended
 
                 var serverHelloInfo = new ServerHelloInfo
                 {
+                    HandshakeVersion = 3,
                     MajorVersion = majorVersion,
                     MinorVersion = minorVersion,
                     Random = random,
