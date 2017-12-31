@@ -116,6 +116,22 @@ namespace StreamExtended.Network
             return stream.ReadAsync(buffer, 0, bytesToRead);
         }
 
+        public bool DataAvailable => stream.DataAvailable;
+
+        /// <summary>
+        /// Fills the buffer asynchronous.
+        /// </summary>
+        /// <returns></returns>
+        public Task<bool> FillBufferAsync()
+        {
+            return stream.FillBufferAsync();
+        }
+
+        public byte ReadByteFromBuffer()
+        {
+            return stream.ReadByteFromBuffer();
+        }
+
         public void Dispose()
         {
             if (!disposed)
