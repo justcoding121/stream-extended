@@ -292,6 +292,11 @@ namespace StreamExtended.Network
             return streamBuffer[bufferPos++];
         }
 
+        /// <summary>
+        /// Peeks a byte asynchronous.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
         public async Task<int> PeekByteAsync(int index)
         {
             if (Available <= index)
@@ -307,6 +312,12 @@ namespace StreamExtended.Network
             return streamBuffer[bufferPos + index];
         }
 
+        /// <summary>
+        /// Peeks a byte from buffer.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
+        /// <exception cref="Exception">Index is out of buffer size</exception>
         public byte PeekByteFromBuffer(int index)
         {
             if (bufferLength <= index)
@@ -317,6 +328,11 @@ namespace StreamExtended.Network
             return streamBuffer[bufferPos + index];
         }
 
+        /// <summary>
+        /// Reads a byte from buffer.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception">Buffer is empty</exception>
         public byte ReadByteFromBuffer()
         {
             if (bufferLength == 0)
@@ -407,8 +423,14 @@ namespace StreamExtended.Network
         /// </summary>
         public override long Length => baseStream.Length;
 
+        /// <summary>
+        /// Gets a value indicating whether data is available.
+        /// </summary>
         public bool DataAvailable => bufferLength > 0;
 
+        /// <summary>
+        /// Gets the available data size.
+        /// </summary>
         public int Available => bufferLength;
 
         /// <summary>
