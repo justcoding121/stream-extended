@@ -17,7 +17,7 @@ namespace StreamExtended.Network
             return stream.WriteAsync(data, offset, count);
         }
 
-        internal Task FlushAsync()
+        protected Task FlushAsync()
         {
             return stream.FlushAsync();
         }
