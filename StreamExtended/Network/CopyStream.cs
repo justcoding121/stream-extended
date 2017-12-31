@@ -20,6 +20,8 @@ namespace StreamExtended.Network
 
         public bool DataAvailable => reader.DataAvailable;
 
+        public long ReadBytes { get; private set; }
+
         public CopyStream(CustomBinaryReader reader, CustomBinaryWriter writer, int bufferSize)
         {
             this.reader = reader;
@@ -48,6 +50,7 @@ namespace StreamExtended.Network
         {
             byte b = reader.ReadByteFromBuffer();
             buffer[bufferLength++] = b;
+            ReadBytes++;
             return b;
         }
 
@@ -63,6 +66,7 @@ namespace StreamExtended.Network
 
                 Buffer.BlockCopy(buffer, offset, this.buffer, bufferLength, result);
                 bufferLength += result;
+                ReadBytes += result;
                 await FlushAsync();
             }
 
