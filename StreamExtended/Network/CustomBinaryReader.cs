@@ -116,6 +116,18 @@ namespace StreamExtended.Network
             return stream.ReadAsync(buffer, 0, bytesToRead);
         }
 
+        /// <summary>
+        /// Read the specified number (or less) of raw bytes from the base stream to the given buffer to the specified offset
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="bytesToRead"></param>
+        /// <returns>The number of bytes read</returns>
+        public Task<int> ReadBytesAsync(byte[] buffer, int offset, int bytesToRead)
+        {
+            return stream.ReadAsync(buffer, offset, bytesToRead);
+        }
+
         public bool DataAvailable => stream.DataAvailable;
 
         /// <summary>
