@@ -9,7 +9,7 @@ namespace StreamExtended.Network
 
         internal int Position { get; private set; }
 
-        public CustomBufferedPeekStream(CustomBufferedStream baseStream, int startPosition = 0)
+        internal CustomBufferedPeekStream(CustomBufferedStream baseStream, int startPosition = 0)
         {
             this.baseStream = baseStream;
             Position = startPosition;
