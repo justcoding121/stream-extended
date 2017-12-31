@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace StreamExtended.Network
 {
@@ -14,9 +15,15 @@ namespace StreamExtended.Network
             Position = startPosition;
         }
 
-        internal int Available => baseStream.Available - Position;
-
+        /// <summary>
+        /// Gets a value indicating whether data is available.
+        /// </summary>
         bool IBufferedStream.DataAvailable => Available > 0;
+
+        /// <summary>
+        /// Gets the available data size.
+        /// </summary>
+        internal int Available => baseStream.Available - Position;
 
         internal async Task<bool> EnsureBufferLength(int length)
         {
@@ -55,11 +62,20 @@ namespace StreamExtended.Network
             return buffer;
         }
 
+        /// <summary>
+        /// Fills the buffer asynchronous.
+        /// </summary>
+        /// <returns></returns>
         Task<bool> IBufferedStream.FillBufferAsync()
         {
             return baseStream.FillBufferAsync();
         }
 
+        /// <summary>
+        /// Reads a byte from buffer.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception">Buffer is empty</exception>
         byte IBufferedStream.ReadByteFromBuffer()
         {
             return ReadByte();
