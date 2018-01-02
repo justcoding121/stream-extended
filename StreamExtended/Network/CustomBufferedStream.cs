@@ -372,11 +372,11 @@ namespace StreamExtended.Network
             baseStream.Write(oneByteBuffer, 0, 1);
         }
 
-        private void OnDataSent(byte[] buffer, int offset, int count)
+        protected virtual void OnDataSent(byte[] buffer, int offset, int count)
         {
         }
 
-        private void OnDataReceived(byte[] buffer, int offset, int count)
+        protected virtual void OnDataReceived(byte[] buffer, int offset, int count)
         {
         }
 
@@ -390,8 +390,9 @@ namespace StreamExtended.Network
             {
                 disposed = true;
                 baseStream.Dispose();
-                BufferPool.ReturnBuffer(streamBuffer);
+                var buffer = streamBuffer;
                 streamBuffer = null;
+                BufferPool.ReturnBuffer(buffer);
 #if NET45
                 readCallback = null;
 #endif

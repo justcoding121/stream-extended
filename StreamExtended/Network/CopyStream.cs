@@ -78,8 +78,9 @@ namespace StreamExtended.Network
             if (!disposed)
             {
                 disposed = true;
-                BufferPool.ReturnBuffer(buffer);
+                var buf = buffer;
                 buffer = null;
+                BufferPool.ReturnBuffer(buf);
             }
         }
     }
