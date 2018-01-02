@@ -390,8 +390,9 @@ namespace StreamExtended.Network
             {
                 disposed = true;
                 baseStream.Dispose();
-                BufferPool.ReturnBuffer(streamBuffer);
+                var buffer = streamBuffer;
                 streamBuffer = null;
+                BufferPool.ReturnBuffer(buffer);
 #if NET45
                 readCallback = null;
 #endif
