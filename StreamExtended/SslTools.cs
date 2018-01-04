@@ -20,6 +20,11 @@ namespace StreamExtended
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
             int recordType = await clientStream.PeekByteAsync(0);
+            if (recordType == -1)
+            {
+                return null;
+            }
+
             if ((recordType & 0x80) == 0x80)
             {
                 //SSL 2
@@ -211,6 +216,11 @@ namespace StreamExtended
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
             int recordType = await serverStream.PeekByteAsync(0);
+            if (recordType == -1)
+            {
+                return null;
+            }
+
             if ((recordType & 0x80) == 0x80)
             {
                 //SSL 2
