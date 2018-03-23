@@ -48,9 +48,14 @@ namespace StreamExtended.Network
                 buffer[bufferDataLength] = newChar;
 
                 //if new line
-                if (lastChar == '\r' && newChar == '\n')
+                if (newChar == '\n')
                 {
-                    return encoding.GetString(buffer, 0, bufferDataLength - 1);
+                    if (lastChar == '\r')
+                    {
+                        return encoding.GetString(buffer, 0, bufferDataLength - 1);
+                    }
+
+                    return encoding.GetString(buffer, 0, bufferDataLength);
                 }
 
                 //end of stream
