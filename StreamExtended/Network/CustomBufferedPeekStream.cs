@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace StreamExtended.Network
@@ -25,9 +26,9 @@ namespace StreamExtended.Network
         /// </summary>
         internal int Available => baseStream.Available - Position;
 
-        internal async Task<bool> EnsureBufferLength(int length)
+        internal async Task<bool> EnsureBufferLength(int length, CancellationToken cancellationToken)
         {
-            var val = await baseStream.PeekByteAsync(Position + length - 1);
+            var val = await baseStream.PeekByteAsync(Position + length - 1, cancellationToken);
             return val != -1;
         }
 
@@ -66,9 +67,9 @@ namespace StreamExtended.Network
         /// Fills the buffer asynchronous.
         /// </summary>
         /// <returns></returns>
-        Task<bool> IBufferedStream.FillBufferAsync()
+        Task<bool> IBufferedStream.FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return baseStream.FillBufferAsync();
+            return baseStream.FillBufferAsync(cancellationToken);
         }
 
         /// <summary>
@@ -81,9 +82,9 @@ namespace StreamExtended.Network
             return ReadByte();
         }
 
-        Task<int> IBufferedStream.ReadAsync(byte[] buffer, int offset, int count)
+        Task<int> IBufferedStream.ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            return baseStream.ReadAsync(buffer, offset, count);
+            return baseStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
     }
 }

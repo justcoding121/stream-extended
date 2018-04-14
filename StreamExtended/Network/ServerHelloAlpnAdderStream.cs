@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace StreamExtended.Network
 {
@@ -47,7 +48,8 @@ namespace StreamExtended.Network
             var ms = new MemoryStream(buffer, offset, count);
 
             //this can be non async, because reads from a memory stream
-            var serverHello = SslTools.PeekServerHello(new CustomBufferedStream(ms, (int)ms.Length)).Result;
+            var cts = new CancellationTokenSource();
+            var serverHello = SslTools.PeekServerHello(new CustomBufferedStream(ms, (int)ms.Length), cts.Token).Result;
             if (serverHello != null)
             {
                 // 0x00 0x10: ALPN identifier
