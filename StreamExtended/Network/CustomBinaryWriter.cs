@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace StreamExtended.Network
@@ -12,14 +13,14 @@ namespace StreamExtended.Network
             this.stream = stream;
         }
 
-        public Task WriteAsync(byte[] data, int offset, int count)
+        public Task WriteAsync(byte[] data, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return stream.WriteAsync(data, offset, count);
+            return stream.WriteAsync(data, offset, count, cancellationToken);
         }
 
-        protected Task FlushAsync()
+        protected Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return stream.FlushAsync();
+            return stream.FlushAsync(cancellationToken);
         }
     }
 }

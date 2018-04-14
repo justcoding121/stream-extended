@@ -122,7 +122,7 @@ namespace StreamExtended.Network
         /// <returns>
         /// A task that represents the asynchronous copy operation.
         /// </returns>
-        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (bufferLength > 0)
             {
@@ -140,7 +140,7 @@ namespace StreamExtended.Network
         /// <returns>
         /// A task that represents the asynchronous flush operation.
         /// </returns>
-        public override Task FlushAsync(CancellationToken cancellationToken)
+        public override Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return baseStream.FlushAsync(cancellationToken);
         }
@@ -165,7 +165,7 @@ namespace StreamExtended.Network
         /// less than the requested number, or it can be 0 (zero)
         /// if the end of the stream has been reached.
         /// </returns>
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (bufferLength == 0)
             {
@@ -209,12 +209,13 @@ namespace StreamExtended.Network
         /// Peeks a byte asynchronous.
         /// </summary>
         /// <param name="index">The index.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<int> PeekByteAsync(int index)
+        public async Task<int> PeekByteAsync(int index, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (Available <= index)
             {
-                await FillBufferAsync();
+                await FillBufferAsync(cancellationToken);
             }
 
             if (Available <= index)
@@ -268,7 +269,7 @@ namespace StreamExtended.Network
         /// A task that represents the asynchronous write operation.
         /// </returns>
         [DebuggerStepThrough]
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
             OnDataSent(buffer, offset, count);
             return baseStream.WriteAsync(buffer, offset, count, cancellationToken);
@@ -420,18 +421,9 @@ namespace StreamExtended.Network
         /// <summary>
         /// Fills the buffer asynchronous.
         /// </summary>
-        /// <returns></returns>
-        public Task<bool> FillBufferAsync()
-        {
-            return FillBufferAsync(CancellationToken.None);
-        }
-
-        /// <summary>
-        /// Fills the buffer asynchronous.
-        /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<bool> FillBufferAsync(CancellationToken cancellationToken)
+        public async Task<bool> FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             if (closed)
             {
