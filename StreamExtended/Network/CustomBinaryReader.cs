@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace StreamExtended.Network
@@ -33,7 +34,7 @@ namespace StreamExtended.Network
         /// Read a line from the byte stream
         /// </summary>
         /// <returns></returns>
-        public async Task<string> ReadLineAsync()
+        public async Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             byte lastChar = default(byte);
 
@@ -42,7 +43,7 @@ namespace StreamExtended.Network
             // try to use the thread static buffer, usually it is enough
             var buffer = Buffer;
 
-            while (stream.DataAvailable || await stream.FillBufferAsync())
+            while (stream.DataAvailable || await stream.FillBufferAsync(cancellationToken))
             {
                 byte newChar = stream.ReadByteFromBuffer();
                 buffer[bufferDataLength] = newChar;
@@ -87,11 +88,11 @@ namespace StreamExtended.Network
         /// Read until the last new line
         /// </summary>
         /// <returns></returns>
-        public async Task<List<string>> ReadAllLinesAsync()
+        public async Task<List<string>> ReadAllLinesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             string tmpLine;
             var requestLines = new List<string>();
-            while (!string.IsNullOrEmpty(tmpLine = await ReadLineAsync()))
+            while (!string.IsNullOrEmpty(tmpLine = await ReadLineAsync(cancellationToken)))
             {
                 requestLines.Add(tmpLine);
             }
@@ -103,9 +104,9 @@ namespace StreamExtended.Network
         /// Read until the last new line, ignores the result
         /// </summary>
         /// <returns></returns>
-        public async Task ReadAndIgnoreAllLinesAsync()
+        public async Task ReadAndIgnoreAllLinesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            while (!string.IsNullOrEmpty(await ReadLineAsync()))
+            while (!string.IsNullOrEmpty(await ReadLineAsync(cancellationToken)))
             {
             }
         }
@@ -115,10 +116,11 @@ namespace StreamExtended.Network
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="bytesToRead"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The number of bytes read</returns>
-        public Task<int> ReadBytesAsync(byte[] buffer, int bytesToRead)
+        public Task<int> ReadBytesAsync(byte[] buffer, int bytesToRead, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return stream.ReadAsync(buffer, 0, bytesToRead);
+            return stream.ReadAsync(buffer, 0, bytesToRead, cancellationToken);
         }
 
         /// <summary>
@@ -127,10 +129,11 @@ namespace StreamExtended.Network
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="bytesToRead"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>The number of bytes read</returns>
-        public Task<int> ReadBytesAsync(byte[] buffer, int offset, int bytesToRead)
+        public Task<int> ReadBytesAsync(byte[] buffer, int offset, int bytesToRead, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return stream.ReadAsync(buffer, offset, bytesToRead);
+            return stream.ReadAsync(buffer, offset, bytesToRead, cancellationToken);
         }
 
         public bool DataAvailable => stream.DataAvailable;
@@ -139,9 +142,9 @@ namespace StreamExtended.Network
         /// Fills the buffer asynchronous.
         /// </summary>
         /// <returns></returns>
-        public Task<bool> FillBufferAsync()
+        public Task<bool> FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return stream.FillBufferAsync();
+            return stream.FillBufferAsync(cancellationToken);
         }
 
         public byte ReadByteFromBuffer()

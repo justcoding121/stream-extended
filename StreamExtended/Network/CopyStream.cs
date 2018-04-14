@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using StreamExtended.Helpers;
 
@@ -30,18 +31,18 @@ namespace StreamExtended.Network
             buffer = BufferPool.GetBuffer(bufferSize);
         }
 
-        public async Task<bool> FillBufferAsync()
+        public async Task<bool> FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            await FlushAsync();
-            return await reader.FillBufferAsync();
+            await FlushAsync(cancellationToken);
+            return await reader.FillBufferAsync(cancellationToken);
         }
 
-        public async Task FlushAsync()
+        public async Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             //send out the current data from from the buffer
             if (bufferLength > 0)
             {
-                await writer.WriteAsync(buffer, 0, bufferLength);
+                await writer.WriteAsync(buffer, 0, bufferLength, cancellationToken);
                 bufferLength = 0;
             }
         }
@@ -54,20 +55,20 @@ namespace StreamExtended.Network
             return b;
         }
 
-        public async Task<int> ReadAsync(byte[] buffer, int offset, int count)
+        public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
-            int result = await reader.ReadBytesAsync(buffer, offset, count);
+            int result = await reader.ReadBytesAsync(buffer, offset, count, cancellationToken);
             if (result > 0)
             {
                 if (bufferLength + result > bufferSize)
                 {
-                    await FlushAsync();
+                    await FlushAsync(cancellationToken);
                 }
 
                 Buffer.BlockCopy(buffer, offset, this.buffer, bufferLength, result);
                 bufferLength += result;
                 ReadBytes += result;
-                await FlushAsync();
+                await FlushAsync(cancellationToken);
             }
 
             return result;

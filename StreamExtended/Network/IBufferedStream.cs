@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace StreamExtended.Network
 {
@@ -6,10 +7,10 @@ namespace StreamExtended.Network
     {
         bool DataAvailable { get; }
 
-        Task<bool> FillBufferAsync();
+        Task<bool> FillBufferAsync(CancellationToken cancellationToken);
 
         byte ReadByteFromBuffer();
 
-        Task<int> ReadAsync(byte[] buffer, int offset, int count);
+        Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken);
     }
 }
