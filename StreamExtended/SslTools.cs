@@ -15,7 +15,7 @@ namespace StreamExtended
             return clientHello != null;
         }
 
-        public static async Task<ClientHelloInfo> PeekClientHello(CustomBufferedStream clientStream, CancellationToken cancellationToken)
+        public static async Task<ClientHelloInfo> PeekClientHello(CustomBufferedStream clientStream, CancellationToken cancellationToken = default (CancellationToken))
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
@@ -211,7 +211,7 @@ namespace StreamExtended
             return serverHello != null;
         }
 
-        public static async Task<ServerHelloInfo> PeekServerHello(CustomBufferedStream serverStream, CancellationToken cancellationToken)
+        public static async Task<ServerHelloInfo> PeekServerHello(CustomBufferedStream serverStream, CancellationToken cancellationToken = default(CancellationToken))
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
