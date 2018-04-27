@@ -3,8 +3,8 @@
     {
       "src": [
         {
-		 "files": [ "StreamExtended.Docs.sln"],
-          "src": ""
+	 "files": [ "StreamExtended.Docs.sln"],
+         "src": "../"
         }
       ],
       "dest": "obj/api"
@@ -28,10 +28,10 @@
     ],
     "overwrite": "specs/*.md",
     "globalMetadata": {
-      "_appTitle": "StreamExtended",
+      "_appTitle": "Stream Extended",
       "_enableSearch": true
     },
-    "dest": "docs",
+    "dest": "../docs",
     "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
   }
 }
