@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Class CustomBufferedStream
-   | StreamExtended </title>
+   | Stream Extended </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class CustomBufferedStream
-   | StreamExtended ">
-    <meta name="generator" content="docfx 2.35.0.0">
+   | Stream Extended ">
+    <meta name="generator" content="docfx 2.35.2.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -97,6 +97,7 @@ with an underlying buffer </p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><span class="xref">IBufferedStream</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -189,20 +190,20 @@ with an underlying buffer </p>
   <h6><strong>Assembly</strong>: StreamExtended.dll</h6>
   <h5 id="StreamExtended_Network_CustomBufferedStream_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CustomBufferedStream : Stream, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class CustomBufferedStream : Stream, IDisposable, IBufferedStream</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
   <a id="StreamExtended_Network_CustomBufferedStream__ctor_" data-uid="StreamExtended.Network.CustomBufferedStream.#ctor*"></a>
-  <h4 id="StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,System.Int32)">CustomBufferedStream(Stream, Int32)</h4>
+  <h4 id="StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_System_Int32_System_Boolean_" data-uid="StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,System.Int32,System.Boolean)">CustomBufferedStream(Stream, Int32, Boolean)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="StreamExtended.Network.CustomBufferedStream.html">CustomBufferedStream</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CustomBufferedStream(Stream baseStream, int bufferSize)</code></pre>
+    <pre><code class="lang-csharp hljs">public CustomBufferedStream(Stream baseStream, int bufferSize, bool leaveOpen = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -226,6 +227,12 @@ with an underlying buffer </p>
         <td><p>Size of the buffer.</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">leaveOpen</span></td>
+        <td><p><span class="xref">true</span> to leave the stream open after disposing the <span class="xref">CustomBufferedStream</span> object; otherwise, <span class="xref">false</span>.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
@@ -234,7 +241,8 @@ with an underlying buffer </p>
   
   <a id="StreamExtended_Network_CustomBufferedStream_Available_" data-uid="StreamExtended.Network.CustomBufferedStream.Available*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Available" data-uid="StreamExtended.Network.CustomBufferedStream.Available">Available</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the available data size.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -371,7 +379,8 @@ with an underlying buffer </p>
   
   <a id="StreamExtended_Network_CustomBufferedStream_DataAvailable_" data-uid="StreamExtended.Network.CustomBufferedStream.DataAvailable*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_DataAvailable" data-uid="StreamExtended.Network.CustomBufferedStream.DataAvailable">DataAvailable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether data is available.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -515,7 +524,7 @@ with an underlying buffer </p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -625,39 +634,13 @@ with an underlying buffer </p>
   
   
   <a id="StreamExtended_Network_CustomBufferedStream_FillBufferAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.FillBufferAsync*"></a>
-  <h4 id="StreamExtended_Network_CustomBufferedStream_FillBufferAsync" data-uid="StreamExtended.Network.CustomBufferedStream.FillBufferAsync">FillBufferAsync()</h4>
-  <div class="markdown level1 summary"><p>Fills the buffer asynchronous.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; FillBufferAsync()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="StreamExtended_Network_CustomBufferedStream_FillBufferAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.FillBufferAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_FillBufferAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.FillBufferAsync(System.Threading.CancellationToken)">FillBufferAsync(CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Fills the buffer asynchronous.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; FillBufferAsync(CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -714,7 +697,7 @@ with an underlying buffer </p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task FlushAsync(CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -754,13 +737,88 @@ with an underlying buffer </p>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.stream.flushasync#System_IO_Stream_FlushAsync_System_Threading_CancellationToken_">Stream.FlushAsync(CancellationToken)</a></div>
   
   
-  <a id="StreamExtended_Network_CustomBufferedStream_PeekByteAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteAsync*"></a>
-  <h4 id="StreamExtended_Network_CustomBufferedStream_PeekByteAsync_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32)">PeekByteAsync(Int32)</h4>
+  <a id="StreamExtended_Network_CustomBufferedStream_OnDataReceived_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataReceived*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataReceived_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataReceived(System.Byte[],System.Int32,System.Int32)">OnDataReceived(Byte[], Int32, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;int&gt; PeekByteAsync(int index)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual void OnDataReceived(byte[] buffer, int offset, int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="StreamExtended_Network_CustomBufferedStream_OnDataSent_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataSent*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataSent_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataSent(System.Byte[],System.Int32,System.Int32)">OnDataSent(Byte[], Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDataSent(byte[] buffer, int offset, int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="StreamExtended_Network_CustomBufferedStream_PeekByteAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteAsync*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_PeekByteAsync_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)">PeekByteAsync(Int32, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Peeks a byte asynchronous.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;int&gt; PeekByteAsync(int index, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -775,7 +833,14 @@ with an underlying buffer </p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
         <td><span class="parametername">index</span></td>
-        <td></td>
+        <td><p>The index.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The cancellation token.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -798,7 +863,8 @@ with an underlying buffer </p>
   
   <a id="StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(System.Int32)">PeekByteFromBuffer(Int32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Peeks a byte from buffer.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -817,7 +883,8 @@ with an underlying buffer </p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
         <td><span class="parametername">index</span></td>
-        <td></td>
+        <td><p>The index.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -833,6 +900,22 @@ with an underlying buffer </p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><p>Index is out of buffer size</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -906,7 +989,7 @@ and monitors cancellation requests.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task&lt;int&gt; ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task&lt;int&gt; ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1003,7 +1086,8 @@ if the end of the stream has been reached.</p>
   
   <a id="StreamExtended_Network_CustomBufferedStream_ReadByteFromBuffer_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadByteFromBuffer*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadByteFromBuffer" data-uid="StreamExtended.Network.CustomBufferedStream.ReadByteFromBuffer">ReadByteFromBuffer()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Reads a byte from buffer.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1021,6 +1105,22 @@ if the end of the stream has been reached.</p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Exception</span></td>
+        <td><p>Buffer is empty</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1160,7 +1260,7 @@ if the end of the stream has been reached.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1250,6 +1350,9 @@ if the end of the stream has been reached.</p>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <div>
+      <span class="xref">IBufferedStream</span>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
