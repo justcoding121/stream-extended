@@ -1,7 +1,9 @@
 ﻿using StreamExtended.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,13 +14,14 @@ namespace StreamExtended.Network
     /// with an underlying buffer 
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
-    public class CustomBufferedStream : Stream, IBufferedStream
+    public class CustomBufferedStream : Stream, ICustomStreamReader
     {
         private readonly Stream baseStream;
         private readonly bool leaveOpen;
         private byte[] streamBuffer;
 
-        private readonly byte[] oneByteBuffer = new byte[1];
+        // default to UTF-8
+        private static readonly Encoding encoding = Encoding.UTF8;
 
         private int bufferLength;
 
@@ -27,6 +30,12 @@ namespace StreamExtended.Network
         private bool disposed;
 
         private bool closed;
+
+        public int BufferSize { get; }
+
+        public event EventHandler<DataEventArgs> DataRead;
+
+        public event EventHandler<DataEventArgs> DataWrite;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomBufferedStream"/> class.
@@ -37,6 +46,7 @@ namespace StreamExtended.Network
         public CustomBufferedStream(Stream baseStream, int bufferSize, bool leaveOpen = false)
         {
             this.baseStream = baseStream;
+            BufferSize = bufferSize;
             this.leaveOpen = leaveOpen;
             streamBuffer = BufferPool.GetBuffer(bufferSize);
         }
@@ -109,7 +119,7 @@ namespace StreamExtended.Network
         [DebuggerStepThrough]
         public override void Write(byte[] buffer, int offset, int count)
         {
-            OnDataSent(buffer, offset, count);
+            OnDataWrite(buffer, offset, count);
             baseStream.Write(buffer, offset, count);
         }
 
@@ -271,7 +281,7 @@ namespace StreamExtended.Network
         [DebuggerStepThrough]
         public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
-            OnDataSent(buffer, offset, count);
+            OnDataWrite(buffer, offset, count);
             return baseStream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
@@ -281,17 +291,27 @@ namespace StreamExtended.Network
         /// <param name="value">The byte to write to the stream.</param>
         public override void WriteByte(byte value)
         {
-            oneByteBuffer[0] = value;
-            OnDataSent(oneByteBuffer, 0, 1);
-            baseStream.Write(oneByteBuffer, 0, 1);
+            var buffer = BufferPool.GetBuffer(BufferSize);
+            try
+            {
+                buffer[0] = value;
+                OnDataWrite(buffer, 0, 1);
+                baseStream.Write(buffer, 0, 1);
+            }
+            finally
+            {
+                BufferPool.ReturnBuffer(buffer);
+            }
         }
 
-        protected virtual void OnDataSent(byte[] buffer, int offset, int count)
+        protected virtual void OnDataWrite(byte[] buffer, int offset, int count)
         {
+            DataWrite?.Invoke(this, new DataEventArgs(buffer, offset, count));
         }
 
-        protected virtual void OnDataReceived(byte[] buffer, int offset, int count)
+        protected virtual void OnDataRead(byte[] buffer, int offset, int count)
         {
+            DataRead?.Invoke(this, new DataEventArgs(buffer, offset, count));
         }
 
         /// <summary>
@@ -401,7 +421,7 @@ namespace StreamExtended.Network
                 bool result = readBytes > 0;
                 if (result)
                 {
-                    OnDataReceived(streamBuffer, bufferLength, readBytes);
+                    OnDataRead(streamBuffer, bufferLength, readBytes);
                     bufferLength += readBytes;
                 }
                 else
@@ -450,7 +470,7 @@ namespace StreamExtended.Network
                 bool result = readBytes > 0;
                 if (result)
                 {
-                    OnDataReceived(streamBuffer, bufferLength, readBytes);
+                    OnDataRead(streamBuffer, bufferLength, readBytes);
                     bufferLength += readBytes;
                 }
                 else
@@ -465,6 +485,100 @@ namespace StreamExtended.Network
                 closed = true;
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Read a line from the byte stream
+        /// </summary>
+        /// <returns></returns>
+        public Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return ReadLineInternalAsync(this, cancellationToken);
+        }
+
+        /// <summary>
+        /// Read a line from the byte stream
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task<string> ReadLineInternalAsync(ICustomStreamReader reader, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            byte lastChar = default(byte);
+
+            int bufferDataLength = 0;
+
+            // try to use buffer from the buffer pool, usually it is enough
+            var bufferPoolBuffer = BufferPool.GetBuffer(reader.BufferSize);
+            var buffer = bufferPoolBuffer;
+
+            try
+            {
+                while (reader.DataAvailable || await reader.FillBufferAsync(cancellationToken))
+                {
+                    byte newChar = reader.ReadByteFromBuffer();
+                    buffer[bufferDataLength] = newChar;
+
+                    //if new line
+                    if (newChar == '\n')
+                    {
+                        if (lastChar == '\r')
+                        {
+                            return encoding.GetString(buffer, 0, bufferDataLength - 1);
+                        }
+
+                        return encoding.GetString(buffer, 0, bufferDataLength);
+                    }
+
+                    //end of stream
+                    if (newChar == '\0')
+                    {
+                        return encoding.GetString(buffer, 0, bufferDataLength);
+                    }
+
+                    bufferDataLength++;
+
+                    //store last char for new line comparison
+                    lastChar = newChar;
+
+                    if (bufferDataLength == buffer.Length)
+                    {
+                        ResizeBuffer(ref buffer, bufferDataLength * 2);
+                    }
+                }
+            }
+            finally
+            {
+                BufferPool.ReturnBuffer(bufferPoolBuffer);
+            }
+
+            if (bufferDataLength == 0)
+            {
+                return null;
+            }
+
+            return encoding.GetString(buffer, 0, bufferDataLength);
+        }
+
+        /// <summary>
+        /// Read until the last new line, ignores the result
+        /// </summary>
+        /// <returns></returns>
+        public async Task ReadAndIgnoreAllLinesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            while (!string.IsNullOrEmpty(await ReadLineAsync(cancellationToken)))
+            {
+            }
+        }
+
+        /// <summary>
+        /// Increase size of buffer and copy existing content to new buffer
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="size"></param>
+        private static void ResizeBuffer(ref byte[] buffer, long size)
+        {
+            var newBuffer = new byte[size];
+            Buffer.BlockCopy(buffer, 0, newBuffer, 0, buffer.Length);
+            buffer = newBuffer;
         }
     }
 }

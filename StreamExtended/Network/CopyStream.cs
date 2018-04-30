@@ -5,13 +5,13 @@ using StreamExtended.Helpers;
 
 namespace StreamExtended.Network
 {
-    public class CopyStream : IBufferedStream, IDisposable
+    public class CopyStream : ICustomStreamReader, IDisposable
     {
-        private readonly CustomBinaryReader reader;
+        private readonly ICustomStreamReader reader;
 
-        private readonly CustomBinaryWriter writer;
+        private readonly ICustomStreamWriter writer;
 
-        private readonly int bufferSize;
+        public int BufferSize { get; }
 
         private int bufferLength;
 
@@ -19,15 +19,17 @@ namespace StreamExtended.Network
 
         private bool disposed;
 
+        public int Available => reader.Available;
+
         public bool DataAvailable => reader.DataAvailable;
 
         public long ReadBytes { get; private set; }
 
-        public CopyStream(CustomBinaryReader reader, CustomBinaryWriter writer, int bufferSize)
+        public CopyStream(ICustomStreamReader reader, ICustomStreamWriter writer, int bufferSize)
         {
             this.reader = reader;
             this.writer = writer;
-            this.bufferSize = bufferSize;
+            BufferSize = bufferSize;
             buffer = BufferPool.GetBuffer(bufferSize);
         }
 
@@ -35,6 +37,26 @@ namespace StreamExtended.Network
         {
             await FlushAsync(cancellationToken);
             return await reader.FillBufferAsync(cancellationToken);
+        }
+
+        public byte PeekByteFromBuffer(int index)
+        {
+            return reader.PeekByteFromBuffer(index);
+        }
+
+        public Task<int> PeekByteAsync(int index, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return reader.PeekByteAsync(index, cancellationToken);
+        }
+
+        public void Flush()
+        {
+            //send out the current data from from the buffer
+            if (bufferLength > 0)
+            {
+                writer.Write(buffer, 0, bufferLength);
+                bufferLength = 0;
+            }
         }
 
         public async Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -55,12 +77,31 @@ namespace StreamExtended.Network
             return b;
         }
 
-        public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
+        public int Read(byte[] buffer, int offset, int count)
         {
-            int result = await reader.ReadBytesAsync(buffer, offset, count, cancellationToken);
+            int result = reader.Read(buffer, offset, count);
             if (result > 0)
             {
-                if (bufferLength + result > bufferSize)
+                if (bufferLength + result > BufferSize)
+                {
+                    Flush();
+                }
+
+                Buffer.BlockCopy(buffer, offset, this.buffer, bufferLength, result);
+                bufferLength += result;
+                ReadBytes += result;
+                Flush();
+            }
+
+            return result;
+        }
+
+        public async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            int result = await reader.ReadAsync(buffer, offset, count, cancellationToken);
+            if (result > 0)
+            {
+                if (bufferLength + result > BufferSize)
                 {
                     await FlushAsync(cancellationToken);
                 }
@@ -72,6 +113,11 @@ namespace StreamExtended.Network
             }
 
             return result;
+        }
+
+        public Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return CustomBufferedStream.ReadLineInternalAsync(this, cancellationToken);
         }
 
         public void Dispose()
