@@ -97,7 +97,7 @@ with an underlying buffer </p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
-    <div><span class="xref">IBufferedStream</span></div>
+    <div><span class="xref">ICustomStreamReader</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -190,7 +190,7 @@ with an underlying buffer </p>
   <h6><strong>Assembly</strong>: StreamExtended.dll</h6>
   <h5 id="StreamExtended_Network_CustomBufferedStream_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CustomBufferedStream : Stream, IDisposable, IBufferedStream</code></pre>
+    <pre><code class="lang-csharp hljs">public class CustomBufferedStream : Stream, IDisposable, ICustomStreamReader</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -247,6 +247,31 @@ with an underlying buffer </p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public int Available { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="StreamExtended_Network_CustomBufferedStream_BufferSize_" data-uid="StreamExtended.Network.CustomBufferedStream.BufferSize*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_BufferSize" data-uid="StreamExtended.Network.CustomBufferedStream.BufferSize">BufferSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int BufferSize { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -737,13 +762,13 @@ with an underlying buffer </p>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.stream.flushasync#System_IO_Stream_FlushAsync_System_Threading_CancellationToken_">Stream.FlushAsync(CancellationToken)</a></div>
   
   
-  <a id="StreamExtended_Network_CustomBufferedStream_OnDataReceived_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataReceived*"></a>
-  <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataReceived_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataReceived(System.Byte[],System.Int32,System.Int32)">OnDataReceived(Byte[], Int32, Int32)</h4>
+  <a id="StreamExtended_Network_CustomBufferedStream_OnDataRead_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataRead*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataRead_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte[],System.Int32,System.Int32)">OnDataRead(Byte[], Int32, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void OnDataReceived(byte[] buffer, int offset, int count)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual void OnDataRead(byte[] buffer, int offset, int count)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -774,13 +799,13 @@ with an underlying buffer </p>
   </table>
   
   
-  <a id="StreamExtended_Network_CustomBufferedStream_OnDataSent_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataSent*"></a>
-  <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataSent_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataSent(System.Byte[],System.Int32,System.Int32)">OnDataSent(Byte[], Int32, Int32)</h4>
+  <a id="StreamExtended_Network_CustomBufferedStream_OnDataWrite_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataWrite*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataWrite_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte[],System.Int32,System.Int32)">OnDataWrite(Byte[], Int32, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void OnDataSent(byte[] buffer, int offset, int count)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual void OnDataWrite(byte[] buffer, int offset, int count)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -980,6 +1005,49 @@ with an underlying buffer </p>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.stream.read#System_IO_Stream_Read_System_Byte___System_Int32_System_Int32_">Stream.Read(Byte[], Int32, Int32)</a></div>
   
   
+  <a id="StreamExtended_Network_CustomBufferedStream_ReadAndIgnoreAllLinesAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAndIgnoreAllLinesAsync*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_ReadAndIgnoreAllLinesAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAndIgnoreAllLinesAsync(System.Threading.CancellationToken)">ReadAndIgnoreAllLinesAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Read until the last new line, ignores the result</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task ReadAndIgnoreAllLinesAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="StreamExtended_Network_CustomBufferedStream_ReadAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">ReadAsync(Byte[], Int32, Int32, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Asynchronously reads a sequence of bytes from the current stream,
@@ -1121,6 +1189,49 @@ if the end of the stream has been reached.</p>
         <td><span class="xref">System.Exception</span></td>
         <td><p>Buffer is empty</p>
 </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="StreamExtended_Network_CustomBufferedStream_ReadLineAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadLineAsync*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_ReadLineAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadLineAsync(System.Threading.CancellationToken)">ReadLineAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Read a line from the byte stream</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -1347,12 +1458,62 @@ if the end of the stream has been reached.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.io.stream.writebyte#System_IO_Stream_WriteByte_System_Byte_">Stream.WriteByte(Byte)</a></div>
+  <h3 id="events">Events
+  </h3>
+  
+  
+  <h4 id="StreamExtended_Network_CustomBufferedStream_DataRead" data-uid="StreamExtended.Network.CustomBufferedStream.DataRead">DataRead</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DataEventArgs&gt; DataRead</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<span class="xref">DataEventArgs</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="StreamExtended_Network_CustomBufferedStream_DataWrite" data-uid="StreamExtended.Network.CustomBufferedStream.DataWrite">DataWrite</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DataEventArgs&gt; DataWrite</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<span class="xref">DataEventArgs</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <div>
-      <span class="xref">IBufferedStream</span>
+      <span class="xref">ICustomStreamReader</span>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
