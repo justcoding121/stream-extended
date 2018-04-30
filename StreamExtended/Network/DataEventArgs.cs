@@ -7,7 +7,7 @@ namespace StreamExtended.Network
     /// </summary>
     public class DataEventArgs : EventArgs
     {
-        internal DataEventArgs(byte[] buffer, int offset, int count)
+        public DataEventArgs(byte[] buffer, int offset, int count)
         {
             Buffer = buffer;
             Offset = offset;
