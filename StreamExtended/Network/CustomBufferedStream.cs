@@ -528,12 +528,6 @@ namespace StreamExtended.Network
                         return encoding.GetString(buffer, 0, bufferDataLength);
                     }
 
-                    //end of stream
-                    if (newChar == '\0')
-                    {
-                        return encoding.GetString(buffer, 0, bufferDataLength);
-                    }
-
                     bufferDataLength++;
 
                     //store last char for new line comparison
