@@ -1,26 +1,36 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace StreamExtended.Network
 {
-    public class CustomBufferedPeekStream : IBufferedStream
+    public class CustomBufferedPeekStream : ICustomStreamReader
     {
-        private readonly CustomBufferedStream baseStream;
+        private readonly ICustomStreamReader baseStream;
 
         internal int Position { get; private set; }
 
-        public CustomBufferedPeekStream(CustomBufferedStream baseStream, int startPosition = 0)
+        internal CustomBufferedPeekStream(ICustomStreamReader baseStream, int startPosition = 0)
         {
             this.baseStream = baseStream;
             Position = startPosition;
         }
 
-        internal int Available => baseStream.Available - Position;
+        int ICustomStreamReader.BufferSize => baseStream.BufferSize;
 
-        bool IBufferedStream.DataAvailable => Available > 0;
+        /// <summary>
+        /// Gets a value indicating whether data is available.
+        /// </summary>
+        bool ICustomStreamReader.DataAvailable => Available > 0;
 
-        internal async Task<bool> EnsureBufferLength(int length)
+        /// <summary>
+        /// Gets the available data size.
+        /// </summary>
+        public int Available => baseStream.Available - Position;
+
+        internal async Task<bool> EnsureBufferLength(int length, CancellationToken cancellationToken)
         {
-            var val = await baseStream.PeekByteAsync(Position + length - 1);
+            var val = await baseStream.PeekByteAsync(Position + length - 1, cancellationToken);
             return val != -1;
         }
 
@@ -55,19 +65,73 @@ namespace StreamExtended.Network
             return buffer;
         }
 
-        Task<bool> IBufferedStream.FillBufferAsync()
+        /// <summary>
+        /// Fills the buffer asynchronous.
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> ICustomStreamReader.FillBufferAsync(CancellationToken cancellationToken)
         {
-            return baseStream.FillBufferAsync();
+            return baseStream.FillBufferAsync(cancellationToken);
         }
 
-        byte IBufferedStream.ReadByteFromBuffer()
+        /// <summary>
+        /// Peeks a byte from buffer.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
+        byte ICustomStreamReader.PeekByteFromBuffer(int index)
+        {
+            return baseStream.PeekByteFromBuffer(index);
+        }
+
+        /// <summary>
+        /// Peeks a byte asynchronous.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<int> ICustomStreamReader.PeekByteAsync(int index, CancellationToken cancellationToken)
+        {
+            return baseStream.PeekByteAsync(index, cancellationToken);
+        }
+
+        /// <summary>
+        /// Reads a byte from buffer.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception">Buffer is empty</exception>
+        byte ICustomStreamReader.ReadByteFromBuffer()
         {
             return ReadByte();
         }
 
-        Task<int> IBufferedStream.ReadAsync(byte[] buffer, int offset, int count)
+        int ICustomStreamReader.Read(byte[] buffer, int offset, int count)
         {
-            return baseStream.ReadAsync(buffer, offset, count);
+            return baseStream.Read(buffer, offset, count);
         }
+
+        /// <summary>
+        /// Reads the asynchronous.
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <param name="offset">The offset.</param>
+        /// <param name="count">The count.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<int> ICustomStreamReader.ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        {
+            return baseStream.ReadAsync(buffer, offset, count, cancellationToken);
+        }
+
+        /// <summary>
+        /// Read a line from the byte stream
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<string> ICustomStreamReader.ReadLineAsync(CancellationToken cancellationToken)
+        {
+            return CustomBufferedStream.ReadLineInternalAsync(this, cancellationToken);
+        }
+
     }
 }

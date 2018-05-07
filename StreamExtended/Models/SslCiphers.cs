@@ -34,6 +34,10 @@ namespace StreamExtended.Models
             { 0x0019, "TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA" },
             { 0x001A, "TLS_DH_anon_WITH_DES_CBC_SHA" },
             { 0x001B, "TLS_DH_anon_WITH_3DES_EDE_CBC_SHA" },
+            { 0x001C, "SSL_FORTEZZA_KEA_WITH_NULL_SHA" },
+            { 0x001D, "SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA" },
+            //{ 0x001E, "SSL_FORTEZZA_KEA_WITH_RC4_128_SHA" },
+            // RFC 2712
             { 0x001E, "TLS_KRB5_WITH_DES_CBC_SHA" },
             { 0x001F, "TLS_KRB5_WITH_3DES_EDE_CBC_SHA" },
             { 0x0020, "TLS_KRB5_WITH_RC4_128_SHA" },
@@ -48,9 +52,11 @@ namespace StreamExtended.Models
             { 0x0029, "TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5" },
             { 0x002A, "TLS_KRB5_EXPORT_WITH_RC2_CBC_40_MD5" },
             { 0x002B, "TLS_KRB5_EXPORT_WITH_RC4_40_MD5" },
+            // RFC 4785
             { 0x002C, "TLS_PSK_WITH_NULL_SHA" },
             { 0x002D, "TLS_DHE_PSK_WITH_NULL_SHA" },
             { 0x002E, "TLS_RSA_PSK_WITH_NULL_SHA" },
+            // RFC 5246
             { 0x002F, "TLS_RSA_WITH_AES_128_CBC_SHA" },
             { 0x0030, "TLS_DH_DSS_WITH_AES_128_CBC_SHA" },
             { 0x0031, "TLS_DH_RSA_WITH_AES_128_CBC_SHA" },
@@ -75,6 +81,19 @@ namespace StreamExtended.Models
             { 0x0044, "TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA" },
             { 0x0045, "TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA" },
             { 0x0046, "TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA" },
+            { 0x0047, "TLS_ECDH_ECDSA_WITH_NULL_SHA" },
+            { 0x0048, "TLS_ECDH_ECDSA_WITH_RC4_128_SHA" },
+            { 0x0049, "TLS_ECDH_ECDSA_WITH_DES_CBC_SHA" },
+            { 0x004A, "TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA" },
+            { 0x004B, "TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA" },
+            { 0x004C, "TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA" },
+            { 0x0060, "TLS_RSA_EXPORT1024_WITH_RC4_56_MD5" },
+            { 0x0061, "TLS_RSA_EXPORT1024_WITH_RC2_CBC_56_MD5" },
+            { 0x0062, "TLS_RSA_EXPORT1024_WITH_DES_CBC_SHA" },
+            { 0x0063, "TLS_DHE_DSS_EXPORT1024_WITH_DES_CBC_SHA" },
+            { 0x0064, "TLS_RSA_EXPORT1024_WITH_RC4_56_SHA" },
+            { 0x0065, "TLS_DHE_DSS_EXPORT1024_WITH_RC4_56_SHA" },
+            { 0x0066, "TLS_DHE_DSS_WITH_RC4_128_SHA" },
             { 0x0067, "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256" },
             { 0x0068, "TLS_DH_DSS_WITH_AES_256_CBC_SHA256" },
             { 0x0069, "TLS_DH_RSA_WITH_AES_256_CBC_SHA256" },
@@ -88,6 +107,7 @@ namespace StreamExtended.Models
             { 0x0087, "TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA" },
             { 0x0088, "TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA" },
             { 0x0089, "TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA" },
+            // RFC 4279
             { 0x008A, "TLS_PSK_WITH_RC4_128_SHA" },
             { 0x008B, "TLS_PSK_WITH_3DES_EDE_CBC_SHA" },
             { 0x008C, "TLS_PSK_WITH_AES_128_CBC_SHA" },
@@ -100,12 +120,14 @@ namespace StreamExtended.Models
             { 0x0093, "TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA" },
             { 0x0094, "TLS_RSA_PSK_WITH_AES_128_CBC_SHA" },
             { 0x0095, "TLS_RSA_PSK_WITH_AES_256_CBC_SHA" },
+            // RFC 4162
             { 0x0096, "TLS_RSA_WITH_SEED_CBC_SHA" },
             { 0x0097, "TLS_DH_DSS_WITH_SEED_CBC_SHA" },
             { 0x0098, "TLS_DH_RSA_WITH_SEED_CBC_SHA" },
             { 0x0099, "TLS_DHE_DSS_WITH_SEED_CBC_SHA" },
             { 0x009A, "TLS_DHE_RSA_WITH_SEED_CBC_SHA" },
             { 0x009B, "TLS_DH_anon_WITH_SEED_CBC_SHA" },
+            // RFC 5288
             { 0x009C, "TLS_RSA_WITH_AES_128_GCM_SHA256" },
             { 0x009D, "TLS_RSA_WITH_AES_256_GCM_SHA384" },
             { 0x009E, "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256" },
@@ -118,6 +140,7 @@ namespace StreamExtended.Models
             { 0x00A5, "TLS_DH_DSS_WITH_AES_256_GCM_SHA384" },
             { 0x00A6, "TLS_DH_anon_WITH_AES_128_GCM_SHA256" },
             { 0x00A7, "TLS_DH_anon_WITH_AES_256_GCM_SHA384" },
+            // RFC 5487
             { 0x00A8, "TLS_PSK_WITH_AES_128_GCM_SHA256" },
             { 0x00A9, "TLS_PSK_WITH_AES_256_GCM_SHA384" },
             { 0x00AA, "TLS_DHE_PSK_WITH_AES_128_GCM_SHA256" },
@@ -136,6 +159,7 @@ namespace StreamExtended.Models
             { 0x00B7, "TLS_RSA_PSK_WITH_AES_256_CBC_SHA384" },
             { 0x00B8, "TLS_RSA_PSK_WITH_NULL_SHA256" },
             { 0x00B9, "TLS_RSA_PSK_WITH_NULL_SHA384" },
+            // RFC 5932
             { 0x00BA, "TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256" },
             { 0x00BB, "TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA256" },
             { 0x00BC, "TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA256" },
@@ -150,6 +174,7 @@ namespace StreamExtended.Models
             { 0x00C5, "TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA256" },
             { 0x00FF, "TLS_EMPTY_RENEGOTIATION_INFO_SCSV" },
             { 0x5600, "TLS_FALLBACK_SCSV" },
+            // RFC 4492
             { 0xC001, "TLS_ECDH_ECDSA_WITH_NULL_SHA" },
             { 0xC002, "TLS_ECDH_ECDSA_WITH_RC4_128_SHA" },
             { 0xC003, "TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA" },
@@ -175,6 +200,7 @@ namespace StreamExtended.Models
             { 0xC017, "TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA" },
             { 0xC018, "TLS_ECDH_anon_WITH_AES_128_CBC_SHA" },
             { 0xC019, "TLS_ECDH_anon_WITH_AES_256_CBC_SHA" },
+            // RFC 5054
             { 0xC01A, "TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA" },
             { 0xC01B, "TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA" },
             { 0xC01C, "TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA" },
@@ -184,6 +210,7 @@ namespace StreamExtended.Models
             { 0xC020, "TLS_SRP_SHA_WITH_AES_256_CBC_SHA" },
             { 0xC021, "TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA" },
             { 0xC022, "TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA" },
+            // RFC 5589
             { 0xC023, "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256" },
             { 0xC024, "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384" },
             { 0xC025, "TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256" },
@@ -200,6 +227,7 @@ namespace StreamExtended.Models
             { 0xC030, "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384" },
             { 0xC031, "TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256" },
             { 0xC032, "TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384" },
+            // RFC 5489
             { 0xC033, "TLS_ECDHE_PSK_WITH_RC4_128_SHA" },
             { 0xC034, "TLS_ECDHE_PSK_WITH_3DES_EDE_CBC_SHA" },
             { 0xC035, "TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA" },
@@ -325,6 +353,11 @@ namespace StreamExtended.Models
             { 0xC0AD, "TLS_ECDHE_ECDSA_WITH_AES_256_CCM" },
             { 0xC0AE, "TLS_ECDHE_ECDSA_WITH_AES_128_CCM_8" },
             { 0xC0AF, "TLS_ECDHE_ECDSA_WITH_AES_256_CCM_8" },
+            // old numbers used in the beginning http://tools.ietf.org/html/draft-agl-tls-chacha20poly1305
+            { 0xCC13, "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256" },
+            { 0xCC14, "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256" },
+            { 0xCC15, "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256" },
+            // http://tools.ietf.org/html/draft-ietf-tls-chacha20-poly1305
             { 0xCCA8, "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256" },
             { 0xCCA9, "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256" },
             { 0xCCAA, "TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256" },
@@ -332,6 +365,49 @@ namespace StreamExtended.Models
             { 0xCCAC, "TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256" },
             { 0xCCAD, "TLS_DHE_PSK_WITH_CHACHA20_POLY1305_SHA256" },
             { 0xCCAE, "TLS_RSA_PSK_WITH_CHACHA20_POLY1305_SHA256" },
+            // http://tools.ietf.org/html/draft-josefsson-salsa20-tls
+            { 0xE410, "TLS_RSA_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE411, "TLS_RSA_WITH_SALSA20_SHA1" },
+            { 0xE412, "TLS_ECDHE_RSA_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE413, "TLS_ECDHE_RSA_WITH_SALSA20_SHA1" },
+            { 0xE414, "TLS_ECDHE_ECDSA_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE415, "TLS_ECDHE_ECDSA_WITH_SALSA20_SHA1" },
+            { 0xE416, "TLS_PSK_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE417, "TLS_PSK_WITH_SALSA20_SHA1" },
+            { 0xE418, "TLS_ECDHE_PSK_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE419, "TLS_ECDHE_PSK_WITH_SALSA20_SHA1" },
+            { 0xE41A, "TLS_RSA_PSK_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE41B, "TLS_RSA_PSK_WITH_SALSA20_SHA1" },
+            { 0xE41C, "TLS_DHE_PSK_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE41D, "TLS_DHE_PSK_WITH_SALSA20_SHA1" },
+            { 0xE41E, "TLS_DHE_RSA_WITH_ESTREAM_SALSA20_SHA1" },
+            { 0xE41F, "TLS_DHE_RSA_WITH_SALSA20_SHA1" },
+            // these from http://www.mozilla.org/projects/security/pki/nss/ssl/fips-ssl-ciphersuites.html
+            { 0xFEFE, "SSL_RSA_FIPS_WITH_DES_CBC_SHA"},
+            { 0xFEFF, "SSL_RSA_FIPS_WITH_3DES_EDE_CBC_SHA" },
+            { 0xFFE0, "SSL_RSA_FIPS_WITH_3DES_EDE_CBC_SHA" },
+            { 0xFFE1, "SSL_RSA_FIPS_WITH_DES_CBC_SHA"},
+            // note that ciphersuites of {0x00????} are TLS cipher suites in
+            // a sslv2 client hello message; the ???? above is the two-byte
+            // tls cipher suite id
+            { 0x010080, "SSL2_RC4_128_WITH_MD5" },
+            { 0x020080, "SSL2_RC4_128_EXPORT40_WITH_MD5" },
+            { 0x030080, "SSL2_RC2_128_CBC_WITH_MD5" },
+            { 0x040080, "SSL2_RC2_128_CBC_EXPORT40_WITH_MD5" },
+            { 0x050080, "SSL2_IDEA_128_CBC_WITH_MD5" },
+            { 0x060040, "SSL2_DES_64_CBC_WITH_MD5" },
+            { 0x0700C0, "SSL2_DES_192_EDE3_CBC_WITH_MD5" },
+            { 0x080080, "SSL2_RC4_64_WITH_MD5" },
+            // Microsoft's old PCT protocol. These are from Eric Rescorla's book "SSL and TLS"
+            { 0x800001, "PCT_SSL_CERT_TYPE | PCT1_CERT_X509" },
+            { 0x800003, "PCT_SSL_CERT_TYPE | PCT1_CERT_X509_CHAIN" },
+            { 0x810001, "PCT_SSL_HASH_TYPE | PCT1_HASH_MD5" },
+            { 0x810003, "PCT_SSL_HASH_TYPE | PCT1_HASH_SHA" },
+            { 0x820001, "PCT_SSL_EXCH_TYPE | PCT1_EXCH_RSA_PKCS1" },
+            { 0x830004, "PCT_SSL_CIPHER_TYPE_1ST_HALF | PCT1_CIPHER_RC4" },
+            { 0x842840, "PCT_SSL_CIPHER_TYPE_2ND_HALF | PCT1_ENC_BITS_40 | PCT1_MAC_BITS_128" },
+            { 0x848040, "PCT_SSL_CIPHER_TYPE_2ND_HALF | PCT1_ENC_BITS_128 | PCT1_MAC_BITS_128" },
+            { 0x8F8001, "PCT_SSL_COMPAT | PCT_VERSION_1" },
         };
     }
 }
