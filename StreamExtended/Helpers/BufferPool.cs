@@ -2,9 +2,10 @@
 
 namespace StreamExtended.Helpers
 {
+    //TODO remote static
     public static class BufferPool
     {
-        private static readonly ConcurrentQueue<byte[]> buffers = new ConcurrentQueue<byte[]>();
+        private static readonly ConcurrentStack<byte[]> buffers = new ConcurrentStack<byte[]>();
 
         /// <summary>
         /// Gets a buffer.
@@ -13,7 +14,7 @@ namespace StreamExtended.Helpers
         /// <returns></returns>
         public static byte[] GetBuffer(int bufferSize)
         {
-            if (!buffers.TryDequeue(out var buffer) || buffer.Length != bufferSize)
+            if (!buffers.TryPop(out var buffer) || buffer.Length != bufferSize)
             {
                 buffer = new byte[bufferSize];
             }
@@ -29,7 +30,7 @@ namespace StreamExtended.Helpers
         {
             if (buffer != null)
             {
-                buffers.Enqueue(buffer);
+                buffers.Push(buffer);
             }
         }
     }
