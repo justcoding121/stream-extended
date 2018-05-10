@@ -23,8 +23,9 @@ Supports
 ### Server Name Indication
 
 ```csharp
+var bufferSize = 4096;
 var bufferPool = new DefaultBufferPool();
-var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, 4096)
+var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, bufferSize)
 var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
 
 //will be null if no client hello was received (not a SSL connection)
@@ -45,8 +46,9 @@ if (clientSslHelloInfo != null)
 
 ### Peek Client SSL Hello
 ```csharp
+var bufferSize = 4096;
 var bufferPool = new DefaultBufferPool();
-var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, 4096)
+var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, bufferSize)
 var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
 
 //will be null if no client hello was received (not a SSL connection)
@@ -60,8 +62,9 @@ if(clientSslHelloInfo!=null)
 
 ### Peek Server SSL Hello
 ```csharp
+var bufferSize = 4096;
 var bufferPool = new DefaultBufferPool();
-var yourServerStream = new CustomBufferedStream(serverStream, bufferPool, 4096)
+var yourServerStream = new CustomBufferedStream(serverStream, bufferPool, bufferSize)
 var serverSslHelloInfo = await SslTools.PeekServerHello(yourServerStream, bufferPool);
 
 //will be null if no server hello was received (not a SSL connection)
