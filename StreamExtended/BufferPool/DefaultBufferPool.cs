@@ -2,21 +2,11 @@
 
 namespace StreamExtended
 {
-    /// <summary>
-    ///     Use this interface to implement custom buffer pool.
-    ///     To use the default buffer pool implementation use DefaultBufferPool class.
-    /// </summary>
-    public interface IBufferPool
-    {
-        byte[] GetBuffer(int bufferSize);
-        void ReturnBuffer(byte[] buffer);
-    }
-
 
     /// <summary>
-    ///     A concrete IBufferPool implementation using concurrent stack.
-    ///     Works well for fixed buffer sizes, where if size does change then it would be global for all applications using this pool.
-    ///     If your application would use variable size buffers consider implementing IBufferPool using System.Buffers from Microsoft.
+    ///     A concrete IBufferPool implementation using a thread-safe stack.
+    ///     Works well when all consumers ask for buffers with the same size.
+    ///     If your application would use size buffers consider implementing IBufferPool using System.Buffers library from Microsoft.
     /// </summary>
     public class DefaultBufferPool : IBufferPool
     {
@@ -47,6 +37,11 @@ namespace StreamExtended
             {
                 buffers.Push(buffer);
             }
+        }
+
+        public void Dispose()
+        {
+            buffers.Clear();
         }
     }
 }

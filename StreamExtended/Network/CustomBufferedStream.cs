@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace StreamExtended.Network
 {
     /// <summary>
-    /// A custom network stream inherited from stream
-    /// with an underlying buffer 
+    ///     A custom network stream inherited from stream
+    ///     with an underlying read buffer supporting read/write of string or bytes asynchronously.
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
     public class CustomBufferedStream : Stream, ICustomStreamReader

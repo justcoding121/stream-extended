@@ -6,6 +6,9 @@ using System.Text;
 
 namespace StreamExtended
 {
+    /// <summary>
+    /// Wraps up the client SSL hello information.
+    /// </summary>
     public class ClientHelloInfo
     {
         private static readonly string[] compressions = {

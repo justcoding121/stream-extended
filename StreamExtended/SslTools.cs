@@ -7,14 +7,31 @@ using System.Threading.Tasks;
 
 namespace StreamExtended
 {
+    /// <summary>
+    /// Use this class to peek SSL client/server hello information.
+    /// </summary>
     public class SslTools
     {
+        /// <summary>
+        ///     Is the given stream starts with an SSL client hello?
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="bufferPool"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<bool> IsClientHello(CustomBufferedStream stream, IBufferPool  bufferPool, CancellationToken cancellationToken)
         {
             var clientHello = await PeekClientHello(stream, bufferPool, cancellationToken);
             return clientHello != null;
         }
 
+        /// <summary>
+        ///     Peek the SSL client hello information.
+        /// </summary>
+        /// <param name="clientStream"></param>
+        /// <param name="bufferPool"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<ClientHelloInfo> PeekClientHello(CustomBufferedStream clientStream, IBufferPool bufferPool, CancellationToken cancellationToken = default (CancellationToken))
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
@@ -205,12 +222,25 @@ namespace StreamExtended
             return extensions;
         }
 
+        /// <summary>
+        ///     Is the given stream starts with an SSL client hello?
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="bufferPool"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<bool> IsServerHello(CustomBufferedStream stream, IBufferPool bufferPool, CancellationToken cancellationToken)
         {
             var serverHello = await PeekServerHello(stream, bufferPool, cancellationToken);
             return serverHello != null;
         }
-
+        /// <summary>
+        ///     Peek the SSL client hello information.
+        /// </summary>
+        /// <param name="serverStream"></param>
+        /// <param name="bufferPool"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<ServerHelloInfo> PeekServerHello(CustomBufferedStream serverStream, IBufferPool bufferPool, CancellationToken cancellationToken = default(CancellationToken))
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
