@@ -9,7 +9,8 @@ namespace StreamExtended.Network
 {
     /// <summary>
     ///     A custom network stream inherited from stream
-    ///     with an underlying read buffer supporting read/write of string or bytes asynchronously.
+    ///     with an underlying read buffer supporting both read/write 
+    ///     of UTF-8 encoded string or raw bytes asynchronously from last read position.
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
     public class CustomBufferedStream : Stream, ICustomStreamReader
