@@ -88,9 +88,9 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="StreamExtended.Network.CopyStream.html">CopyStream</a></h4>
-      <section></section>
-      <h4><a class="xref" href="StreamExtended.Network.CustomBufferedPeekStream.html">CustomBufferedPeekStream</a></h4>
-      <section></section>
+      <section><p>Copies the source stream to destination stream.
+But this let users to peek and read the copying process.</p>
+</section>
       <h4><a class="xref" href="StreamExtended.Network.CustomBufferedStream.html">CustomBufferedStream</a></h4>
       <section><p>A custom network stream inherited from stream
 with an underlying read buffer supporting both read/write 
@@ -102,7 +102,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <h3 id="interfaces">Interfaces
   </h3>
       <h4><a class="xref" href="StreamExtended.Network.ICustomStreamReader.html">ICustomStreamReader</a></h4>
-      <section><p>A concrete implementation of this interface is required when calling CopyStream.</p>
+      <section><p>This concrete implemetation of interface acts as the source stream for CopyStream class.</p>
 </section>
       <h4><a class="xref" href="StreamExtended.Network.ICustomStreamWriter.html">ICustomStreamWriter</a></h4>
       <section><p>A concrete implementation of this interface is required when calling CopyStream.</p>
