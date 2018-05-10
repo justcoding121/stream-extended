@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace StreamExtended
+    <title>Interface IBufferPool
    | Stream Extended </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace StreamExtended
+    <meta name="title" content="Interface IBufferPool
    | Stream Extended ">
     <meta name="generator" content="docfx 2.35.4.0">
     
@@ -78,32 +78,92 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="StreamExtended">
+            <article class="content wrap" id="_content" data-uid="StreamExtended.IBufferPool">
   
-  <h1 id="StreamExtended" data-uid="StreamExtended" class="text-break">Namespace StreamExtended
+  
+  <h1 id="StreamExtended_IBufferPool" data-uid="StreamExtended.IBufferPool" class="text-break">Interface IBufferPool
   </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
-  </h3>
-      <h4><a class="xref" href="StreamExtended.ClientHelloInfo.html">ClientHelloInfo</a></h4>
-      <section></section>
-      <h4><a class="xref" href="StreamExtended.DefaultBufferPool.html">DefaultBufferPool</a></h4>
-      <section><p>A concrete IBufferPool implementation using concurrent stack.
-Works well for fixed buffer sizes, where if size does change then it would be global for all applications using this pool.
-If you application would use variable size buffers consider implementing IBufferPool using System.Buffers from Microsoft.</p>
-</section>
-      <h4><a class="xref" href="StreamExtended.ServerHelloInfo.html">ServerHelloInfo</a></h4>
-      <section></section>
-      <h4><a class="xref" href="StreamExtended.SslTools.html">SslTools</a></h4>
-      <section></section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="StreamExtended.IBufferPool.html">IBufferPool</a></h4>
-      <section><p>Use this interface to implement custom buffer pool.
+  <div class="markdown level0 summary"><p>Use this interface to implement custom buffer pool.
 To use the default buffer pool implementation use DefaultBufferPool class.</p>
-</section>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="StreamExtended.html">StreamExtended</a></h6>
+  <h6><strong>Assembly</strong>: StreamExtended.dll</h6>
+  <h5 id="StreamExtended_IBufferPool_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IBufferPool</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="StreamExtended_IBufferPool_GetBuffer_" data-uid="StreamExtended.IBufferPool.GetBuffer*"></a>
+  <h4 id="StreamExtended_IBufferPool_GetBuffer_System_Int32_" data-uid="StreamExtended.IBufferPool.GetBuffer(System.Int32)">GetBuffer(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">byte[] GetBuffer(int bufferSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">bufferSize</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="StreamExtended_IBufferPool_ReturnBuffer_" data-uid="StreamExtended.IBufferPool.ReturnBuffer*"></a>
+  <h4 id="StreamExtended_IBufferPool_ReturnBuffer_System_Byte___" data-uid="StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])">ReturnBuffer(Byte[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ReturnBuffer(byte[] buffer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
