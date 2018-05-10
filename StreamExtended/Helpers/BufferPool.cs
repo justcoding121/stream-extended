@@ -16,7 +16,7 @@ namespace StreamExtended
     /// <summary>
     ///     A concrete IBufferPool implementation using concurrent stack.
     ///     Works well for fixed buffer sizes, where if size does change then it would be global for all applications using this pool.
-    ///     If you application would use variable size buffers consider implementing IBufferPool using System.Buffers from Microsoft.
+    ///     If your application would use variable size buffers consider implementing IBufferPool using System.Buffers from Microsoft.
     /// </summary>
     public class DefaultBufferPool : IBufferPool
     {
