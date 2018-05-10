@@ -7,10 +7,11 @@ namespace StreamExtended.Network
     public class ClientHelloAlpnAdderStream : Stream
     {
         private readonly CustomBufferedStream stream;
+        private readonly IBufferPool bufferPool;
 
         private bool called;
 
-        public ClientHelloAlpnAdderStream(CustomBufferedStream stream)
+        public ClientHelloAlpnAdderStream(CustomBufferedStream stream, IBufferPool bufferPool)
         {
             this.stream = stream;
         }
@@ -49,7 +50,7 @@ namespace StreamExtended.Network
 
             //this can be non async, because reads from a memory stream
             var cts = new CancellationTokenSource();
-            var clientHello = SslTools.PeekClientHello(new CustomBufferedStream(ms, (int)ms.Length), cts.Token).Result;
+            var clientHello = SslTools.PeekClientHello(new CustomBufferedStream(ms, bufferPool, (int)ms.Length), bufferPool, cts.Token).Result;
             if (clientHello != null)
             {
                 // 0x00 0x10: ALPN identifier

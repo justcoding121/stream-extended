@@ -6,12 +6,14 @@ namespace StreamExtended.Network
 {
     public class CustomBufferedPeekStream : ICustomStreamReader
     {
+        private readonly IBufferPool bufferPool;
         private readonly ICustomStreamReader baseStream;
 
         internal int Position { get; private set; }
 
-        internal CustomBufferedPeekStream(ICustomStreamReader baseStream, int startPosition = 0)
+        internal CustomBufferedPeekStream(ICustomStreamReader baseStream, IBufferPool bufferPool, int startPosition = 0)
         {
+            this.bufferPool = bufferPool;
             this.baseStream = baseStream;
             Position = startPosition;
         }
@@ -130,7 +132,7 @@ namespace StreamExtended.Network
         /// <returns></returns>
         Task<string> ICustomStreamReader.ReadLineAsync(CancellationToken cancellationToken)
         {
-            return CustomBufferedStream.ReadLineInternalAsync(this, cancellationToken);
+            return CustomBufferedStream.ReadLineInternalAsync(this, bufferPool, cancellationToken);
         }
 
     }

@@ -9,13 +9,13 @@ namespace StreamExtended
 {
     public class SslTools
     {
-        public static async Task<bool> IsClientHello(CustomBufferedStream stream, CancellationToken cancellationToken)
+        public static async Task<bool> IsClientHello(CustomBufferedStream stream, IBufferPool  bufferPool, CancellationToken cancellationToken)
         {
-            var clientHello = await PeekClientHello(stream, cancellationToken);
+            var clientHello = await PeekClientHello(stream, bufferPool, cancellationToken);
             return clientHello != null;
         }
 
-        public static async Task<ClientHelloInfo> PeekClientHello(CustomBufferedStream clientStream, CancellationToken cancellationToken = default (CancellationToken))
+        public static async Task<ClientHelloInfo> PeekClientHello(CustomBufferedStream clientStream, IBufferPool bufferPool, CancellationToken cancellationToken = default (CancellationToken))
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
@@ -29,7 +29,7 @@ namespace StreamExtended
             if ((recordType & 0x80) == 0x80)
             {
                 //SSL 2
-                var peekStream = new CustomBufferedPeekStream(clientStream, 1);
+                var peekStream = new CustomBufferedPeekStream(clientStream, bufferPool, 1);
 
                 // length value + minimum length
                 if (!await peekStream.EnsureBufferLength(10, cancellationToken))
@@ -86,7 +86,7 @@ namespace StreamExtended
             }
             else if (recordType == 0x16)
             {
-                var peekStream = new CustomBufferedPeekStream(clientStream, 1);
+                var peekStream = new CustomBufferedPeekStream(clientStream, bufferPool, 1);
 
                 //should contain at least 43 bytes
                 // 2 version + 2 length + 1 type + 3 length(?) + 2 version +  32 random + 1 sessionid length
@@ -154,7 +154,7 @@ namespace StreamExtended
 
                 int extenstionsStartPosition = peekStream.Position;
 
-                var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, cancellationToken);
+                var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
 
                 var clientHelloInfo = new ClientHelloInfo
                 {
@@ -176,7 +176,7 @@ namespace StreamExtended
             return null;
         }
 
-        private static async Task<Dictionary<string, SslExtension>> ReadExtensions(int majorVersion, int minorVersion, CustomBufferedPeekStream peekStream, CancellationToken cancellationToken)
+        private static async Task<Dictionary<string, SslExtension>> ReadExtensions(int majorVersion, int minorVersion, CustomBufferedPeekStream peekStream, IBufferPool bufferPool, CancellationToken cancellationToken)
         {
             Dictionary<string, SslExtension> extensions = null;
             if (majorVersion > 3 || majorVersion == 3 && minorVersion >= 1)
@@ -205,13 +205,13 @@ namespace StreamExtended
             return extensions;
         }
 
-        public static async Task<bool> IsServerHello(CustomBufferedStream stream, CancellationToken cancellationToken)
+        public static async Task<bool> IsServerHello(CustomBufferedStream stream, IBufferPool bufferPool, CancellationToken cancellationToken)
         {
-            var serverHello = await PeekServerHello(stream, cancellationToken);
+            var serverHello = await PeekServerHello(stream, bufferPool, cancellationToken);
             return serverHello != null;
         }
 
-        public static async Task<ServerHelloInfo> PeekServerHello(CustomBufferedStream serverStream, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<ServerHelloInfo> PeekServerHello(CustomBufferedStream serverStream, IBufferPool bufferPool, CancellationToken cancellationToken = default(CancellationToken))
         {
             //detects the HTTPS ClientHello message as it is described in the following url:
             //https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
@@ -226,7 +226,7 @@ namespace StreamExtended
             {
                 //SSL 2
                 // not tested. SSL2 is deprecated
-                var peekStream = new CustomBufferedPeekStream(serverStream, 1);
+                var peekStream = new CustomBufferedPeekStream(serverStream, bufferPool, 1);
 
                 // length value + minimum length
                 if (!await peekStream.EnsureBufferLength(39, cancellationToken))
@@ -275,7 +275,7 @@ namespace StreamExtended
             }
             else if (recordType == 0x16)
             {
-                var peekStream = new CustomBufferedPeekStream(serverStream, 1);
+                var peekStream = new CustomBufferedPeekStream(serverStream, bufferPool, 1);
 
                 //should contain at least 43 bytes
                 // 2 version + 2 length + 1 type + 3 length(?) + 2 version +  32 random + 1 sessionid length
@@ -317,7 +317,7 @@ namespace StreamExtended
 
                 int extenstionsStartPosition = peekStream.Position;
 
-                var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, cancellationToken);
+                var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
 
                 //var rawBytes = new CustomBufferedPeekStream(serverStream).ReadBytes(peekStream.Position);
 
