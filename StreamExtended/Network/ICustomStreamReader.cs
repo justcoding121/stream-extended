@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace StreamExtended.Network
 {
+    /// <summary>
+    ///     This concrete implemetation of interface acts as the source stream for CopyStream class.
+    /// </summary>
     public interface ICustomStreamReader
     {
         int BufferSize { get; }

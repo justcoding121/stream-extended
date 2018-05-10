@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 namespace StreamExtended.Network
 {
+    /// <summary>
+    ///     Copies the source stream to destination stream.
+    ///     But this let users to peek and read the copying process.
+    /// </summary>
     public class CopyStream : ICustomStreamReader, IDisposable
     {
         private readonly ICustomStreamReader reader;
@@ -126,9 +130,9 @@ namespace StreamExtended.Network
             if (!disposed)
             {
                 disposed = true;
-                var buf = buffer;
+                var b = buffer;
                 buffer = null;
-                bufferPool.ReturnBuffer(buf);
+                bufferPool.ReturnBuffer(b);
             }
         }
     }

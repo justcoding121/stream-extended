@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace StreamExtended.Network
 {
-    public class CustomBufferedPeekStream : ICustomStreamReader
+    internal class CustomBufferedPeekStream : ICustomStreamReader
     {
         private readonly IBufferPool bufferPool;
         private readonly ICustomStreamReader baseStream;
