@@ -88,21 +88,13 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="StreamExtended.ClientHelloInfo.html">ClientHelloInfo</a></h4>
-      <section></section>
-      <h4><a class="xref" href="StreamExtended.DefaultBufferPool.html">DefaultBufferPool</a></h4>
-      <section><p>A concrete IBufferPool implementation using concurrent stack.
-Works well for fixed buffer sizes, where if size does change then it would be global for all applications using this pool.
-If your application would use variable size buffers consider implementing IBufferPool using System.Buffers from Microsoft.</p>
+      <section><p>Wraps up the client SSL hello information.</p>
 </section>
       <h4><a class="xref" href="StreamExtended.ServerHelloInfo.html">ServerHelloInfo</a></h4>
-      <section></section>
+      <section><p>Wraps up the server SSL hello information.</p>
+</section>
       <h4><a class="xref" href="StreamExtended.SslTools.html">SslTools</a></h4>
-      <section></section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="StreamExtended.IBufferPool.html">IBufferPool</a></h4>
-      <section><p>Use this interface to implement custom buffer pool.
-To use the default buffer pool implementation use DefaultBufferPool class.</p>
+      <section><p>Use this class to peek SSL client/server hello information.</p>
 </section>
 </article>
           </div>
