@@ -224,12 +224,12 @@
   
   
   <a id="StreamExtended_Network_ServerHelloAlpnAdderStream__ctor_" data-uid="StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor*"></a>
-  <h4 id="StreamExtended_Network_ServerHelloAlpnAdderStream__ctor_StreamExtended_Network_CustomBufferedStream_" data-uid="StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream)">ServerHelloAlpnAdderStream(CustomBufferedStream)</h4>
+  <h4 id="StreamExtended_Network_ServerHelloAlpnAdderStream__ctor_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_" data-uid="StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool)">ServerHelloAlpnAdderStream(CustomBufferedStream, IBufferPool)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ServerHelloAlpnAdderStream(CustomBufferedStream stream)</code></pre>
+    <pre><code class="lang-csharp hljs">public ServerHelloAlpnAdderStream(CustomBufferedStream stream, IBufferPool bufferPool)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -244,6 +244,11 @@
       <tr>
         <td><a class="xref" href="StreamExtended.Network.CustomBufferedStream.html">CustomBufferedStream</a></td>
         <td><span class="parametername">stream</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="StreamExtended.IBufferPool.html">IBufferPool</a></td>
+        <td><span class="parametername">bufferPool</span></td>
         <td></td>
       </tr>
     </tbody>
