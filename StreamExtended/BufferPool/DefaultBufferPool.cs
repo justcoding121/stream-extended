@@ -6,7 +6,7 @@ namespace StreamExtended
     /// <summary>
     ///     A concrete IBufferPool implementation using a thread-safe stack.
     ///     Works well when all consumers ask for buffers with the same size.
-    ///     If your application would use size buffers consider implementing IBufferPool using System.Buffers library from Microsoft.
+    ///     If your application would use variable size buffers consider implementing IBufferPool using System.Buffers library from Microsoft.
     /// </summary>
     public class DefaultBufferPool : IBufferPool
     {
