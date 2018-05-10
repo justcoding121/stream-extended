@@ -1,5 +1,8 @@
 namespace StreamExtended.Models
 {
+    /// <summary>
+    ///     The SSL extension information.
+    /// </summary>
     public class SslExtension
     {
         /// <summary>
