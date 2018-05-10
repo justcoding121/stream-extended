@@ -84,7 +84,8 @@
   <h1 id="StreamExtended_Network_CustomBufferedStream" data-uid="StreamExtended.Network.CustomBufferedStream" class="text-break">Class CustomBufferedStream
   </h1>
   <div class="markdown level0 summary"><p>A custom network stream inherited from stream
-with an underlying read buffer supporting read/write of string or bytes asynchronously.</p>
+with an underlying read buffer supporting both read/write 
+of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -97,7 +98,7 @@ with an underlying read buffer supporting read/write of string or bytes asynchro
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
-    <div><span class="xref">ICustomStreamReader</span></div>
+    <div><a class="xref" href="StreamExtended.Network.ICustomStreamReader.html">ICustomStreamReader</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -197,7 +198,7 @@ with an underlying read buffer supporting read/write of string or bytes asynchro
   
   
   <a id="StreamExtended_Network_CustomBufferedStream__ctor_" data-uid="StreamExtended.Network.CustomBufferedStream.#ctor*"></a>
-  <h4 id="StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_IBufferPool_System_Int32_System_Boolean_" data-uid="StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,IBufferPool,System.Int32,System.Boolean)">CustomBufferedStream(Stream, IBufferPool, Int32, Boolean)</h4>
+  <h4 id="StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_StreamExtended_IBufferPool_System_Int32_System_Boolean_" data-uid="StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.IBufferPool,System.Int32,System.Boolean)">CustomBufferedStream(Stream, IBufferPool, Int32, Boolean)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="StreamExtended.Network.CustomBufferedStream.html">CustomBufferedStream</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -222,7 +223,7 @@ with an underlying read buffer supporting read/write of string or bytes asynchro
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IBufferPool</span></td>
+        <td><a class="xref" href="StreamExtended.IBufferPool.html">IBufferPool</a></td>
         <td><span class="parametername">bufferPool</span></td>
         <td><p>Bufferpool.</p>
 </td>
@@ -1485,7 +1486,7 @@ if the end of the stream has been reached.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<span class="xref">DataEventArgs</span>&gt;</td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="StreamExtended.Network.DataEventArgs.html">DataEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1509,7 +1510,7 @@ if the end of the stream has been reached.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<span class="xref">DataEventArgs</span>&gt;</td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="StreamExtended.Network.DataEventArgs.html">DataEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1519,7 +1520,7 @@ if the end of the stream has been reached.</p>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <div>
-      <span class="xref">ICustomStreamReader</span>
+      <a class="xref" href="StreamExtended.Network.ICustomStreamReader.html">ICustomStreamReader</a>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
