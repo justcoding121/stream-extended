@@ -90,11 +90,22 @@
       <h4><a class="xref" href="StreamExtended.ClientHelloInfo.html">ClientHelloInfo</a></h4>
       <section><p>Wraps up the client SSL hello information.</p>
 </section>
+      <h4><a class="xref" href="StreamExtended.DefaultBufferPool.html">DefaultBufferPool</a></h4>
+      <section><p>A concrete IBufferPool implementation using a thread-safe stack.
+Works well when all consumers ask for buffers with the same size.
+If your application would use size buffers consider implementing IBufferPool using System.Buffers library from Microsoft.</p>
+</section>
       <h4><a class="xref" href="StreamExtended.ServerHelloInfo.html">ServerHelloInfo</a></h4>
       <section><p>Wraps up the server SSL hello information.</p>
 </section>
       <h4><a class="xref" href="StreamExtended.SslTools.html">SslTools</a></h4>
       <section><p>Use this class to peek SSL client/server hello information.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="StreamExtended.IBufferPool.html">IBufferPool</a></h4>
+      <section><p>Use this interface to implement custom buffer pool.
+To use the default buffer pool implementation use DefaultBufferPool class.</p>
 </section>
 </article>
           </div>
