@@ -1,6 +1,4 @@
-﻿using StreamExtended.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -31,6 +29,8 @@ namespace StreamExtended.Network
 
         private bool closed;
 
+        private readonly IBufferPool bufferPool;
+
         public int BufferSize { get; }
 
         public event EventHandler<DataEventArgs> DataRead;
@@ -41,14 +41,16 @@ namespace StreamExtended.Network
         /// Initializes a new instance of the <see cref="CustomBufferedStream"/> class.
         /// </summary>
         /// <param name="baseStream">The base stream.</param>
+        /// <param name="bufferPool">Bufferpool.</param>
         /// <param name="bufferSize">Size of the buffer.</param>
         /// <param name="leaveOpen"><see langword="true" /> to leave the stream open after disposing the <see cref="T:CustomBufferedStream" /> object; otherwise, <see langword="false" />.</param>
-        public CustomBufferedStream(Stream baseStream, int bufferSize, bool leaveOpen = false)
+        public CustomBufferedStream(Stream baseStream, IBufferPool bufferPool, int bufferSize, bool leaveOpen = false)
         {
             this.baseStream = baseStream;
             BufferSize = bufferSize;
             this.leaveOpen = leaveOpen;
-            streamBuffer = BufferPool.GetBuffer(bufferSize);
+            streamBuffer = bufferPool.GetBuffer(bufferSize);
+            this.bufferPool = bufferPool; 
         }
 
         /// <summary>
@@ -291,7 +293,7 @@ namespace StreamExtended.Network
         /// <param name="value">The byte to write to the stream.</param>
         public override void WriteByte(byte value)
         {
-            var buffer = BufferPool.GetBuffer(BufferSize);
+            var buffer = bufferPool.GetBuffer(BufferSize);
             try
             {
                 buffer[0] = value;
@@ -300,7 +302,7 @@ namespace StreamExtended.Network
             }
             finally
             {
-                BufferPool.ReturnBuffer(buffer);
+                bufferPool.ReturnBuffer(buffer);
             }
         }
 
@@ -331,7 +333,7 @@ namespace StreamExtended.Network
 
                 var buffer = streamBuffer;
                 streamBuffer = null;
-                BufferPool.ReturnBuffer(buffer);
+                bufferPool.ReturnBuffer(buffer);
             }
         }
 
@@ -493,21 +495,21 @@ namespace StreamExtended.Network
         /// <returns></returns>
         public Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return ReadLineInternalAsync(this, cancellationToken);
+            return ReadLineInternalAsync(this, bufferPool, cancellationToken);
         }
 
         /// <summary>
         /// Read a line from the byte stream
         /// </summary>
         /// <returns></returns>
-        internal static async Task<string> ReadLineInternalAsync(ICustomStreamReader reader, CancellationToken cancellationToken = default(CancellationToken))
+        internal static async Task<string> ReadLineInternalAsync(ICustomStreamReader reader, IBufferPool bufferPool, CancellationToken cancellationToken = default(CancellationToken))
         {
             byte lastChar = default(byte);
 
             int bufferDataLength = 0;
 
             // try to use buffer from the buffer pool, usually it is enough
-            var bufferPoolBuffer = BufferPool.GetBuffer(reader.BufferSize);
+            var bufferPoolBuffer = bufferPool.GetBuffer(reader.BufferSize);
             var buffer = bufferPoolBuffer;
 
             try
@@ -541,7 +543,7 @@ namespace StreamExtended.Network
             }
             finally
             {
-                BufferPool.ReturnBuffer(bufferPoolBuffer);
+                bufferPool.ReturnBuffer(bufferPoolBuffer);
             }
 
             if (bufferDataLength == 0)
