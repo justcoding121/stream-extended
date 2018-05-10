@@ -143,76 +143,6 @@ references:
   isSpec: "True"
   fullName: StreamExtended.ClientHelloInfo.ToString
   nameWithType: ClientHelloInfo.ToString
-- uid: StreamExtended.DefaultBufferPool
-  name: DefaultBufferPool
-  href: api/StreamExtended.DefaultBufferPool.html
-  commentId: T:StreamExtended.DefaultBufferPool
-  fullName: StreamExtended.DefaultBufferPool
-  nameWithType: DefaultBufferPool
-- uid: StreamExtended.DefaultBufferPool.GetBuffer(System.Int32)
-  name: GetBuffer(Int32)
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_GetBuffer_System_Int32_
-  commentId: M:StreamExtended.DefaultBufferPool.GetBuffer(System.Int32)
-  fullName: StreamExtended.DefaultBufferPool.GetBuffer(System.Int32)
-  nameWithType: DefaultBufferPool.GetBuffer(Int32)
-- uid: StreamExtended.DefaultBufferPool.GetBuffer*
-  name: GetBuffer
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_GetBuffer_
-  commentId: Overload:StreamExtended.DefaultBufferPool.GetBuffer
-  isSpec: "True"
-  fullName: StreamExtended.DefaultBufferPool.GetBuffer
-  nameWithType: DefaultBufferPool.GetBuffer
-- uid: StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte[])
-  name: ReturnBuffer(Byte[])
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_ReturnBuffer_System_Byte___
-  commentId: M:StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte[])
-  name.vb: ReturnBuffer(Byte())
-  fullName: StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte[])
-  fullName.vb: StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte())
-  nameWithType: DefaultBufferPool.ReturnBuffer(Byte[])
-  nameWithType.vb: DefaultBufferPool.ReturnBuffer(Byte())
-- uid: StreamExtended.DefaultBufferPool.ReturnBuffer*
-  name: ReturnBuffer
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_ReturnBuffer_
-  commentId: Overload:StreamExtended.DefaultBufferPool.ReturnBuffer
-  isSpec: "True"
-  fullName: StreamExtended.DefaultBufferPool.ReturnBuffer
-  nameWithType: DefaultBufferPool.ReturnBuffer
-- uid: StreamExtended.IBufferPool
-  name: IBufferPool
-  href: api/StreamExtended.IBufferPool.html
-  commentId: T:StreamExtended.IBufferPool
-  fullName: StreamExtended.IBufferPool
-  nameWithType: IBufferPool
-- uid: StreamExtended.IBufferPool.GetBuffer(System.Int32)
-  name: GetBuffer(Int32)
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_GetBuffer_System_Int32_
-  commentId: M:StreamExtended.IBufferPool.GetBuffer(System.Int32)
-  fullName: StreamExtended.IBufferPool.GetBuffer(System.Int32)
-  nameWithType: IBufferPool.GetBuffer(Int32)
-- uid: StreamExtended.IBufferPool.GetBuffer*
-  name: GetBuffer
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_GetBuffer_
-  commentId: Overload:StreamExtended.IBufferPool.GetBuffer
-  isSpec: "True"
-  fullName: StreamExtended.IBufferPool.GetBuffer
-  nameWithType: IBufferPool.GetBuffer
-- uid: StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])
-  name: ReturnBuffer(Byte[])
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_ReturnBuffer_System_Byte___
-  commentId: M:StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])
-  name.vb: ReturnBuffer(Byte())
-  fullName: StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])
-  fullName.vb: StreamExtended.IBufferPool.ReturnBuffer(System.Byte())
-  nameWithType: IBufferPool.ReturnBuffer(Byte[])
-  nameWithType.vb: IBufferPool.ReturnBuffer(Byte())
-- uid: StreamExtended.IBufferPool.ReturnBuffer*
-  name: ReturnBuffer
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_ReturnBuffer_
-  commentId: Overload:StreamExtended.IBufferPool.ReturnBuffer
-  isSpec: "True"
-  fullName: StreamExtended.IBufferPool.ReturnBuffer
-  nameWithType: IBufferPool.ReturnBuffer
 - uid: StreamExtended.Models
   name: StreamExtended.Models
   href: api/StreamExtended.Models.html
@@ -302,11 +232,11 @@ references:
   commentId: T:StreamExtended.Network.ClientHelloAlpnAdderStream
   fullName: StreamExtended.Network.ClientHelloAlpnAdderStream
   nameWithType: ClientHelloAlpnAdderStream
-- uid: StreamExtended.Network.ClientHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool)
+- uid: StreamExtended.Network.ClientHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,IBufferPool)
   name: ClientHelloAlpnAdderStream(CustomBufferedStream, IBufferPool)
-  href: api/StreamExtended.Network.ClientHelloAlpnAdderStream.html#StreamExtended_Network_ClientHelloAlpnAdderStream__ctor_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_
-  commentId: M:StreamExtended.Network.ClientHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool)
-  fullName: StreamExtended.Network.ClientHelloAlpnAdderStream.ClientHelloAlpnAdderStream(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool)
+  href: api/StreamExtended.Network.ClientHelloAlpnAdderStream.html#StreamExtended_Network_ClientHelloAlpnAdderStream__ctor_StreamExtended_Network_CustomBufferedStream_IBufferPool_
+  commentId: M:StreamExtended.Network.ClientHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,IBufferPool)
+  fullName: StreamExtended.Network.ClientHelloAlpnAdderStream.ClientHelloAlpnAdderStream(StreamExtended.Network.CustomBufferedStream, IBufferPool)
   nameWithType: ClientHelloAlpnAdderStream.ClientHelloAlpnAdderStream(CustomBufferedStream, IBufferPool)
 - uid: StreamExtended.Network.ClientHelloAlpnAdderStream.#ctor*
   name: ClientHelloAlpnAdderStream
@@ -476,11 +406,11 @@ references:
   commentId: T:StreamExtended.Network.CustomBufferedStream
   fullName: StreamExtended.Network.CustomBufferedStream
   nameWithType: CustomBufferedStream
-- uid: StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.IBufferPool,System.Int32,System.Boolean)
+- uid: StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,IBufferPool,System.Int32,System.Boolean)
   name: CustomBufferedStream(Stream, IBufferPool, Int32, Boolean)
-  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_StreamExtended_IBufferPool_System_Int32_System_Boolean_
-  commentId: M:StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.IBufferPool,System.Int32,System.Boolean)
-  fullName: StreamExtended.Network.CustomBufferedStream.CustomBufferedStream(System.IO.Stream, StreamExtended.IBufferPool, System.Int32, System.Boolean)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_IBufferPool_System_Int32_System_Boolean_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,IBufferPool,System.Int32,System.Boolean)
+  fullName: StreamExtended.Network.CustomBufferedStream.CustomBufferedStream(System.IO.Stream, IBufferPool, System.Int32, System.Boolean)
   nameWithType: CustomBufferedStream.CustomBufferedStream(Stream, IBufferPool, Int32, Boolean)
 - uid: StreamExtended.Network.CustomBufferedStream.#ctor*
   name: CustomBufferedStream
@@ -941,11 +871,11 @@ references:
   commentId: T:StreamExtended.Network.ServerHelloAlpnAdderStream
   fullName: StreamExtended.Network.ServerHelloAlpnAdderStream
   nameWithType: ServerHelloAlpnAdderStream
-- uid: StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool)
+- uid: StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,IBufferPool)
   name: ServerHelloAlpnAdderStream(CustomBufferedStream, IBufferPool)
-  href: api/StreamExtended.Network.ServerHelloAlpnAdderStream.html#StreamExtended_Network_ServerHelloAlpnAdderStream__ctor_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_
-  commentId: M:StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool)
-  fullName: StreamExtended.Network.ServerHelloAlpnAdderStream.ServerHelloAlpnAdderStream(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool)
+  href: api/StreamExtended.Network.ServerHelloAlpnAdderStream.html#StreamExtended_Network_ServerHelloAlpnAdderStream__ctor_StreamExtended_Network_CustomBufferedStream_IBufferPool_
+  commentId: M:StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor(StreamExtended.Network.CustomBufferedStream,IBufferPool)
+  fullName: StreamExtended.Network.ServerHelloAlpnAdderStream.ServerHelloAlpnAdderStream(StreamExtended.Network.CustomBufferedStream, IBufferPool)
   nameWithType: ServerHelloAlpnAdderStream.ServerHelloAlpnAdderStream(CustomBufferedStream, IBufferPool)
 - uid: StreamExtended.Network.ServerHelloAlpnAdderStream.#ctor*
   name: ServerHelloAlpnAdderStream
@@ -1232,11 +1162,11 @@ references:
   commentId: T:StreamExtended.SslTools
   fullName: StreamExtended.SslTools
   nameWithType: SslTools
-- uid: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
+- uid: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
   name: IsClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsClientHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsClientHello_StreamExtended_Network_CustomBufferedStream_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream, IBufferPool, System.Threading.CancellationToken)
   nameWithType: SslTools.IsClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.IsClientHello*
   name: IsClientHello
@@ -1245,11 +1175,11 @@ references:
   isSpec: "True"
   fullName: StreamExtended.SslTools.IsClientHello
   nameWithType: SslTools.IsClientHello
-- uid: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
+- uid: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
   name: IsServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsServerHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsServerHello_StreamExtended_Network_CustomBufferedStream_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream, IBufferPool, System.Threading.CancellationToken)
   nameWithType: SslTools.IsServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.IsServerHello*
   name: IsServerHello
@@ -1258,11 +1188,11 @@ references:
   isSpec: "True"
   fullName: StreamExtended.SslTools.IsServerHello
   nameWithType: SslTools.IsServerHello
-- uid: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
+- uid: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
   name: PeekClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekClientHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekClientHello_StreamExtended_Network_CustomBufferedStream_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream, IBufferPool, System.Threading.CancellationToken)
   nameWithType: SslTools.PeekClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.PeekClientHello*
   name: PeekClientHello
@@ -1271,11 +1201,11 @@ references:
   isSpec: "True"
   fullName: StreamExtended.SslTools.PeekClientHello
   nameWithType: SslTools.PeekClientHello
-- uid: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
+- uid: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
   name: PeekServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekServerHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekServerHello_StreamExtended_Network_CustomBufferedStream_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream,IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream, IBufferPool, System.Threading.CancellationToken)
   nameWithType: SslTools.PeekServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.PeekServerHello*
   name: PeekServerHello
