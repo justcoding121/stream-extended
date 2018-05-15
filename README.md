@@ -23,8 +23,9 @@ Supports
 ### Server Name Indication
 
 ```csharp
-var yourClientStream = new CustomBufferedStream(clientStream, 4096)
-var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream);
+var bufferPool = new DefaultBufferPool();
+var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, 4096)
+var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
 
 //will be null if no client hello was received (not a SSL connection)
 if (clientSslHelloInfo != null)
@@ -44,9 +45,9 @@ if (clientSslHelloInfo != null)
 
 ### Peek Client SSL Hello
 ```csharp
-
-var yourClientStream = new CustomBufferedStream(clientStream, 4096)
-var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream);
+var bufferPool = new DefaultBufferPool();
+var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, 4096)
+var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
 
 //will be null if no client hello was received (not a SSL connection)
 if(clientSslHelloInfo!=null)
@@ -59,8 +60,9 @@ if(clientSslHelloInfo!=null)
 
 ### Peek Server SSL Hello
 ```csharp
-var yourServerStream = new CustomBufferedStream(serverStream, 4096)
-var serverSslHelloInfo = await SslTools.PeekServerHello(yourServerStream);
+var bufferPool = new DefaultBufferPool();
+var yourServerStream = new CustomBufferedStream(serverStream, bufferPool, 4096)
+var serverSslHelloInfo = await SslTools.PeekServerHello(yourServerStream, bufferPool);
 
 //will be null if no server hello was received (not a SSL connection)
 if(serverSslHelloInfo!=null)

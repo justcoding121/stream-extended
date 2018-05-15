@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using StreamExtended.Helpers;
 
 namespace StreamExtended.Network
 {
+    /// <summary>
+    ///     Copies the source stream to destination stream.
+    ///     But this let users to peek and read the copying process.
+    /// </summary>
     public class CopyStream : ICustomStreamReader, IDisposable
     {
         private readonly ICustomStreamReader reader;
 
         private readonly ICustomStreamWriter writer;
+
+        private readonly IBufferPool bufferPool;
 
         public int BufferSize { get; }
 
@@ -25,12 +30,12 @@ namespace StreamExtended.Network
 
         public long ReadBytes { get; private set; }
 
-        public CopyStream(ICustomStreamReader reader, ICustomStreamWriter writer, int bufferSize)
+        public CopyStream(ICustomStreamReader reader, ICustomStreamWriter writer, IBufferPool bufferPool, int bufferSize)
         {
             this.reader = reader;
             this.writer = writer;
             BufferSize = bufferSize;
-            buffer = BufferPool.GetBuffer(bufferSize);
+            buffer = bufferPool.GetBuffer(bufferSize);
         }
 
         public async Task<bool> FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))
@@ -117,7 +122,7 @@ namespace StreamExtended.Network
 
         public Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return CustomBufferedStream.ReadLineInternalAsync(this, cancellationToken);
+            return CustomBufferedStream.ReadLineInternalAsync(this, bufferPool, cancellationToken);
         }
 
         public void Dispose()
@@ -125,9 +130,9 @@ namespace StreamExtended.Network
             if (!disposed)
             {
                 disposed = true;
-                var buf = buffer;
+                var b = buffer;
                 buffer = null;
-                BufferPool.ReturnBuffer(buf);
+                bufferPool.ReturnBuffer(b);
             }
         }
     }

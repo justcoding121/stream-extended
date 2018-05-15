@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class SslExtension
+    <title>Class DataEventArgs
    | Stream Extended </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class SslExtension
+    <meta name="title" content="Class DataEventArgs
    | Stream Extended ">
     <meta name="generator" content="docfx 2.35.4.0">
     
@@ -78,21 +78,25 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="StreamExtended.Models.SslExtension">
+            <article class="content wrap" id="_content" data-uid="StreamExtended.Network.DataEventArgs">
   
   
-  <h1 id="StreamExtended_Models_SslExtension" data-uid="StreamExtended.Models.SslExtension" class="text-break">Class SslExtension
+  <h1 id="StreamExtended_Network_DataEventArgs" data-uid="StreamExtended.Network.DataEventArgs" class="text-break">Class DataEventArgs
   </h1>
-  <div class="markdown level0 summary"><p>The SSL extension information.</p>
+  <div class="markdown level0 summary"><p>Wraps the data sent/received event argument.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">SslExtension</span></div>
+    <div class="level1"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></div>
+    <div class="level2"><span class="xref">DataEventArgs</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventargs.empty">EventArgs.Empty</a>
+    </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
@@ -115,24 +119,23 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
     </div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="StreamExtended.Models.html">StreamExtended.Models</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="StreamExtended.Network.html">StreamExtended.Network</a></h6>
   <h6><strong>Assembly</strong>: StreamExtended.dll</h6>
-  <h5 id="StreamExtended_Models_SslExtension_syntax">Syntax</h5>
+  <h5 id="StreamExtended_Network_DataEventArgs_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SslExtension</code></pre>
+    <pre><code class="lang-csharp hljs">public class DataEventArgs : EventArgs</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
-  <a id="StreamExtended_Models_SslExtension__ctor_" data-uid="StreamExtended.Models.SslExtension.#ctor*"></a>
-  <h4 id="StreamExtended_Models_SslExtension__ctor_System_Int32_System_String_System_String_System_Int32_" data-uid="StreamExtended.Models.SslExtension.#ctor(System.Int32,System.String,System.String,System.Int32)">SslExtension(Int32, String, String, Int32)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="StreamExtended.Models.SslExtension.html">SslExtension</a> class.</p>
-</div>
+  <a id="StreamExtended_Network_DataEventArgs__ctor_" data-uid="StreamExtended.Network.DataEventArgs.#ctor*"></a>
+  <h4 id="StreamExtended_Network_DataEventArgs__ctor_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.DataEventArgs.#ctor(System.Byte[],System.Int32,System.Int32)">DataEventArgs(Byte[], Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SslExtension(int value, string name, string data, int position)</code></pre>
+    <pre><code class="lang-csharp hljs">public DataEventArgs(byte[] buffer, int offset, int count)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -145,28 +148,19 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><span class="parametername">value</span></td>
-        <td><p>The value.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">name</span></td>
-        <td><p>The name.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">data</span></td>
-        <td><p>The data.</p>
-</td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><span class="parametername">position</span></td>
-        <td><p>The position.</p>
-</td>
+        <td><span class="parametername">offset</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -174,14 +168,14 @@
   </h3>
   
   
-  <a id="StreamExtended_Models_SslExtension_Data_" data-uid="StreamExtended.Models.SslExtension.Data*"></a>
-  <h4 id="StreamExtended_Models_SslExtension_Data" data-uid="StreamExtended.Models.SslExtension.Data">Data</h4>
-  <div class="markdown level1 summary"><p>Gets the data.</p>
+  <a id="StreamExtended_Network_DataEventArgs_Buffer_" data-uid="StreamExtended.Network.DataEventArgs.Buffer*"></a>
+  <h4 id="StreamExtended_Network_DataEventArgs_Buffer" data-uid="StreamExtended.Network.DataEventArgs.Buffer">Buffer</h4>
+  <div class="markdown level1 summary"><p>The buffer with data.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Data { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public byte[] Buffer { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -193,49 +187,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>The data.</p>
-</td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="StreamExtended_Models_SslExtension_Name_" data-uid="StreamExtended.Models.SslExtension.Name*"></a>
-  <h4 id="StreamExtended_Models_SslExtension_Name" data-uid="StreamExtended.Models.SslExtension.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Gets the name.</p>
+  <a id="StreamExtended_Network_DataEventArgs_Count_" data-uid="StreamExtended.Network.DataEventArgs.Count*"></a>
+  <h4 id="StreamExtended_Network_DataEventArgs_Count" data-uid="StreamExtended.Network.DataEventArgs.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Length from offset in buffer with valid data.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><p>The name.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="StreamExtended_Models_SslExtension_Position_" data-uid="StreamExtended.Models.SslExtension.Position*"></a>
-  <h4 id="StreamExtended_Models_SslExtension_Position" data-uid="StreamExtended.Models.SslExtension.Position">Position</h4>
-  <div class="markdown level1 summary"><p>Gets the position.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Position { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -248,21 +214,20 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><p>The position.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="StreamExtended_Models_SslExtension_Value_" data-uid="StreamExtended.Models.SslExtension.Value*"></a>
-  <h4 id="StreamExtended_Models_SslExtension_Value" data-uid="StreamExtended.Models.SslExtension.Value">Value</h4>
-  <div class="markdown level1 summary"><p>Gets the value.</p>
+  <a id="StreamExtended_Network_DataEventArgs_Offset_" data-uid="StreamExtended.Network.DataEventArgs.Offset*"></a>
+  <h4 id="StreamExtended_Network_DataEventArgs_Offset" data-uid="StreamExtended.Network.DataEventArgs.Offset">Offset</h4>
+  <div class="markdown level1 summary"><p>Offset in buffer from which valid data begins.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int Value { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public int Offset { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -275,8 +240,7 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td><p>The value.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>

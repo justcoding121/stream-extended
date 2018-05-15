@@ -3,7 +3,7 @@ using System;
 namespace StreamExtended.Network
 {
     /// <summary>
-    ///     Wraps the data sent/received by a proxy server instance.
+    ///     Wraps the data sent/received event argument.
     /// </summary>
     public class DataEventArgs : EventArgs
     {
