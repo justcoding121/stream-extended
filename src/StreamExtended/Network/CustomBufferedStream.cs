@@ -139,7 +139,14 @@ namespace StreamExtended.Network
         {
             if (bufferLength > 0)
             {
+
+//WriteAsync has a bug in Net45
+//See https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
+#if NET45
+                destination.Write(streamBuffer, bufferPos, bufferLength);
+#else
                 await destination.WriteAsync(streamBuffer, bufferPos, bufferLength, cancellationToken);
+#endif
                 bufferLength = 0;
             }
 
@@ -282,10 +289,18 @@ namespace StreamExtended.Network
         /// A task that represents the asynchronous write operation.
         /// </returns>
         [DebuggerStepThrough]
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
             OnDataWrite(buffer, offset, count);
-            return baseStream.WriteAsync(buffer, offset, count, cancellationToken);
+
+//WriteAsync has a bug in Net45
+//See https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
+#if NET45
+            baseStream.Write(buffer, offset, count);
+            await Task.FromResult(true);
+#else
+            await baseStream.WriteAsync(buffer, offset, count, cancellationToken);
+#endif
         }
 
         /// <summary>

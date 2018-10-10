@@ -6,12 +6,12 @@
     <title>Extended SslStream</title>
     <authors>honfika, justcoding121</authors>
     <owners></owners>
-    <licenseUrl>https://github.com/justcoding121/StreamExtended/blob/develop/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/justcoding121/StreamExtended</projectUrl>
+    <licenseUrl>https://github.com/justcoding121/Stream-Extended/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/justcoding121/Stream-Extended</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SNI for SslStream.</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright &#x00A9; StreamExtended All rights reserved.</copyright>
+    <copyright>Copyright &#x00A9; Stream-Extended All rights reserved.</copyright>
     <tags></tags>
   </metadata>
   <files>
