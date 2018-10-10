@@ -54,8 +54,8 @@ namespace StreamExtended
                     return null;
                 }
 
-                int length = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
-                if (length < 9)
+                int recordLength = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
+                if (recordLength < 9)
                 {
                     // Message body too short.
                     return null;
@@ -116,7 +116,7 @@ namespace StreamExtended
                 int majorVersion = peekStream.ReadByte();
                 int minorVersion = peekStream.ReadByte();
 
-                int length = peekStream.ReadInt16();
+                int recordLength = peekStream.ReadInt16();
 
                 if (peekStream.ReadByte() != 0x01)
                 {
@@ -124,7 +124,7 @@ namespace StreamExtended
                     return null;
                 }
 
-                length = peekStream.ReadInt24();
+                var length = peekStream.ReadInt24();
 
                 majorVersion = peekStream.ReadByte();
                 minorVersion = peekStream.ReadByte();
@@ -171,7 +171,12 @@ namespace StreamExtended
 
                 int extenstionsStartPosition = peekStream.Position;
 
-                var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
+                Dictionary<string, SslExtension> extensions = null;
+
+                if(extenstionsStartPosition + 5 < recordLength)
+                {
+                    extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
+                }
 
                 var clientHelloInfo = new ClientHelloInfo
                 {
@@ -193,34 +198,6 @@ namespace StreamExtended
             return null;
         }
 
-        private static async Task<Dictionary<string, SslExtension>> ReadExtensions(int majorVersion, int minorVersion, CustomBufferedPeekStream peekStream, IBufferPool bufferPool, CancellationToken cancellationToken)
-        {
-            Dictionary<string, SslExtension> extensions = null;
-            if (majorVersion > 3 || majorVersion == 3 && minorVersion >= 1)
-            {
-                if (await peekStream.EnsureBufferLength(2, cancellationToken))
-                {
-                    int extensionsLength = peekStream.ReadInt16();
-
-                    if (await peekStream.EnsureBufferLength(extensionsLength, cancellationToken))
-                    {
-                        extensions = new Dictionary<string, SslExtension>();
-                        int idx = 0;
-                        while (extensionsLength > 3)
-                        {
-                            int id = peekStream.ReadInt16();
-                            int length = peekStream.ReadInt16();
-                            byte[] data = peekStream.ReadBytes(length);
-                            var extension = SslExtensions.GetExtension(id, data, idx++);
-                            extensions[extension.Name] = extension;
-                            extensionsLength -= 4 + length;
-                        }
-                    }
-                }
-            }
-
-            return extensions;
-        }
 
         /// <summary>
         ///     Is the given stream starts with an SSL client hello?
@@ -264,8 +241,8 @@ namespace StreamExtended
                     return null;
                 }
 
-                int length = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
-                if (length < 38)
+                int recordLength = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
+                if (recordLength < 38)
                 {
                     // Message body too short.
                     return null;
@@ -318,7 +295,7 @@ namespace StreamExtended
                 int majorVersion = peekStream.ReadByte();
                 int minorVersion = peekStream.ReadByte();
 
-                int length = peekStream.ReadInt16();
+                int recordLength = peekStream.ReadInt16();
 
                 if (peekStream.ReadByte() != 0x02)
                 {
@@ -326,7 +303,7 @@ namespace StreamExtended
                     return null;
                 }
 
-                length = peekStream.ReadInt24();
+                var length = peekStream.ReadInt24();
 
                 majorVersion = peekStream.ReadByte();
                 minorVersion = peekStream.ReadByte();
@@ -347,9 +324,12 @@ namespace StreamExtended
 
                 int extenstionsStartPosition = peekStream.Position;
 
-                var extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
+                Dictionary<string, SslExtension> extensions = null;
 
-                //var rawBytes = new CustomBufferedPeekStream(serverStream).ReadBytes(peekStream.Position);
+                if (extenstionsStartPosition + 5 < recordLength)
+                {
+                   extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
+                }
 
                 var serverHelloInfo = new ServerHelloInfo
                 {
@@ -369,6 +349,35 @@ namespace StreamExtended
             }
 
             return null;
+        }
+
+        private static async Task<Dictionary<string, SslExtension>> ReadExtensions(int majorVersion, int minorVersion, CustomBufferedPeekStream peekStream, IBufferPool bufferPool, CancellationToken cancellationToken)
+        {
+            Dictionary<string, SslExtension> extensions = null;
+            if (majorVersion > 3 || majorVersion == 3 && minorVersion >= 1)
+            {
+                if (await peekStream.EnsureBufferLength(2, cancellationToken))
+                {
+                    int extensionsLength = peekStream.ReadInt16();
+
+                    if (await peekStream.EnsureBufferLength(extensionsLength, cancellationToken))
+                    {
+                        extensions = new Dictionary<string, SslExtension>();
+                        int idx = 0;
+                        while (extensionsLength > 3)
+                        {
+                            int id = peekStream.ReadInt16();
+                            int length = peekStream.ReadInt16();
+                            byte[] data = peekStream.ReadBytes(length);
+                            var extension = SslExtensions.GetExtension(id, data, idx++);
+                            extensions[extension.Name] = extension;
+                            extensionsLength -= 4 + length;
+                        }
+                    }
+                }
+            }
+
+            return extensions;
         }
     }
 }
