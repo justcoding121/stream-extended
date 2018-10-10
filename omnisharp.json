@@ -1,0 +1,12 @@
+{
+    "fileOptions": {
+      "excludeSearchPatterns": [
+        "**/*.Docs.csproj",
+        "**/*.DotSettings",
+        "**/*.sln",
+        "**/*.Mono.csproj",
+        "**/*.Docs.csproj",
+        "**/StreamExtended.csproj"
+      ]
+    }
+  }
