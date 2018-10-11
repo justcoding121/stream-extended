@@ -173,7 +173,7 @@ namespace StreamExtended
 
                 Dictionary<string, SslExtension> extensions = null;
 
-                if(extenstionsStartPosition + 5 < recordLength)
+                if(extenstionsStartPosition < recordLength + 5)
                 {
                     extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
                 }
@@ -326,7 +326,7 @@ namespace StreamExtended
 
                 Dictionary<string, SslExtension> extensions = null;
 
-                if (extenstionsStartPosition + 5 < recordLength)
+                if (extenstionsStartPosition < recordLength + 5)
                 {
                    extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, bufferPool, cancellationToken);
                 }
