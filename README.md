@@ -18,6 +18,20 @@ Supports
  * .Net Standard 1.3 or above
  * .Net Framework 4.5 or above
  
+### Development environment
+
+#### Windows
+* Visual Studio Code as IDE for .NET core
+* Visual Studio 2017 as IDE for .NET framework/.NET core
+
+#### Mac OS
+* Visual Studio Code as IDE for .NET core
+* Visual Studio 2017 as IDE for Mono
+
+#### Linux
+* Visual Studio Code as IDE for .NET core
+* Mono develop as IDE for Mono
+
 ## Usage
 
 ### Server Name Indication
