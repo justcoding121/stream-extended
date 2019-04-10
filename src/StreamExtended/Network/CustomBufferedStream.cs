@@ -139,14 +139,8 @@ namespace StreamExtended.Network
         {
             if (bufferLength > 0)
             {
-
-//WriteAsync has a bug in Net45
-//See https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
-#if NET45
-                destination.Write(streamBuffer, bufferPos, bufferLength);
-#else
                 await destination.WriteAsync(streamBuffer, bufferPos, bufferLength, cancellationToken);
-#endif
+
                 bufferLength = 0;
             }
 
@@ -293,14 +287,7 @@ namespace StreamExtended.Network
         {
             OnDataWrite(buffer, offset, count);
 
-//WriteAsync has a bug in Net45
-//See https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
-#if NET45
-            baseStream.Write(buffer, offset, count);
-            await Task.FromResult(true);
-#else
             await baseStream.WriteAsync(buffer, offset, count, cancellationToken);
-#endif
         }
 
         /// <summary>
@@ -591,6 +578,22 @@ namespace StreamExtended.Network
             var newBuffer = new byte[size];
             Buffer.BlockCopy(buffer, 0, newBuffer, 0, buffer.Length);
             buffer = newBuffer;
+        }
+
+        /// <summary>
+        /// Fix the .net bug with SslStream slow WriteAsync
+        /// https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
+        /// Stream.BeginWrite + Stream.BeginRead uses the same SemaphoreSlim(1)
+        /// That's why we need to call NetworkStream.BeginWrite only (while read is waiting SemaphoreSlim)
+        /// </summary>
+        /// <returns></returns>
+        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        {
+            return baseStream.BeginWrite(buffer, offset, count, callback, state);
+        }
+        public override void EndWrite(IAsyncResult asyncResult)
+        {
+            baseStream.EndWrite(asyncResult);
         }
     }
 }
