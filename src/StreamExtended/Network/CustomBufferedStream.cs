@@ -580,6 +580,7 @@ namespace StreamExtended.Network
             buffer = newBuffer;
         }
 
+#if NET45
         /// <summary>
         /// Fix the .net bug with SslStream slow WriteAsync
         /// https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
@@ -595,5 +596,6 @@ namespace StreamExtended.Network
         {
             baseStream.EndWrite(asyncResult);
         }
+#endif
     }
 }
