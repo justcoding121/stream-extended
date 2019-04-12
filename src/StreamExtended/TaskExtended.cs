@@ -11,12 +11,12 @@ namespace StreamExtended
     /// Mimic a Task<T> but you can set AsyncState
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class TaskExtended<T> : IAsyncResult
+    public class TaskResult<T> : IAsyncResult
     {
         Task<T> Task;
         object mAsyncState;
 
-        public TaskExtended(Task<T> pTask, object state)
+        public TaskResult(Task<T> pTask, object state)
         {
             Task = pTask;
             mAsyncState = state;

@@ -598,7 +598,7 @@ namespace StreamExtended.Network
             {
                 //use TaskExtended to pass State as AsyncObject
                 //callback will call EndRead (otherwise, it will block)
-                callback(new TaskExtended<int>(pAsyncResult, state));
+                callback(new TaskResult<int>(pAsyncResult, state));
             });
 
             return vAsyncResult;
@@ -610,7 +610,7 @@ namespace StreamExtended.Network
         /// <returns></returns>
         public override int EndRead(IAsyncResult asyncResult)
         {
-            return ((TaskExtended<int>)asyncResult).Result;
+            return ((TaskResult<int>)asyncResult).Result;
         }
 
         /// <summary>
