@@ -581,6 +581,38 @@ namespace StreamExtended.Network
         }
 
 #if NET45
+
+        /// <summary>        
+        /// Base Stream.BeginRead will call this.Read and block thread (we don't want this, Network stream handles async)
+        /// In order to really async Reading Launch this.ReadAsync as Task will fire NetworkStream.ReadAsync
+        /// See Threads here :
+        /// https://github.com/justcoding121/Stream-Extended/pull/43
+        /// https://github.com/justcoding121/Titanium-Web-Proxy/issues/575
+        /// </summary>
+        /// <returns></returns>
+        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        {
+            var vAsyncResult = this.ReadAsync(buffer, offset, count);
+
+            vAsyncResult.ContinueWith(pAsyncResult =>
+            {
+                //use TaskExtended to pass State as AsyncObject
+                //callback will call EndRead (otherwise, it will block)
+                callback(new TaskExtended<int>(pAsyncResult, state));
+            });
+
+            return vAsyncResult;
+        }
+
+        /// <summary>
+        /// override EndRead to handle async Reading (see BeginRead comment)
+        /// </summary>
+        /// <returns></returns>
+        public override int EndRead(IAsyncResult asyncResult)
+        {
+            return ((TaskExtended<int>)asyncResult).Result;
+        }
+
         /// <summary>
         /// Fix the .net bug with SslStream slow WriteAsync
         /// https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
