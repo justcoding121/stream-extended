@@ -241,6 +241,30 @@ namespace StreamExtended.Network
         }
 
         /// <summary>
+        /// Peeks bytes asynchronous.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        public async Task<byte[]> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
+        {
+
+            if (Available <= index)
+            {
+                await FillBufferAsync(cancellationToken);
+            }
+
+            if (Available <= (index + size))
+            {
+                return null;
+            }
+
+            var vRet = new byte[size];
+            Array.Copy(streamBuffer, index, vRet, 0, size);
+            return vRet;
+        }
+
+        /// <summary>
         /// Peeks a byte from buffer.
         /// </summary>
         /// <param name="index">The index.</param>

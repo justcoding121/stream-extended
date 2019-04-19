@@ -86,6 +86,17 @@ namespace StreamExtended.Network
         }
 
         /// <summary>
+        /// Peeks bytes asynchronous.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<byte[]> ICustomStreamReader.PeekBytesAsync(int index, int size, CancellationToken cancellationToken)
+        {
+            return baseStream.PeekBytesAsync(index, size, cancellationToken);
+        }
+
+        /// <summary>
         /// Peeks a byte asynchronous.
         /// </summary>
         /// <param name="index">The index.</param>
