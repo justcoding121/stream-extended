@@ -432,6 +432,7 @@ namespace StreamExtended.Network
                 else
                 {
                     closed = true;
+                    throw new IOException($"{nameof(CustomBufferedStream)} closed");
                 }
 
                 return result;
@@ -439,7 +440,7 @@ namespace StreamExtended.Network
             catch
             {
                 closed = true;
-                return false;
+                throw;//rethrow
             }
         }
 
@@ -481,6 +482,7 @@ namespace StreamExtended.Network
                 else
                 {
                     closed = true;
+                    throw new IOException($"{nameof(CustomBufferedStream)} closed");
                 }
 
                 return result;
@@ -488,7 +490,7 @@ namespace StreamExtended.Network
             catch
             {
                 closed = true;
-                return false;
+                throw;//rethrow
             }
         }
 
