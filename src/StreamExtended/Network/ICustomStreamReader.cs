@@ -37,6 +37,14 @@ namespace StreamExtended.Network
         /// <returns></returns>
         Task<int> PeekByteAsync(int index, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Peeks bytes asynchronous.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<byte[]> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken));
+
         byte ReadByteFromBuffer();
 
         /// <summary>
