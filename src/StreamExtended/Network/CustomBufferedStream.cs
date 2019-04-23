@@ -459,28 +459,21 @@ namespace StreamExtended.Network
             }
 
             bufferPos = 0;
-            try
-            {
-                int readBytes = baseStream.Read(streamBuffer, bufferLength, streamBuffer.Length - bufferLength);
-                bool result = readBytes > 0;
-                if (result)
-                {
-                    OnDataRead(streamBuffer, bufferLength, readBytes);
-                    bufferLength += readBytes;
-                }
-                else
-                {
-                    closed = true;
-                    throw new IOException($"{nameof(CustomBufferedStream)} closed");
-                }
 
-                return result;
+            int readBytes = baseStream.Read(streamBuffer, bufferLength, streamBuffer.Length - bufferLength);
+            bool result = readBytes > 0;
+            if (result)
+            {
+                OnDataRead(streamBuffer, bufferLength, readBytes);
+                bufferLength += readBytes;
             }
-            catch
+            else
             {
                 closed = true;
-                throw;//rethrow
             }
+
+            return result;
+
         }
 
         /// <summary>
