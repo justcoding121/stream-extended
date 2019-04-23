@@ -445,6 +445,19 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.CopyStream.PeekByteFromBuffer
   nameWithType: CopyStream.PeekByteFromBuffer
+- uid: StreamExtended.Network.CopyStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(Int32, Int32, CancellationToken)
+  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CopyStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  fullName: StreamExtended.Network.CopyStream.PeekBytesAsync(System.Int32, System.Int32, System.Threading.CancellationToken)
+  nameWithType: CopyStream.PeekBytesAsync(Int32, Int32, CancellationToken)
+- uid: StreamExtended.Network.CopyStream.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.CopyStream.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.CopyStream.PeekBytesAsync
+  nameWithType: CopyStream.PeekBytesAsync
 - uid: StreamExtended.Network.CopyStream.Read(System.Byte[],System.Int32,System.Int32)
   name: Read(Byte[], Int32, Int32)
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_Read_System_Byte___System_Int32_System_Int32_
@@ -787,6 +800,19 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer
   nameWithType: CustomBufferedStream.PeekByteFromBuffer
+- uid: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(Int32, Int32, CancellationToken)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32, System.Int32, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.PeekBytesAsync(Int32, Int32, CancellationToken)
+- uid: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.CustomBufferedStream.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync
+  nameWithType: CustomBufferedStream.PeekBytesAsync
 - uid: StreamExtended.Network.CustomBufferedStream.Position
   name: Position
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Position
@@ -1126,6 +1152,19 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer
   nameWithType: ICustomStreamReader.PeekByteFromBuffer
+- uid: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(Int32, Int32, CancellationToken)
+  href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  fullName: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(System.Int32, System.Int32, System.Threading.CancellationToken)
+  nameWithType: ICustomStreamReader.PeekBytesAsync(Int32, Int32, CancellationToken)
+- uid: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.ICustomStreamReader.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync
+  nameWithType: ICustomStreamReader.PeekBytesAsync
 - uid: StreamExtended.Network.ICustomStreamReader.Read(System.Byte[],System.Int32,System.Int32)
   name: Read(Byte[], Int32, Int32)
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_Read_System_Byte___System_Int32_System_Int32_
