@@ -729,6 +729,19 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.CustomBufferedStream.FlushAsync
   nameWithType: CustomBufferedStream.FlushAsync
+- uid: StreamExtended.Network.CustomBufferedStream.IsClosed
+  name: IsClosed
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_IsClosed
+  commentId: P:StreamExtended.Network.CustomBufferedStream.IsClosed
+  fullName: StreamExtended.Network.CustomBufferedStream.IsClosed
+  nameWithType: CustomBufferedStream.IsClosed
+- uid: StreamExtended.Network.CustomBufferedStream.IsClosed*
+  name: IsClosed
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_IsClosed_
+  commentId: Overload:StreamExtended.Network.CustomBufferedStream.IsClosed
+  isSpec: "True"
+  fullName: StreamExtended.Network.CustomBufferedStream.IsClosed
+  nameWithType: CustomBufferedStream.IsClosed
 - uid: StreamExtended.Network.CustomBufferedStream.Length
   name: Length
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Length
