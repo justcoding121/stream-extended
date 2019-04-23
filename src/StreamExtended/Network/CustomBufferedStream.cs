@@ -38,6 +38,8 @@ namespace StreamExtended.Network
 
         public event EventHandler<DataEventArgs> DataWrite;
 
+        public bool IsClosed => closed;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomBufferedStream"/> class.
         /// </summary>
@@ -51,7 +53,7 @@ namespace StreamExtended.Network
             BufferSize = bufferSize;
             this.leaveOpen = leaveOpen;
             streamBuffer = bufferPool.GetBuffer(bufferSize);
-            this.bufferPool = bufferPool; 
+            this.bufferPool = bufferPool;
         }
 
         /// <summary>
@@ -232,10 +234,18 @@ namespace StreamExtended.Network
                 await FillBufferAsync(cancellationToken);
             }
 
+            //When index is greater than the buffer size
+            if (streamBuffer.Length <= index)
+            {
+                throw new Exception("Requested Peek index exceeds the buffer size. Consider increasing the buffer size.");
+            }
+
+            //When index is greater than the buffer size
             if (Available <= index)
             {
                 return -1;
             }
+
 
             return streamBuffer[bufferPos + index];
         }
@@ -248,10 +258,15 @@ namespace StreamExtended.Network
         /// <returns></returns>
         public async Task<byte[]> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
         {
-
             if (Available <= index)
             {
                 await FillBufferAsync(cancellationToken);
+            }
+
+            //When index is greater than the buffer size
+            if (streamBuffer.Length <= (index + size))
+            {
+                throw new Exception("Requested Peek index and size exceeds the buffer size. Consider increasing the buffer size.");
             }
 
             if (Available <= (index + size))
@@ -444,28 +459,21 @@ namespace StreamExtended.Network
             }
 
             bufferPos = 0;
-            try
-            {
-                int readBytes = baseStream.Read(streamBuffer, bufferLength, streamBuffer.Length - bufferLength);
-                bool result = readBytes > 0;
-                if (result)
-                {
-                    OnDataRead(streamBuffer, bufferLength, readBytes);
-                    bufferLength += readBytes;
-                }
-                else
-                {
-                    closed = true;
-                    throw new IOException($"{nameof(CustomBufferedStream)} closed");
-                }
 
-                return result;
+            int readBytes = baseStream.Read(streamBuffer, bufferLength, streamBuffer.Length - bufferLength);
+            bool result = readBytes > 0;
+            if (result)
+            {
+                OnDataRead(streamBuffer, bufferLength, readBytes);
+                bufferLength += readBytes;
             }
-            catch
+            else
             {
                 closed = true;
-                throw;//rethrow
             }
+
+            return result;
+
         }
 
         /// <summary>
@@ -494,28 +502,21 @@ namespace StreamExtended.Network
             }
 
             bufferPos = 0;
-            try
-            {
-                int readBytes = await baseStream.ReadAsync(streamBuffer, bufferLength, bytesToRead, cancellationToken);
-                bool result = readBytes > 0;
-                if (result)
-                {
-                    OnDataRead(streamBuffer, bufferLength, readBytes);
-                    bufferLength += readBytes;
-                }
-                else
-                {
-                    closed = true;
-                    throw new IOException($"{nameof(CustomBufferedStream)} closed");
-                }
 
-                return result;
+            int readBytes = await baseStream.ReadAsync(streamBuffer, bufferLength, bytesToRead, cancellationToken);
+            bool result = readBytes > 0;
+            if (result)
+            {
+                OnDataRead(streamBuffer, bufferLength, readBytes);
+                bufferLength += readBytes;
             }
-            catch
+            else
             {
                 closed = true;
-                throw;//rethrow
             }
+
+            return result;
+
         }
 
         /// <summary>
