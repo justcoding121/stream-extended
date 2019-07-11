@@ -1,6 +1,6 @@
 ## Stream extended
 
-### Note: This Project is no longer maintained. Any pull requests for fixes are welcome.
+### Note: This Project is no longer maintained. 
 
 * An extended SslStream with support for SNI
 * An extended BufferedStream with support for reading bytes and string
