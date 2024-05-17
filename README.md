@@ -13,7 +13,7 @@ Install by [nuget](https://www.nuget.org/packages/StreamExtended)
 
     Install-Package StreamExtended
 
-* [API Documentation](https://justcoding121.github.io/StreamExtended/api/StreamExtended.html)
+* [API Documentation](https://justcoding121.github.io/stream-extended/api/StreamExtended.html)
 
 Supports
 
