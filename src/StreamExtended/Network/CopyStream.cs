@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using StreamExtended.BufferPool;
 
 namespace StreamExtended.Network
 {
@@ -34,6 +35,7 @@ namespace StreamExtended.Network
         {
             this.reader = reader;
             this.writer = writer;
+            this.bufferPool = bufferPool;
             BufferSize = bufferSize;
             buffer = bufferPool.GetBuffer(bufferSize);
         }
@@ -54,7 +56,7 @@ namespace StreamExtended.Network
             return reader.PeekByteAsync(index, cancellationToken);
         }
 
-        public Task<byte[]> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<byte[]?> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
         {
             return reader.PeekBytesAsync(index, size, cancellationToken);
         }
@@ -125,7 +127,7 @@ namespace StreamExtended.Network
             return result;
         }
 
-        public Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string?> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return CustomBufferedStream.ReadLineInternalAsync(this, bufferPool, cancellationToken);
         }
@@ -136,7 +138,7 @@ namespace StreamExtended.Network
             {
                 disposed = true;
                 var b = buffer;
-                buffer = null;
+                buffer = null!;
                 bufferPool.ReturnBuffer(b);
             }
         }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using StreamExtended.BufferPool;
 
 namespace StreamExtended.Network
 {
@@ -13,7 +14,7 @@ namespace StreamExtended.Network
     ///     of UTF-8 encoded string or raw bytes asynchronously from last read position.
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
-    public class CustomBufferedStream : Stream, ICustomStreamReader
+    public class CustomBufferedStream : Stream, ICustomStreamReader, IPeekStream
     {
         private readonly Stream baseStream;
         private readonly bool leaveOpen;
@@ -34,9 +35,9 @@ namespace StreamExtended.Network
 
         public int BufferSize { get; }
 
-        public event EventHandler<DataEventArgs> DataRead;
+        public event EventHandler<DataEventArgs>? DataRead;
 
-        public event EventHandler<DataEventArgs> DataWrite;
+        public event EventHandler<DataEventArgs>? DataWrite;
 
         public bool IsClosed => closed;
 
@@ -229,9 +230,12 @@ namespace StreamExtended.Network
         /// <returns></returns>
         public async Task<int> PeekByteAsync(int index, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (Available <= index)
+            while (Available <= index)
             {
-                await FillBufferAsync(cancellationToken);
+                if (!await FillBufferAsync(cancellationToken))
+                {
+                    break;
+                }
             }
 
             //When index is greater than the buffer size
@@ -246,21 +250,29 @@ namespace StreamExtended.Network
                 return -1;
             }
 
-
             return streamBuffer[bufferPos + index];
+        }
+
+        async ValueTask<int> IPeekStream.PeekByteAsync(int index, CancellationToken cancellationToken)
+        {
+            return await PeekByteAsync(index, cancellationToken);
         }
 
         /// <summary>
         /// Peeks bytes asynchronous.
         /// </summary>
         /// <param name="index">The index.</param>
+        /// <param name="size">The number of bytes to peek.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<byte[]> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<byte[]?> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (Available <= index)
+            while (Available <= index + size)
             {
-                await FillBufferAsync(cancellationToken);
+                if (!await FillBufferAsync(cancellationToken))
+                {
+                    break;
+                }
             }
 
             //When index is greater than the buffer size
@@ -275,8 +287,38 @@ namespace StreamExtended.Network
             }
 
             var vRet = new byte[size];
-            Array.Copy(streamBuffer, index, vRet, 0, size);
+            Array.Copy(streamBuffer, bufferPos + index, vRet, 0, size);
             return vRet;
+        }
+
+        /// <summary>
+        ///     Peeks bytes into the supplied buffer (IPeekStream).
+        /// </summary>
+        public async ValueTask<int> PeekBytesAsync(byte[] buffer, int offset, int index, int count,
+            CancellationToken cancellationToken = default)
+        {
+            while (Available <= index)
+            {
+                if (!await FillBufferAsync(cancellationToken))
+                {
+                    break;
+                }
+            }
+
+            if (streamBuffer.Length <= index + count)
+            {
+                throw new Exception(
+                    "Requested Peek index and size exceeds the buffer size. Consider increasing the buffer size.");
+            }
+
+            if (Available <= index)
+            {
+                return 0;
+            }
+
+            var toCopy = Math.Min(count, Available - index);
+            Buffer.BlockCopy(streamBuffer, bufferPos + index, buffer, offset, toCopy);
+            return toCopy;
         }
 
         /// <summary>
@@ -374,7 +416,7 @@ namespace StreamExtended.Network
                 }
 
                 var buffer = streamBuffer;
-                streamBuffer = null;
+                streamBuffer = null!;
                 bufferPool.ReturnBuffer(buffer);
             }
         }
@@ -523,7 +565,7 @@ namespace StreamExtended.Network
         /// Read a line from the byte stream
         /// </summary>
         /// <returns></returns>
-        public Task<string> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string?> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             return ReadLineInternalAsync(this, bufferPool, cancellationToken);
         }
@@ -532,7 +574,7 @@ namespace StreamExtended.Network
         /// Read a line from the byte stream
         /// </summary>
         /// <returns></returns>
-        internal static async Task<string> ReadLineInternalAsync(ICustomStreamReader reader, IBufferPool bufferPool, CancellationToken cancellationToken = default(CancellationToken))
+        internal static async Task<string?> ReadLineInternalAsync(ICustomStreamReader reader, IBufferPool bufferPool, CancellationToken cancellationToken = default(CancellationToken))
         {
             byte lastChar = default(byte);
 
@@ -606,55 +648,5 @@ namespace StreamExtended.Network
             Buffer.BlockCopy(buffer, 0, newBuffer, 0, buffer.Length);
             buffer = newBuffer;
         }
-
-#if NET45
-
-        /// <summary>        
-        /// Base Stream.BeginRead will call this.Read and block thread (we don't want this, Network stream handles async)
-        /// In order to really async Reading Launch this.ReadAsync as Task will fire NetworkStream.ReadAsync
-        /// See Threads here :
-        /// https://github.com/justcoding121/Stream-Extended/pull/43
-        /// https://github.com/justcoding121/Titanium-Web-Proxy/issues/575
-        /// </summary>
-        /// <returns></returns>
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
-            var vAsyncResult = this.ReadAsync(buffer, offset, count);
-
-            vAsyncResult.ContinueWith(pAsyncResult =>
-            {
-                //use TaskExtended to pass State as AsyncObject
-                //callback will call EndRead (otherwise, it will block)
-                callback(new TaskResult<int>(pAsyncResult, state));
-            });
-
-            return vAsyncResult;
-        }
-
-        /// <summary>
-        /// override EndRead to handle async Reading (see BeginRead comment)
-        /// </summary>
-        /// <returns></returns>
-        public override int EndRead(IAsyncResult asyncResult)
-        {
-            return ((TaskResult<int>)asyncResult).Result;
-        }
-
-        /// <summary>
-        /// Fix the .net bug with SslStream slow WriteAsync
-        /// https://github.com/justcoding121/Titanium-Web-Proxy/issues/495
-        /// Stream.BeginWrite + Stream.BeginRead uses the same SemaphoreSlim(1)
-        /// That's why we need to call NetworkStream.BeginWrite only (while read is waiting SemaphoreSlim)
-        /// </summary>
-        /// <returns></returns>
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
-        {
-            return baseStream.BeginWrite(buffer, offset, count, callback, state);
-        }
-        public override void EndWrite(IAsyncResult asyncResult)
-        {
-            baseStream.EndWrite(asyncResult);
-        }
-#endif
     }
 }

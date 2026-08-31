@@ -1,102 +1,49 @@
-## Stream extended
+# StreamExtended
 
-### Note: This Project is no longer maintained. 
+Actively maintained .NET library for peeking TLS **ClientHello** / **ServerHello** (SNI, ALPN, and other extensions) from a stream before `SslStream.AuthenticateAsServer` / `AuthenticateAsClient`.
 
-* An extended SslStream with support for SNI
-* An extended BufferedStream with support for reading bytes and string
+## Install
 
-<a href="https://ci.appveyor.com/project/justcoding121/Streamextended">![Build Status](https://ci.appveyor.com/api/projects/status/3vp1pdya9ncmlqwq?svg=true)</a>
+```bash
+dotnet add package StreamExtended
+```
 
-## Installation
-
-Install by [nuget](https://www.nuget.org/packages/StreamExtended)
-
-    Install-Package StreamExtended
-
-* [API Documentation](https://justcoding121.github.io/stream-extended/api/StreamExtended.html)
-
-Supports
-
- * .Net Standard 1.3 or above
- * .Net Framework 4.5 or above
- 
-### Development environment
-
-#### Windows
-* Visual Studio Code as IDE for .NET core
-* Visual Studio 2017 as IDE for .NET framework/.NET core
-
-#### Mac OS
-* Visual Studio Code as IDE for .NET core
-* Visual Studio 2017 as IDE for Mono
-
-#### Linux
-* Visual Studio Code as IDE for .NET core
-* Mono develop as IDE for Mono
+Current line: **2.0** (requires **.NET 10**). For `net45` / `netstandard1.3`, stay on the **1.0.x** packages.
 
 ## Usage
 
-### Server Name Indication
-
 ```csharp
-var bufferSize = 4096;
-var bufferPool = new DefaultBufferPool();
-var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, bufferSize)
-var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
+using StreamExtended;
+using StreamExtended.BufferPool;
+using StreamExtended.Network;
 
-//will be null if no client hello was received (not a SSL connection)
-if (clientSslHelloInfo != null)
+IBufferPool bufferPool = new DefaultBufferPool();
+await using var stream = new CustomBufferedStream(networkStream, bufferPool, bufferSize: 4096, leaveOpen: true);
+
+var clientHello = await SslTools.PeekClientHello(stream, bufferPool);
+if (clientHello?.Extensions != null &&
+    clientHello.Extensions.TryGetValue("server_name", out var sni))
 {
-    string sniHostName = clientSslHelloInfo.Extensions?.FirstOrDefault(x => x.Name == "server_name")?.Data;
-   
-    //create yourClientCertificate based on sniHostName
-    
-    //and now as usual
-    var sslStream = new SslStream(yourClientStream);
-    await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+    var hostName = sni.Data;
+    // select certificate / continue with SslStream on the same stream
 }
+
+var serverHello = await SslTools.PeekServerHello(stream, bufferPool);
 ```
 
+`CustomBufferedStream` implements `IPeekStream`, so peeked bytes remain available for the subsequent TLS handshake.
 
-## Peek SSL Information
+## Supported frameworks
 
-### Peek Client SSL Hello
-```csharp
-var bufferSize = 4096;
-var bufferPool = new DefaultBufferPool();
-var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, bufferSize)
-var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
+- .NET 10 (`net10.0`)
 
-//will be null if no client hello was received (not a SSL connection)
-if(clientSslHelloInfo!=null)
-{
-    //and now as usual
-    var sslStream = new SslStream(yourClientStream);
-    await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
-}
+## Build
+
+```bash
+dotnet test src/StreamExtended.sln -c Release
+dotnet pack src/StreamExtended/StreamExtended.csproj -c Release
 ```
 
-### Peek Server SSL Hello
-```csharp
-var bufferSize = 4096;
-var bufferPool = new DefaultBufferPool();
-var yourServerStream = new CustomBufferedStream(serverStream, bufferPool, bufferSize)
-var serverSslHelloInfo = await SslTools.PeekServerHello(yourServerStream, bufferPool);
+## License
 
-//will be null if no server hello was received (not a SSL connection)
-if(serverSslHelloInfo!=null)
-{
-     //and now as usual
-     var sslStream = new SslStream(yourServerStream, false, null, null);
-     await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
-
-}
-```
-
-## Note to contributors
-
-Special thanks to [@honfika](https://github.com/honfika) who contributed this code [originally in Titanium Web Proxy](https://github.com/justcoding121/Titanium-Web-Proxy/issues/293) project. 
-
-### Collaborators
-
-* [honfika](https://github.com/honfika)
+MIT — see [LICENSE](LICENSE).

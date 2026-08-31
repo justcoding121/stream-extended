@@ -206,3 +206,9 @@ FakesAssemblies/
 
 # Docfx
 docs/manifest.json
+.vscode/
+.idea/
+omnisharp.json
+.omnisharp/
+*.DotSettings
+*.DotSettings.user

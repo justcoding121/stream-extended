@@ -1,0 +1,73 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore src/StreamExtended.sln
+
+      - name: Build
+        run: dotnet build src/StreamExtended.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo
+
+      - name: Pack
+        run: dotnet pack src/StreamExtended/StreamExtended.csproj --configuration Release --no-build --no-restore --output artifacts
+
+      - name: Assert package version matches tag
+        shell: pwsh
+        run: |
+          $tag = '${{ github.ref_name }}'
+          $version = $tag.TrimStart('v')
+          $pkg = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
+            Where-Object { $_.Name -notlike '*.symbols.*' } |
+            Select-Object -First 1
+          if (-not $pkg) { throw 'No nupkg found' }
+          $expected = "StreamExtended.$version.nupkg"
+          if ($pkg.Name -ne $expected) {
+            throw "Tag $tag expects $expected but packed $($pkg.Name). Update Version/PackageVersion in the csproj to match."
+          }
+          Write-Host "OK: $($pkg.Name)"
+
+      - name: Push to NuGet.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "NUGET_API_KEY secret is not set"
+            exit 1
+          fi
+          dotnet nuget push artifacts/StreamExtended.*.nupkg \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "$NUGET_API_KEY" \
+            --skip-duplicate
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.ref_name }}"
+          gh release create "$TAG" artifacts/StreamExtended.*.nupkg \
+            --title "$TAG" \
+            --generate-notes \
+            --verify-tag

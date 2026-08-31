@@ -1,112 +1,121 @@
-using StreamExtended.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using StreamExtended.Helpers;
+using StreamExtended.Models;
 
-namespace StreamExtended
+namespace StreamExtended;
+
+/// <summary>
+///     Wraps up the server SSL hello information.
+/// </summary>
+public class ServerHelloInfo
 {
-    /// <summary>
-    /// Wraps up the server SSL hello information.
-    /// </summary>
-    public class ServerHelloInfo
+    private static readonly string[] compressions =
     {
-        private static readonly string[] compressions = {
-            "null",
-            "DEFLATE"
-        };
+        "null",
+        "DEFLATE"
+    };
 
-        public int HandshakeVersion { get; set; }
+    public ServerHelloInfo(int handshakeVersion, int majorVersion, int minorVersion, byte[] random,
+        byte[] sessionId, int cipherSuite, int serverHelloLength)
+    {
+        HandshakeVersion = handshakeVersion;
+        MajorVersion = majorVersion;
+        MinorVersion = minorVersion;
+        Random = random;
+        SessionId = sessionId;
+        CipherSuite = cipherSuite;
+        ServerHelloLength = serverHelloLength;
+    }
 
-        public int MajorVersion { get; set; }
+    public int HandshakeVersion { get; }
 
-        public int MinorVersion { get; set; }
+    public int MajorVersion { get; }
 
-        public byte[] Random { get; set; }
+    public int MinorVersion { get; }
 
-        public DateTime Time
+    public byte[] Random { get; }
+
+    public DateTime Time
+    {
+        get
         {
-            get
-            {
-                DateTime time = DateTime.MinValue;
-                if (Random.Length > 3)
-                {
-                    time = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
-                        .AddSeconds(((uint)Random[3] << 24) + ((uint)Random[2] << 16) + ((uint)Random[1] << 8) + (uint)Random[0]).ToLocalTime();
-                }
+            var time = DateTime.MinValue;
+            if (Random.Length > 3)
+                // RFC 5246: gmt_unix_time is the first 4 bytes of Random, big-endian.
+                time = DateTime.UnixEpoch
+                    .AddSeconds(((uint)Random[0] << 24) + ((uint)Random[1] << 16) + ((uint)Random[2] << 8) + Random[3])
+                    .ToLocalTime();
 
-                return time;
-            }
+            return time;
+        }
+    }
+
+    public byte[] SessionId { get; }
+
+    public int CipherSuite { get; }
+
+    public byte CompressionMethod { get; set; }
+
+    internal int ServerHelloLength { get; }
+
+    internal int ExtensionsStartPosition { get; set; }
+
+    public Dictionary<string, SslExtension>? Extensions { get; set; }
+
+    private static string SslVersionToString(int major, int minor)
+    {
+        var str = "Unknown";
+        if (major == 3 && minor == 3)
+            str = "TLS/1.2";
+        else if (major == 3 && minor == 2)
+            str = "TLS/1.1";
+        else if (major == 3 && minor == 1)
+            str = "TLS/1.0";
+        else if (major == 3 && minor == 0)
+            str = "SSL/3.0";
+        else if (major == 2 && minor == 0)
+            str = "SSL/2.0";
+
+        return $"{major}.{minor} ({str})";
+    }
+
+    /// <summary>
+    ///     Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>
+    ///     A <see cref="System.String" /> that represents this instance.
+    /// </returns>
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine(
+            $"A SSLv{HandshakeVersion}-compatible ServerHello handshake was found. The following parameters were extracted.");
+        sb.AppendLine();
+        sb.AppendLine($"Version: {SslVersionToString(MajorVersion, MinorVersion)}");
+        sb.AppendLine($"Random: {((ReadOnlySpan<byte>)Random).ByteArrayToHexString()}");
+        sb.AppendLine($"\"Time\": {Time}");
+        sb.AppendLine($"SessionID: {((ReadOnlySpan<byte>)SessionId).ByteArrayToHexString()}");
+
+        if (Extensions != null)
+        {
+            sb.AppendLine("Extensions:");
+            foreach (var extension in Extensions.Values.OrderBy(x => x.Position))
+                sb.AppendLine($"{extension.Name}: {extension.Data}");
         }
 
-        public byte[] SessionId { get; set; }
+        var compression = compressions.Length > CompressionMethod
+            ? compressions[CompressionMethod]
+            : $"unknown [0x{CompressionMethod:X2}]";
+        sb.AppendLine($"Compression: {compression}");
 
-        public int CipherSuite { get; set; }
+        sb.Append("Cipher:");
+        if (!SslCiphers.Ciphers.TryGetValue(CipherSuite, out var cipherStr)) cipherStr = "unknown";
 
-        public byte CompressionMethod { get; set; }
+        sb.AppendLine($"[0x{CipherSuite:X4}] {cipherStr}");
 
-        internal int ServerHelloLength { get; set; }
-
-        internal int EntensionsStartPosition { get; set; }
-
-        public Dictionary<string, SslExtension> Extensions { get; set; }
-
-        private static string SslVersionToString(int major, int minor)
-        {
-            string str = "Unknown";
-            if (major == 3 && minor == 3)
-                str = "TLS/1.2";
-            else if (major == 3 && minor == 2)
-                str = "TLS/1.1";
-            else if (major == 3 && minor == 1)
-                str = "TLS/1.0";
-            else if (major == 3 && minor == 0)
-                str = "SSL/3.0";
-            else if (major == 2 && minor == 0)
-                str = "SSL/2.0";
-
-            return $"{major}.{minor} ({str})";
-        }
-
-        /// <summary>
-        /// Returns a <see cref="System.String" /> that represents this instance.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
-        /// </returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine($"A SSLv{HandshakeVersion}-compatible ServerHello handshake was found. Titanium extracted the parameters below.");
-            sb.AppendLine();
-            sb.AppendLine($"Version: {SslVersionToString(MajorVersion, MinorVersion)}");
-            sb.AppendLine($"Random: {string.Join(" ", Random.Select(x => x.ToString("X2")))}");
-            sb.AppendLine($"\"Time\": {Time}");
-            sb.AppendLine($"SessionID: {string.Join(" ", SessionId.Select(x => x.ToString("X2")))}");
-
-            if (Extensions != null)
-            {
-                sb.AppendLine("Extensions:");
-                foreach (var extension in Extensions.Values.OrderBy(x => x.Position))
-                {
-                    sb.AppendLine($"{extension.Name}: {extension.Data}");
-                }
-            }
-
-            string compression = compressions.Length > CompressionMethod 
-                ? compressions[CompressionMethod] 
-                : $"unknown [0x{CompressionMethod:X2}]";
-            sb.AppendLine($"Compression: {compression}");
-
-            sb.Append("Cipher:");
-            if (!SslCiphers.Ciphers.TryGetValue(CipherSuite, out string cipherStr))
-            {
-                cipherStr = "unknown";
-            }
-
-            sb.AppendLine($"[0x{CipherSuite:X4}] {cipherStr}");
-
-            return sb.ToString();
-        }
+        return sb.ToString();
     }
 }
