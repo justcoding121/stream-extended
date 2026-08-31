@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master, main, develop]
+    branches: [master, main, develop, beta, stable]
   pull_request:
-    branches: [master, main, develop]
+    branches: [master, main, develop, beta, stable]
 
 permissions:
   contents: read
@@ -55,3 +55,95 @@ jobs:
         with:
           name: streamextended-nupkg
           path: artifacts/StreamExtended.2.0.0.nupkg
+
+  publish:
+    name: Publish NuGet package
+    needs: build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/stable')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: nuget-publish
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack Beta
+        if: github.ref == 'refs/heads/beta'
+        run: |
+          dotnet pack src/StreamExtended/StreamExtended.csproj \
+            --configuration Release \
+            --version-suffix beta \
+            --output artifacts
+
+      - name: Pack Stable
+        if: github.ref == 'refs/heads/stable'
+        run: |
+          dotnet pack src/StreamExtended/StreamExtended.csproj \
+            --configuration Release \
+            --output artifacts
+
+      - name: Resolve package version
+        id: package
+        shell: pwsh
+        run: |
+          $package = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
+            Where-Object { $_.Name -notlike '*.symbols.*' } |
+            Select-Object -First 1
+          if (-not $package) { throw 'No NuGet package was produced.' }
+          if ($package.BaseName -notmatch '^StreamExtended\.(.+)$') {
+            throw "Unexpected package name: $($package.Name)"
+          }
+          $version = $Matches[1]
+          "name=$($package.Name)" >> $env:GITHUB_OUTPUT
+          "path=$($package.FullName)" >> $env:GITHUB_OUTPUT
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$version" >> $env:GITHUB_OUTPUT
+          "prerelease=$(if ($version -match '-beta$') { 'true' } else { 'false' })" >> $env:GITHUB_OUTPUT
+          Write-Host "Package $($package.Name) version=$version"
+
+      - name: NuGet login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish package
+        run: |
+          dotnet nuget push "${{ steps.package.outputs.path }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --skip-duplicate
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $tag = "${{ steps.package.outputs.tag }}"
+          $version = "${{ steps.package.outputs.version }}"
+          $package = "${{ steps.package.outputs.path }}"
+          $prerelease = "${{ steps.package.outputs.prerelease }}" -eq "true"
+
+          if (gh release view $tag 2>$null) {
+            Write-Host "Release $tag already exists; uploading package asset if missing."
+            gh release upload $tag $package --clobber
+          } else {
+            $args = @(
+              "release", "create", $tag,
+              $package,
+              "--title", $version,
+              "--generate-notes",
+              "--target", $env:GITHUB_SHA
+            )
+            if ($prerelease) { $args += "--prerelease" }
+            gh @args
+          }
