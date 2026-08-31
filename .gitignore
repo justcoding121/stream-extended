@@ -206,9 +206,16 @@ FakesAssemblies/
 
 # Docfx
 docs/manifest.json
+.github/obj/
 .vscode/
 .idea/
 omnisharp.json
 .omnisharp/
 *.DotSettings
 *.DotSettings.user
+
+# SonarCloud / coverage tooling
+.sonar/
+.sonarqube/
+.coverage/
+coverage/

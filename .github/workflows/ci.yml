@@ -17,13 +17,31 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
+
+      - name: Install SonarScanner
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        shell: pwsh
+        run: dotnet tool install --tool-path .sonar/scanner dotnet-sonarscanner
+
+      - name: Install coverage tool
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: dotnet tool install --tool-path .coverage/tools dotnet-coverage
 
       - name: Restore
         run: dotnet restore src/StreamExtended.sln
@@ -31,8 +49,42 @@ jobs:
       - name: Build
         run: dotnet build src/StreamExtended.sln --configuration Release --no-restore
 
+      - name: Begin SonarCloud analysis
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        shell: pwsh
+        run: >
+          .\.sonar\scanner\dotnet-sonarscanner begin
+          /k:"justcoding121_stream-extended"
+          /o:"justcoding121"
+          /d:sonar.token="$env:SONAR_TOKEN"
+          /d:sonar.host.url="https://sonarcloud.io"
+          /d:sonar.cs.vscoveragexml.reportsPaths="coverage/coverage.xml"
+          /d:sonar.exclusions="**/docs/**,**/.github/**"
+
+      - name: Build for SonarCloud analysis
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        run: dotnet build src/StreamExtended.sln --configuration Release --no-restore --no-incremental --disable-build-servers
+
       - name: Test
+        if: matrix.os != 'windows-latest'
         run: dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo
+
+      - name: Test with coverage
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo --collect:"Code Coverage" --results-directory coverage/unit
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Merge code coverage
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: .\.coverage\tools\dotnet-coverage merge "coverage\**\*.coverage" --output coverage/coverage.xml --output-format xml
+
+      - name: Complete SonarCloud analysis
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        shell: pwsh
+        run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
 
       - name: Pack
         run: dotnet pack src/StreamExtended/StreamExtended.csproj --configuration Release --no-build --no-restore --output artifacts
