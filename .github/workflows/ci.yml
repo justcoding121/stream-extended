@@ -37,15 +37,27 @@ jobs:
       - name: Pack
         run: dotnet pack src/StreamExtended/StreamExtended.csproj --configuration Release --no-build --no-restore --output artifacts
 
-      - name: Assert package version 2.0.0
+      - name: Resolve VersionPrefix from csproj
+        id: ver
         shell: pwsh
         run: |
+          $m = Select-String -Path src/StreamExtended/StreamExtended.csproj -Pattern '<VersionPrefix>([^<]+)</VersionPrefix>'
+          if (-not $m) { throw 'VersionPrefix not found in StreamExtended.csproj' }
+          $prefix = $m.Matches[0].Groups[1].Value
+          "prefix=$prefix" >> $env:GITHUB_OUTPUT
+          "nupkg=StreamExtended.$prefix.nupkg" >> $env:GITHUB_OUTPUT
+          Write-Host "VersionPrefix=$prefix"
+
+      - name: Assert packed package matches VersionPrefix
+        shell: pwsh
+        run: |
+          $expected = '${{ steps.ver.outputs.nupkg }}'
           $pkg = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
             Where-Object { $_.Name -notlike '*.symbols.*' } |
             Select-Object -First 1
           if (-not $pkg) { throw 'No nupkg found in artifacts/' }
-          if ($pkg.Name -ne 'StreamExtended.2.0.0.nupkg') {
-            throw "Expected StreamExtended.2.0.0.nupkg, got $($pkg.Name)"
+          if ($pkg.Name -ne $expected) {
+            throw "Expected $expected (from VersionPrefix), got $($pkg.Name)"
           }
           Write-Host "Packed $($pkg.Name)"
 
@@ -54,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: streamextended-nupkg
-          path: artifacts/StreamExtended.2.0.0.nupkg
+          path: artifacts/${{ steps.ver.outputs.nupkg }}
 
   publish:
     name: Publish NuGet package

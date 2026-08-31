@@ -36,20 +36,26 @@ jobs:
       - name: Pack
         run: dotnet pack src/StreamExtended/StreamExtended.csproj --configuration Release --no-build --no-restore --output artifacts
 
-      - name: Assert package version matches tag
+      - name: Assert package version matches VersionPrefix and tag
         shell: pwsh
         run: |
+          $m = Select-String -Path src/StreamExtended/StreamExtended.csproj -Pattern '<VersionPrefix>([^<]+)</VersionPrefix>'
+          if (-not $m) { throw 'VersionPrefix not found in StreamExtended.csproj' }
+          $prefix = $m.Matches[0].Groups[1].Value
           $tag = '${{ github.ref_name }}'
-          $version = $tag.TrimStart('v')
+          $tagVersion = $tag.TrimStart('v')
+          if ($tagVersion -ne $prefix) {
+            throw "Tag $tag does not match VersionPrefix $prefix in csproj."
+          }
           $pkg = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
             Where-Object { $_.Name -notlike '*.symbols.*' } |
             Select-Object -First 1
           if (-not $pkg) { throw 'No nupkg found' }
-          $expected = "StreamExtended.$version.nupkg"
+          $expected = "StreamExtended.$prefix.nupkg"
           if ($pkg.Name -ne $expected) {
-            throw "Tag $tag expects $expected but packed $($pkg.Name). Update Version/PackageVersion in the csproj to match."
+            throw "Expected $expected (from VersionPrefix), got $($pkg.Name)"
           }
-          Write-Host "OK: $($pkg.Name)"
+          Write-Host "OK: $($pkg.Name) matches tag $tag and VersionPrefix $prefix"
 
       - name: NuGet login
         id: login
