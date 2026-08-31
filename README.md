@@ -55,6 +55,10 @@ var serverHello = await SslTools.PeekServerHello(stream, bufferPool);
 
 - .NET 10 (`net10.0`)
 
+## API docs
+
+Generated with DocFX on `develop`: [justcoding121.github.io/stream-extended](https://justcoding121.github.io/stream-extended/)
+
 ## Build
 
 ```bash

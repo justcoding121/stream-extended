@@ -3,8 +3,12 @@ name: CI
 on:
   push:
     branches: [master, main, develop, beta, stable]
+    paths-ignore:
+      - 'docs/**'
   pull_request:
     branches: [master, main, develop, beta, stable]
+    paths-ignore:
+      - 'docs/**'
 
 permissions:
   contents: read
@@ -16,9 +20,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     permissions:
-      contents: read
+      # write: Publish Documentation (EndBug/add-and-commit) pushes DocFX output to develop.
+      contents: write
       pull-requests: write
       checks: write
     env:
@@ -32,6 +37,14 @@ jobs:
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
+
+      - name: Install DocFX
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        shell: pwsh
+        run: |
+          # Prefer the .NET tool over Chocolatey (matches titanium-web-proxy).
+          dotnet tool install --global docfx
+          Add-Content -Path $env:GITHUB_PATH -Value "$HOME/.dotnet/tools"
 
       - name: Install SonarScanner
         if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
@@ -119,6 +132,23 @@ jobs:
         with:
           name: streamextended-nupkg
           path: artifacts/${{ steps.ver.outputs.nupkg }}
+
+      - name: Update Documentation
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        run: docfx .github/docfx.json
+
+      - name: Publish Documentation
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9
+        with:
+          default_author: github_actions
+          message: Update documentation
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+          # Only commit DocFX output -- never Sonar/coverage/tool install artifacts
+          add: 'docs'
+          # DocFX often races another develop push; rebase instead of failing the job.
+          pull: '--rebase --autostash'
 
   publish:
     name: Publish NuGet package
