@@ -1,100 +1,71 @@
-## Stream extended
+# StreamExtended
 
-* An extended SslStream with support for SNI
-* An extended BufferedStream with support for reading bytes and string
+Actively maintained .NET library for peeking TLS **ClientHello** / **ServerHello** (SNI, ALPN, and other extensions) from a stream before `SslStream.AuthenticateAsServer` / `AuthenticateAsClient`.
 
-<a href="https://ci.appveyor.com/project/justcoding121/Streamextended">![Build Status](https://ci.appveyor.com/api/projects/status/3vp1pdya9ncmlqwq?svg=true)</a>
+[![Build](https://github.com/justcoding121/stream-extended/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/justcoding121/stream-extended/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/StreamExtended.svg)](https://www.nuget.org/packages/StreamExtended)
+[![NuGet downloads](https://img.shields.io/nuget/dt/StreamExtended.svg)](https://www.nuget.org/packages/StreamExtended)
 
-## Installation
+## Code Quality
 
-Install by [nuget](https://www.nuget.org/packages/StreamExtended)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=alert_status)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=coverage)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=ncloc)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=bugs)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=code_smells)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=security_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=sqale_index)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
 
-    Install-Package StreamExtended
+## Install
 
-* [API Documentation](https://justcoding121.github.io/StreamExtended/api/StreamExtended.html)
+```bash
+dotnet add package StreamExtended
+```
 
-Supports
-
- * .Net Standard 1.3 or above
- * .Net Framework 4.5 or above
- 
-### Development environment
-
-#### Windows
-* Visual Studio Code as IDE for .NET core
-* Visual Studio 2017 as IDE for .NET framework/.NET core
-
-#### Mac OS
-* Visual Studio Code as IDE for .NET core
-* Visual Studio 2017 as IDE for Mono
-
-#### Linux
-* Visual Studio Code as IDE for .NET core
-* Mono develop as IDE for Mono
+Current line: **2.0** (requires **.NET 10**). For `net45` / `netstandard1.3`, stay on the **1.0.x** packages.
 
 ## Usage
 
-### Server Name Indication
-
 ```csharp
-var bufferSize = 4096;
-var bufferPool = new DefaultBufferPool();
-var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, bufferSize)
-var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
+using StreamExtended;
+using StreamExtended.BufferPool;
+using StreamExtended.Network;
 
-//will be null if no client hello was received (not a SSL connection)
-if (clientSslHelloInfo != null)
+IBufferPool bufferPool = new DefaultBufferPool();
+await using var stream = new CustomBufferedStream(networkStream, bufferPool, bufferSize: 4096, leaveOpen: true);
+
+var clientHello = await SslTools.PeekClientHello(stream, bufferPool);
+if (clientHello?.Extensions != null &&
+    clientHello.Extensions.TryGetValue("server_name", out var sni))
 {
-    string sniHostName = clientSslHelloInfo.Extensions?.FirstOrDefault(x => x.Name == "server_name")?.Data;
-   
-    //create yourClientCertificate based on sniHostName
-    
-    //and now as usual
-    var sslStream = new SslStream(yourClientStream);
-    await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
+    var hostName = sni.Data;
+    // select certificate / continue with SslStream on the same stream
 }
+
+var serverHello = await SslTools.PeekServerHello(stream, bufferPool);
 ```
 
+`CustomBufferedStream` implements `IPeekStream`, so peeked bytes remain available for the subsequent TLS handshake.
 
-## Peek SSL Information
+## Supported frameworks
 
-### Peek Client SSL Hello
-```csharp
-var bufferSize = 4096;
-var bufferPool = new DefaultBufferPool();
-var yourClientStream = new CustomBufferedStream(clientStream, bufferPool, bufferSize)
-var clientSslHelloInfo = await SslTools.PeekClientHello(yourClientStream, bufferPool);
+- .NET 10 (`net10.0`)
 
-//will be null if no client hello was received (not a SSL connection)
-if(clientSslHelloInfo!=null)
-{
-    //and now as usual
-    var sslStream = new SslStream(yourClientStream);
-    await sslStream.AuthenticateAsServerAsync(yourClientCertificate, false, SupportedSslProtocols, false);
-}
+## API docs
+
+Generated with DocFX on `develop`: [justcoding121.github.io/stream-extended](https://justcoding121.github.io/stream-extended/)
+
+## Build
+
+```bash
+dotnet test src/StreamExtended.sln -c Release
+dotnet pack src/StreamExtended/StreamExtended.csproj -c Release
 ```
 
-### Peek Server SSL Hello
-```csharp
-var bufferSize = 4096;
-var bufferPool = new DefaultBufferPool();
-var yourServerStream = new CustomBufferedStream(serverStream, bufferPool, bufferSize)
-var serverSslHelloInfo = await SslTools.PeekServerHello(yourServerStream, bufferPool);
+## License
 
-//will be null if no server hello was received (not a SSL connection)
-if(serverSslHelloInfo!=null)
-{
-     //and now as usual
-     var sslStream = new SslStream(yourServerStream, false, null, null);
-     await sslStream.AuthenticateAsClientAsync(yourRemoteHostName, null, yourSupportedSslProtocols, false);
-
-}
-```
-
-## Note to contributors
-
-Special thanks to [@honfika](https://github.com/honfika) who contributed this code [originally in Titanium Web Proxy](https://github.com/justcoding121/Titanium-Web-Proxy/issues/293) project. 
-
-### Collaborators
-
-* [honfika](https://github.com/honfika)
+MIT — see [LICENSE](LICENSE).

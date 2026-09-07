@@ -1,0 +1,81 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: nuget-publish
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore src/StreamExtended.sln
+
+      - name: Build
+        run: dotnet build src/StreamExtended.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo
+
+      - name: Pack
+        run: dotnet pack src/StreamExtended/StreamExtended.csproj --configuration Release --no-build --no-restore --output artifacts
+
+      - name: Assert package version matches VersionPrefix and tag
+        shell: pwsh
+        run: |
+          $m = Select-String -Path src/StreamExtended/StreamExtended.csproj -Pattern '<VersionPrefix>([^<]+)</VersionPrefix>'
+          if (-not $m) { throw 'VersionPrefix not found in StreamExtended.csproj' }
+          $prefix = $m.Matches[0].Groups[1].Value
+          $tag = '${{ github.ref_name }}'
+          $tagVersion = $tag.TrimStart('v')
+          if ($tagVersion -ne $prefix) {
+            throw "Tag $tag does not match VersionPrefix $prefix in csproj."
+          }
+          $pkg = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
+            Where-Object { $_.Name -notlike '*.symbols.*' } |
+            Select-Object -First 1
+          if (-not $pkg) { throw 'No nupkg found' }
+          $expected = "StreamExtended.$prefix.nupkg"
+          if ($pkg.Name -ne $expected) {
+            throw "Expected $expected (from VersionPrefix), got $($pkg.Name)"
+          }
+          Write-Host "OK: $($pkg.Name) matches tag $tag and VersionPrefix $prefix"
+
+      - name: NuGet login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Push to NuGet.org
+        run: |
+          dotnet nuget push artifacts/StreamExtended.*.nupkg \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --skip-duplicate
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.ref_name }}"
+          gh release create "$TAG" artifacts/StreamExtended.*.nupkg \
+            --title "$TAG" \
+            --generate-notes \
+            --verify-tag

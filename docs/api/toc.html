@@ -1,29 +1,24 @@
-﻿
+
 <div id="sidetoggle">
   <div>
     <div class="sidefilter">
       <form class="toc-filter">
         <span class="glyphicon glyphicon-filter filter-icon"></span>
-        <input type="text" id="toc_filter_input" placeholder="Enter here to filter..." onkeypress="if(event.keyCode==13) {return false;}">
+        <span class="glyphicon glyphicon-remove clear-icon" id="toc_filter_clear"></span>
+        <input type="text" id="toc_filter_input" placeholder="Filter by title" onkeypress="if(event.keyCode==13) {return false;}">
       </form>
     </div>
     <div class="sidetoc">
       <div class="toc" id="toc">
-          
+
           <ul class="nav level1">
                 <li>
                     <span class="expand-stub"></span>
                     <a href="StreamExtended.html" name="" title="StreamExtended">StreamExtended</a>
-                    
+
                     <ul class="nav level2">
                           <li>
                               <a href="StreamExtended.ClientHelloInfo.html" name="" title="ClientHelloInfo">ClientHelloInfo</a>
-                          </li>
-                          <li>
-                              <a href="StreamExtended.DefaultBufferPool.html" name="" title="DefaultBufferPool">DefaultBufferPool</a>
-                          </li>
-                          <li>
-                              <a href="StreamExtended.IBufferPool.html" name="" title="IBufferPool">IBufferPool</a>
                           </li>
                           <li>
                               <a href="StreamExtended.ServerHelloInfo.html" name="" title="ServerHelloInfo">ServerHelloInfo</a>
@@ -35,8 +30,21 @@
                 </li>
                 <li>
                     <span class="expand-stub"></span>
+                    <a href="StreamExtended.BufferPool.html" name="" title="StreamExtended.BufferPool">StreamExtended.BufferPool</a>
+
+                    <ul class="nav level2">
+                          <li>
+                              <a href="StreamExtended.BufferPool.DefaultBufferPool.html" name="" title="DefaultBufferPool">DefaultBufferPool</a>
+                          </li>
+                          <li>
+                              <a href="StreamExtended.BufferPool.IBufferPool.html" name="" title="IBufferPool">IBufferPool</a>
+                          </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="expand-stub"></span>
                     <a href="StreamExtended.Models.html" name="" title="StreamExtended.Models">StreamExtended.Models</a>
-                    
+
                     <ul class="nav level2">
                           <li>
                               <a href="StreamExtended.Models.SslExtension.html" name="" title="SslExtension">SslExtension</a>
@@ -46,7 +54,7 @@
                 <li>
                     <span class="expand-stub"></span>
                     <a href="StreamExtended.Network.html" name="" title="StreamExtended.Network">StreamExtended.Network</a>
-                    
+
                     <ul class="nav level2">
                           <li>
                               <a href="StreamExtended.Network.CopyStream.html" name="" title="CopyStream">CopyStream</a>
@@ -62,6 +70,9 @@
                           </li>
                           <li>
                               <a href="StreamExtended.Network.ICustomStreamWriter.html" name="" title="ICustomStreamWriter">ICustomStreamWriter</a>
+                          </li>
+                          <li>
+                              <a href="StreamExtended.Network.IPeekStream.html" name="" title="IPeekStream">IPeekStream</a>
                           </li>
                     </ul>
                 </li>

@@ -1,0 +1,243 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main, develop, beta, stable]
+    paths-ignore:
+      - 'docs/**'
+  pull_request:
+    branches: [master, main, develop, beta, stable]
+    paths-ignore:
+      - 'docs/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    permissions:
+      # write: Publish Documentation (EndBug/add-and-commit) pushes DocFX output to develop.
+      contents: write
+      pull-requests: write
+      checks: write
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install DocFX
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        shell: pwsh
+        run: |
+          # Prefer the .NET tool over Chocolatey (matches titanium-web-proxy).
+          dotnet tool install --global docfx
+          Add-Content -Path $env:GITHUB_PATH -Value "$HOME/.dotnet/tools"
+
+      - name: Install SonarScanner
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        shell: pwsh
+        run: dotnet tool install --tool-path .sonar/scanner dotnet-sonarscanner
+
+      - name: Install coverage tool
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: dotnet tool install --tool-path .coverage/tools dotnet-coverage
+
+      - name: Restore
+        run: dotnet restore src/StreamExtended.sln
+
+      - name: Build
+        run: dotnet build src/StreamExtended.sln --configuration Release --no-restore
+
+      - name: Begin SonarCloud analysis
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        shell: pwsh
+        run: >
+          .\.sonar\scanner\dotnet-sonarscanner begin
+          /k:"justcoding121_stream-extended"
+          /o:"justcoding121"
+          /d:sonar.token="$env:SONAR_TOKEN"
+          /d:sonar.host.url="https://sonarcloud.io"
+          /d:sonar.cs.vscoveragexml.reportsPaths="coverage/coverage.xml"
+          /d:sonar.exclusions="**/docs/**,**/.github/**"
+
+      - name: Build for SonarCloud analysis
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        run: dotnet build src/StreamExtended.sln --configuration Release --no-restore --no-incremental --disable-build-servers
+
+      - name: Test
+        if: matrix.os != 'windows-latest'
+        run: dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo
+
+      - name: Test with coverage
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo --collect:"Code Coverage" --results-directory coverage/unit
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Merge code coverage
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: .\.coverage\tools\dotnet-coverage merge "coverage\**\*.coverage" --output coverage/coverage.xml --output-format xml
+
+      - name: Complete SonarCloud analysis
+        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        shell: pwsh
+        run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
+
+      - name: Pack
+        run: dotnet pack src/StreamExtended/StreamExtended.csproj --configuration Release --no-build --no-restore --output artifacts
+
+      - name: Resolve VersionPrefix from csproj
+        id: ver
+        shell: pwsh
+        run: |
+          $m = Select-String -Path src/StreamExtended/StreamExtended.csproj -Pattern '<VersionPrefix>([^<]+)</VersionPrefix>'
+          if (-not $m) { throw 'VersionPrefix not found in StreamExtended.csproj' }
+          $prefix = $m.Matches[0].Groups[1].Value
+          "prefix=$prefix" >> $env:GITHUB_OUTPUT
+          "nupkg=StreamExtended.$prefix.nupkg" >> $env:GITHUB_OUTPUT
+          Write-Host "VersionPrefix=$prefix"
+
+      - name: Assert packed package matches VersionPrefix
+        shell: pwsh
+        run: |
+          $expected = '${{ steps.ver.outputs.nupkg }}'
+          $pkg = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
+            Where-Object { $_.Name -notlike '*.symbols.*' } |
+            Select-Object -First 1
+          if (-not $pkg) { throw 'No nupkg found in artifacts/' }
+          if ($pkg.Name -ne $expected) {
+            throw "Expected $expected (from VersionPrefix), got $($pkg.Name)"
+          }
+          Write-Host "Packed $($pkg.Name)"
+
+      - name: Upload nupkg
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: streamextended-nupkg
+          path: artifacts/${{ steps.ver.outputs.nupkg }}
+
+      - name: Update Documentation
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        run: docfx .github/docfx.json
+
+      - name: Publish Documentation
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9
+        with:
+          default_author: github_actions
+          message: Update documentation
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+          # Only commit DocFX output -- never Sonar/coverage/tool install artifacts
+          add: 'docs'
+          # DocFX often races another develop push; rebase instead of failing the job.
+          pull: '--rebase --autostash'
+
+  publish:
+    name: Publish NuGet package
+    needs: build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/stable')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: nuget-publish
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Pack Beta
+        if: github.ref == 'refs/heads/beta'
+        run: |
+          dotnet pack src/StreamExtended/StreamExtended.csproj \
+            --configuration Release \
+            --version-suffix beta \
+            --output artifacts
+
+      - name: Pack Stable
+        if: github.ref == 'refs/heads/stable'
+        run: |
+          dotnet pack src/StreamExtended/StreamExtended.csproj \
+            --configuration Release \
+            --output artifacts
+
+      - name: Resolve package version
+        id: package
+        shell: pwsh
+        run: |
+          $package = Get-ChildItem artifacts -Filter 'StreamExtended.*.nupkg' |
+            Where-Object { $_.Name -notlike '*.symbols.*' } |
+            Select-Object -First 1
+          if (-not $package) { throw 'No NuGet package was produced.' }
+          if ($package.BaseName -notmatch '^StreamExtended\.(.+)$') {
+            throw "Unexpected package name: $($package.Name)"
+          }
+          $version = $Matches[1]
+          "name=$($package.Name)" >> $env:GITHUB_OUTPUT
+          "path=$($package.FullName)" >> $env:GITHUB_OUTPUT
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$version" >> $env:GITHUB_OUTPUT
+          "prerelease=$(if ($version -match '-beta$') { 'true' } else { 'false' })" >> $env:GITHUB_OUTPUT
+          Write-Host "Package $($package.Name) version=$version"
+
+      - name: NuGet login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Publish package
+        run: |
+          dotnet nuget push "${{ steps.package.outputs.path }}" \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key "${{ steps.login.outputs.NUGET_API_KEY }}" \
+            --skip-duplicate
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $tag = "${{ steps.package.outputs.tag }}"
+          $version = "${{ steps.package.outputs.version }}"
+          $package = "${{ steps.package.outputs.path }}"
+          $prerelease = "${{ steps.package.outputs.prerelease }}" -eq "true"
+
+          if (gh release view $tag 2>$null) {
+            Write-Host "Release $tag already exists; uploading package asset if missing."
+            gh release upload $tag $package --clobber
+          } else {
+            $args = @(
+              "release", "create", $tag,
+              $package,
+              "--title", $version,
+              "--generate-notes",
+              "--target", $env:GITHUB_SHA
+            )
+            if ($prerelease) { $args += "--prerelease" }
+            gh @args
+          }

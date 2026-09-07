@@ -1,14 +1,18 @@
-﻿using System;
+using System;
 
-namespace StreamExtended
+namespace StreamExtended.BufferPool;
+
+/// <summary>
+///     Use this interface to implement custom buffer pool.
+///     To use the default buffer pool implementation use DefaultBufferPool class.
+/// </summary>
+public interface IBufferPool : IDisposable
 {
-    /// <summary>
-    ///     Use this interface to implement custom buffer pool.
-    ///     To use the default buffer pool implementation use DefaultBufferPool class.
-    /// </summary>
-    public interface IBufferPool : IDisposable
-    {
-        byte[] GetBuffer(int bufferSize);
-        void ReturnBuffer(byte[] buffer);
-    }
+    int BufferSize { get; }
+
+    byte[] GetBuffer();
+
+    byte[] GetBuffer(int bufferSize);
+
+    void ReturnBuffer(byte[] buffer);
 }

@@ -1,47 +1,58 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Buffers;
 
-namespace StreamExtended
+namespace StreamExtended.BufferPool;
+
+/// <summary>
+///     A concrete IBufferPool implementation backed by the shared <see cref="System.Buffers.ArrayPool{T}" />.
+///     It is thread-safe and handles both fixed and variable size buffer requests.
+///     Note: rented buffers may be larger than the requested size (ArrayPool bucketing) and are not
+///     cleared on return, so callers must not assume the buffer length equals the requested size.
+/// </summary>
+public sealed class DefaultBufferPool : IBufferPool
 {
+    /// <summary>
+    ///     Buffer size in bytes used throughout this proxy.
+    ///     Default value is 8192 bytes.
+    /// </summary>
+    public int BufferSize { get; set; } = 8192;
 
     /// <summary>
-    ///     A concrete IBufferPool implementation using a thread-safe stack.
-    ///     Works well when all consumers ask for buffers with the same size.
-    ///     If your application would use variable size buffers consider implementing IBufferPool using System.Buffers library from Microsoft.
+    ///     Gets a buffer with a default size.
     /// </summary>
-    public class DefaultBufferPool : IBufferPool
+    /// <returns></returns>
+    public byte[] GetBuffer()
     {
-        private readonly ConcurrentStack<byte[]> buffers = new ConcurrentStack<byte[]>();
+        return ArrayPool<byte>.Shared.Rent(BufferSize);
+    }
 
-        /// <summary>
-        /// Gets a buffer.
-        /// </summary>
-        /// <param name="bufferSize">Size of the buffer.</param>
-        /// <returns></returns>
-        public byte[] GetBuffer(int bufferSize)
-        {
-            if (!buffers.TryPop(out var buffer) || buffer.Length != bufferSize)
-            {
-                buffer = new byte[bufferSize];
-            }
+    /// <summary>
+    ///     Gets a buffer.
+    /// </summary>
+    /// <param name="bufferSize">Size of the buffer.</param>
+    /// <returns></returns>
+    public byte[] GetBuffer(int bufferSize)
+    {
+        return ArrayPool<byte>.Shared.Rent(bufferSize);
+    }
 
-            return buffer;
-        }
+    /// <summary>
+    ///     Returns the buffer.
+    /// </summary>
+    /// <param name="buffer">The buffer.</param>
+    public void ReturnBuffer(byte[] buffer)
+    {
+        ArrayPool<byte>.Shared.Return(buffer);
+    }
 
-        /// <summary>
-        /// Returns the buffer.
-        /// </summary>
-        /// <param name="buffer">The buffer.</param>
-        public void ReturnBuffer(byte[] buffer)
-        {
-            if (buffer != null)
-            {
-                buffers.Push(buffer);
-            }
-        }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        public void Dispose()
-        {
-            buffers.Clear();
-        }
+    private static void Dispose(bool disposing)
+    {
+        // Nothing to dispose; required for IBufferPool.
     }
 }

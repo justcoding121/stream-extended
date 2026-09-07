@@ -7,6 +7,139 @@ references:
   commentId: N:StreamExtended
   fullName: StreamExtended
   nameWithType: StreamExtended
+- uid: StreamExtended.BufferPool
+  name: StreamExtended.BufferPool
+  href: api/StreamExtended.BufferPool.html
+  commentId: N:StreamExtended.BufferPool
+  fullName: StreamExtended.BufferPool
+  nameWithType: StreamExtended.BufferPool
+- uid: StreamExtended.BufferPool.DefaultBufferPool
+  name: DefaultBufferPool
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html
+  commentId: T:StreamExtended.BufferPool.DefaultBufferPool
+  fullName: StreamExtended.BufferPool.DefaultBufferPool
+  nameWithType: DefaultBufferPool
+- uid: StreamExtended.BufferPool.DefaultBufferPool.BufferSize
+  name: BufferSize
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_BufferSize
+  commentId: P:StreamExtended.BufferPool.DefaultBufferPool.BufferSize
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.BufferSize
+  nameWithType: DefaultBufferPool.BufferSize
+- uid: StreamExtended.BufferPool.DefaultBufferPool.BufferSize*
+  name: BufferSize
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_BufferSize_
+  commentId: Overload:StreamExtended.BufferPool.DefaultBufferPool.BufferSize
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.BufferSize
+  nameWithType: DefaultBufferPool.BufferSize
+- uid: StreamExtended.BufferPool.DefaultBufferPool.Dispose
+  name: Dispose()
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_Dispose
+  commentId: M:StreamExtended.BufferPool.DefaultBufferPool.Dispose
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.Dispose()
+  nameWithType: DefaultBufferPool.Dispose()
+- uid: StreamExtended.BufferPool.DefaultBufferPool.Dispose*
+  name: Dispose
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_Dispose_
+  commentId: Overload:StreamExtended.BufferPool.DefaultBufferPool.Dispose
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.Dispose
+  nameWithType: DefaultBufferPool.Dispose
+- uid: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer
+  name: GetBuffer()
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_GetBuffer
+  commentId: M:StreamExtended.BufferPool.DefaultBufferPool.GetBuffer
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer()
+  nameWithType: DefaultBufferPool.GetBuffer()
+- uid: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer(System.Int32)
+  name: GetBuffer(int)
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_GetBuffer_System_Int32_
+  commentId: M:StreamExtended.BufferPool.DefaultBufferPool.GetBuffer(System.Int32)
+  name.vb: GetBuffer(Integer)
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer(int)
+  fullName.vb: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer(Integer)
+  nameWithType: DefaultBufferPool.GetBuffer(int)
+  nameWithType.vb: DefaultBufferPool.GetBuffer(Integer)
+- uid: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer*
+  name: GetBuffer
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_GetBuffer_
+  commentId: Overload:StreamExtended.BufferPool.DefaultBufferPool.GetBuffer
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.GetBuffer
+  nameWithType: DefaultBufferPool.GetBuffer
+- uid: StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer(System.Byte[])
+  name: ReturnBuffer(byte[])
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_ReturnBuffer_System_Byte___
+  commentId: M:StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer(System.Byte[])
+  name.vb: ReturnBuffer(Byte())
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer(byte[])
+  fullName.vb: StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer(Byte())
+  nameWithType: DefaultBufferPool.ReturnBuffer(byte[])
+  nameWithType.vb: DefaultBufferPool.ReturnBuffer(Byte())
+- uid: StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer*
+  name: ReturnBuffer
+  href: api/StreamExtended.BufferPool.DefaultBufferPool.html#StreamExtended_BufferPool_DefaultBufferPool_ReturnBuffer_
+  commentId: Overload:StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.DefaultBufferPool.ReturnBuffer
+  nameWithType: DefaultBufferPool.ReturnBuffer
+- uid: StreamExtended.BufferPool.IBufferPool
+  name: IBufferPool
+  href: api/StreamExtended.BufferPool.IBufferPool.html
+  commentId: T:StreamExtended.BufferPool.IBufferPool
+  fullName: StreamExtended.BufferPool.IBufferPool
+  nameWithType: IBufferPool
+- uid: StreamExtended.BufferPool.IBufferPool.BufferSize
+  name: BufferSize
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_BufferSize
+  commentId: P:StreamExtended.BufferPool.IBufferPool.BufferSize
+  fullName: StreamExtended.BufferPool.IBufferPool.BufferSize
+  nameWithType: IBufferPool.BufferSize
+- uid: StreamExtended.BufferPool.IBufferPool.BufferSize*
+  name: BufferSize
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_BufferSize_
+  commentId: Overload:StreamExtended.BufferPool.IBufferPool.BufferSize
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.IBufferPool.BufferSize
+  nameWithType: IBufferPool.BufferSize
+- uid: StreamExtended.BufferPool.IBufferPool.GetBuffer
+  name: GetBuffer()
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_GetBuffer
+  commentId: M:StreamExtended.BufferPool.IBufferPool.GetBuffer
+  fullName: StreamExtended.BufferPool.IBufferPool.GetBuffer()
+  nameWithType: IBufferPool.GetBuffer()
+- uid: StreamExtended.BufferPool.IBufferPool.GetBuffer(System.Int32)
+  name: GetBuffer(int)
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_GetBuffer_System_Int32_
+  commentId: M:StreamExtended.BufferPool.IBufferPool.GetBuffer(System.Int32)
+  name.vb: GetBuffer(Integer)
+  fullName: StreamExtended.BufferPool.IBufferPool.GetBuffer(int)
+  fullName.vb: StreamExtended.BufferPool.IBufferPool.GetBuffer(Integer)
+  nameWithType: IBufferPool.GetBuffer(int)
+  nameWithType.vb: IBufferPool.GetBuffer(Integer)
+- uid: StreamExtended.BufferPool.IBufferPool.GetBuffer*
+  name: GetBuffer
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_GetBuffer_
+  commentId: Overload:StreamExtended.BufferPool.IBufferPool.GetBuffer
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.IBufferPool.GetBuffer
+  nameWithType: IBufferPool.GetBuffer
+- uid: StreamExtended.BufferPool.IBufferPool.ReturnBuffer(System.Byte[])
+  name: ReturnBuffer(byte[])
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_ReturnBuffer_System_Byte___
+  commentId: M:StreamExtended.BufferPool.IBufferPool.ReturnBuffer(System.Byte[])
+  name.vb: ReturnBuffer(Byte())
+  fullName: StreamExtended.BufferPool.IBufferPool.ReturnBuffer(byte[])
+  fullName.vb: StreamExtended.BufferPool.IBufferPool.ReturnBuffer(Byte())
+  nameWithType: IBufferPool.ReturnBuffer(byte[])
+  nameWithType.vb: IBufferPool.ReturnBuffer(Byte())
+- uid: StreamExtended.BufferPool.IBufferPool.ReturnBuffer*
+  name: ReturnBuffer
+  href: api/StreamExtended.BufferPool.IBufferPool.html#StreamExtended_BufferPool_IBufferPool_ReturnBuffer_
+  commentId: Overload:StreamExtended.BufferPool.IBufferPool.ReturnBuffer
+  isSpec: "True"
+  fullName: StreamExtended.BufferPool.IBufferPool.ReturnBuffer
+  nameWithType: IBufferPool.ReturnBuffer
 - uid: StreamExtended.ClientHelloInfo
   name: ClientHelloInfo
   href: api/StreamExtended.ClientHelloInfo.html
@@ -117,6 +250,19 @@ references:
   isSpec: "True"
   fullName: StreamExtended.ClientHelloInfo.SessionId
   nameWithType: ClientHelloInfo.SessionId
+- uid: StreamExtended.ClientHelloInfo.SslProtocol
+  name: SslProtocol
+  href: api/StreamExtended.ClientHelloInfo.html#StreamExtended_ClientHelloInfo_SslProtocol
+  commentId: P:StreamExtended.ClientHelloInfo.SslProtocol
+  fullName: StreamExtended.ClientHelloInfo.SslProtocol
+  nameWithType: ClientHelloInfo.SslProtocol
+- uid: StreamExtended.ClientHelloInfo.SslProtocol*
+  name: SslProtocol
+  href: api/StreamExtended.ClientHelloInfo.html#StreamExtended_ClientHelloInfo_SslProtocol_
+  commentId: Overload:StreamExtended.ClientHelloInfo.SslProtocol
+  isSpec: "True"
+  fullName: StreamExtended.ClientHelloInfo.SslProtocol
+  nameWithType: ClientHelloInfo.SslProtocol
 - uid: StreamExtended.ClientHelloInfo.Time
   name: Time
   href: api/StreamExtended.ClientHelloInfo.html#StreamExtended_ClientHelloInfo_Time
@@ -143,89 +289,6 @@ references:
   isSpec: "True"
   fullName: StreamExtended.ClientHelloInfo.ToString
   nameWithType: ClientHelloInfo.ToString
-- uid: StreamExtended.DefaultBufferPool
-  name: DefaultBufferPool
-  href: api/StreamExtended.DefaultBufferPool.html
-  commentId: T:StreamExtended.DefaultBufferPool
-  fullName: StreamExtended.DefaultBufferPool
-  nameWithType: DefaultBufferPool
-- uid: StreamExtended.DefaultBufferPool.Dispose
-  name: Dispose()
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_Dispose
-  commentId: M:StreamExtended.DefaultBufferPool.Dispose
-  fullName: StreamExtended.DefaultBufferPool.Dispose()
-  nameWithType: DefaultBufferPool.Dispose()
-- uid: StreamExtended.DefaultBufferPool.Dispose*
-  name: Dispose
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_Dispose_
-  commentId: Overload:StreamExtended.DefaultBufferPool.Dispose
-  isSpec: "True"
-  fullName: StreamExtended.DefaultBufferPool.Dispose
-  nameWithType: DefaultBufferPool.Dispose
-- uid: StreamExtended.DefaultBufferPool.GetBuffer(System.Int32)
-  name: GetBuffer(Int32)
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_GetBuffer_System_Int32_
-  commentId: M:StreamExtended.DefaultBufferPool.GetBuffer(System.Int32)
-  fullName: StreamExtended.DefaultBufferPool.GetBuffer(System.Int32)
-  nameWithType: DefaultBufferPool.GetBuffer(Int32)
-- uid: StreamExtended.DefaultBufferPool.GetBuffer*
-  name: GetBuffer
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_GetBuffer_
-  commentId: Overload:StreamExtended.DefaultBufferPool.GetBuffer
-  isSpec: "True"
-  fullName: StreamExtended.DefaultBufferPool.GetBuffer
-  nameWithType: DefaultBufferPool.GetBuffer
-- uid: StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte[])
-  name: ReturnBuffer(Byte[])
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_ReturnBuffer_System_Byte___
-  commentId: M:StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte[])
-  name.vb: ReturnBuffer(Byte())
-  fullName: StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte[])
-  fullName.vb: StreamExtended.DefaultBufferPool.ReturnBuffer(System.Byte())
-  nameWithType: DefaultBufferPool.ReturnBuffer(Byte[])
-  nameWithType.vb: DefaultBufferPool.ReturnBuffer(Byte())
-- uid: StreamExtended.DefaultBufferPool.ReturnBuffer*
-  name: ReturnBuffer
-  href: api/StreamExtended.DefaultBufferPool.html#StreamExtended_DefaultBufferPool_ReturnBuffer_
-  commentId: Overload:StreamExtended.DefaultBufferPool.ReturnBuffer
-  isSpec: "True"
-  fullName: StreamExtended.DefaultBufferPool.ReturnBuffer
-  nameWithType: DefaultBufferPool.ReturnBuffer
-- uid: StreamExtended.IBufferPool
-  name: IBufferPool
-  href: api/StreamExtended.IBufferPool.html
-  commentId: T:StreamExtended.IBufferPool
-  fullName: StreamExtended.IBufferPool
-  nameWithType: IBufferPool
-- uid: StreamExtended.IBufferPool.GetBuffer(System.Int32)
-  name: GetBuffer(Int32)
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_GetBuffer_System_Int32_
-  commentId: M:StreamExtended.IBufferPool.GetBuffer(System.Int32)
-  fullName: StreamExtended.IBufferPool.GetBuffer(System.Int32)
-  nameWithType: IBufferPool.GetBuffer(Int32)
-- uid: StreamExtended.IBufferPool.GetBuffer*
-  name: GetBuffer
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_GetBuffer_
-  commentId: Overload:StreamExtended.IBufferPool.GetBuffer
-  isSpec: "True"
-  fullName: StreamExtended.IBufferPool.GetBuffer
-  nameWithType: IBufferPool.GetBuffer
-- uid: StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])
-  name: ReturnBuffer(Byte[])
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_ReturnBuffer_System_Byte___
-  commentId: M:StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])
-  name.vb: ReturnBuffer(Byte())
-  fullName: StreamExtended.IBufferPool.ReturnBuffer(System.Byte[])
-  fullName.vb: StreamExtended.IBufferPool.ReturnBuffer(System.Byte())
-  nameWithType: IBufferPool.ReturnBuffer(Byte[])
-  nameWithType.vb: IBufferPool.ReturnBuffer(Byte())
-- uid: StreamExtended.IBufferPool.ReturnBuffer*
-  name: ReturnBuffer
-  href: api/StreamExtended.IBufferPool.html#StreamExtended_IBufferPool_ReturnBuffer_
-  commentId: Overload:StreamExtended.IBufferPool.ReturnBuffer
-  isSpec: "True"
-  fullName: StreamExtended.IBufferPool.ReturnBuffer
-  nameWithType: IBufferPool.ReturnBuffer
 - uid: StreamExtended.Models
   name: StreamExtended.Models
   href: api/StreamExtended.Models.html
@@ -238,19 +301,25 @@ references:
   commentId: T:StreamExtended.Models.SslExtension
   fullName: StreamExtended.Models.SslExtension
   nameWithType: SslExtension
-- uid: StreamExtended.Models.SslExtension.#ctor(System.Int32,System.String,System.String,System.Int32)
-  name: SslExtension(Int32, String, String, Int32)
-  href: api/StreamExtended.Models.SslExtension.html#StreamExtended_Models_SslExtension__ctor_System_Int32_System_String_System_String_System_Int32_
-  commentId: M:StreamExtended.Models.SslExtension.#ctor(System.Int32,System.String,System.String,System.Int32)
-  fullName: StreamExtended.Models.SslExtension.SslExtension(System.Int32, System.String, System.String, System.Int32)
-  nameWithType: SslExtension.SslExtension(Int32, String, String, Int32)
+- uid: StreamExtended.Models.SslExtension.#ctor(System.Int32,System.ReadOnlyMemory{System.Byte},System.Int32)
+  name: SslExtension(int, ReadOnlyMemory<byte>, int)
+  href: api/StreamExtended.Models.SslExtension.html#StreamExtended_Models_SslExtension__ctor_System_Int32_System_ReadOnlyMemory_System_Byte__System_Int32_
+  commentId: M:StreamExtended.Models.SslExtension.#ctor(System.Int32,System.ReadOnlyMemory{System.Byte},System.Int32)
+  name.vb: New(Integer, ReadOnlyMemory(Of Byte), Integer)
+  fullName: StreamExtended.Models.SslExtension.SslExtension(int, System.ReadOnlyMemory<byte>, int)
+  fullName.vb: StreamExtended.Models.SslExtension.New(Integer, System.ReadOnlyMemory(Of Byte), Integer)
+  nameWithType: SslExtension.SslExtension(int, ReadOnlyMemory<byte>, int)
+  nameWithType.vb: SslExtension.New(Integer, ReadOnlyMemory(Of Byte), Integer)
 - uid: StreamExtended.Models.SslExtension.#ctor*
   name: SslExtension
   href: api/StreamExtended.Models.SslExtension.html#StreamExtended_Models_SslExtension__ctor_
   commentId: Overload:StreamExtended.Models.SslExtension.#ctor
   isSpec: "True"
+  name.vb: New
   fullName: StreamExtended.Models.SslExtension.SslExtension
+  fullName.vb: StreamExtended.Models.SslExtension.New
   nameWithType: SslExtension.SslExtension
+  nameWithType.vb: SslExtension.New
 - uid: StreamExtended.Models.SslExtension.Data
   name: Data
   href: api/StreamExtended.Models.SslExtension.html#StreamExtended_Models_SslExtension_Data
@@ -315,19 +384,25 @@ references:
   commentId: T:StreamExtended.Network.CopyStream
   fullName: StreamExtended.Network.CopyStream
   nameWithType: CopyStream
-- uid: StreamExtended.Network.CopyStream.#ctor(StreamExtended.Network.ICustomStreamReader,StreamExtended.Network.ICustomStreamWriter,StreamExtended.IBufferPool,System.Int32)
-  name: CopyStream(ICustomStreamReader, ICustomStreamWriter, IBufferPool, Int32)
-  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream__ctor_StreamExtended_Network_ICustomStreamReader_StreamExtended_Network_ICustomStreamWriter_StreamExtended_IBufferPool_System_Int32_
-  commentId: M:StreamExtended.Network.CopyStream.#ctor(StreamExtended.Network.ICustomStreamReader,StreamExtended.Network.ICustomStreamWriter,StreamExtended.IBufferPool,System.Int32)
-  fullName: StreamExtended.Network.CopyStream.CopyStream(StreamExtended.Network.ICustomStreamReader, StreamExtended.Network.ICustomStreamWriter, StreamExtended.IBufferPool, System.Int32)
-  nameWithType: CopyStream.CopyStream(ICustomStreamReader, ICustomStreamWriter, IBufferPool, Int32)
+- uid: StreamExtended.Network.CopyStream.#ctor(StreamExtended.Network.ICustomStreamReader,StreamExtended.Network.ICustomStreamWriter,StreamExtended.BufferPool.IBufferPool,System.Int32)
+  name: CopyStream(ICustomStreamReader, ICustomStreamWriter, IBufferPool, int)
+  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream__ctor_StreamExtended_Network_ICustomStreamReader_StreamExtended_Network_ICustomStreamWriter_StreamExtended_BufferPool_IBufferPool_System_Int32_
+  commentId: M:StreamExtended.Network.CopyStream.#ctor(StreamExtended.Network.ICustomStreamReader,StreamExtended.Network.ICustomStreamWriter,StreamExtended.BufferPool.IBufferPool,System.Int32)
+  name.vb: New(ICustomStreamReader, ICustomStreamWriter, IBufferPool, Integer)
+  fullName: StreamExtended.Network.CopyStream.CopyStream(StreamExtended.Network.ICustomStreamReader, StreamExtended.Network.ICustomStreamWriter, StreamExtended.BufferPool.IBufferPool, int)
+  fullName.vb: StreamExtended.Network.CopyStream.New(StreamExtended.Network.ICustomStreamReader, StreamExtended.Network.ICustomStreamWriter, StreamExtended.BufferPool.IBufferPool, Integer)
+  nameWithType: CopyStream.CopyStream(ICustomStreamReader, ICustomStreamWriter, IBufferPool, int)
+  nameWithType.vb: CopyStream.New(ICustomStreamReader, ICustomStreamWriter, IBufferPool, Integer)
 - uid: StreamExtended.Network.CopyStream.#ctor*
   name: CopyStream
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream__ctor_
   commentId: Overload:StreamExtended.Network.CopyStream.#ctor
   isSpec: "True"
+  name.vb: New
   fullName: StreamExtended.Network.CopyStream.CopyStream
+  fullName.vb: StreamExtended.Network.CopyStream.New
   nameWithType: CopyStream.CopyStream
+  nameWithType.vb: CopyStream.New
 - uid: StreamExtended.Network.CopyStream.Available
   name: Available
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_Available
@@ -420,11 +495,14 @@ references:
   fullName: StreamExtended.Network.CopyStream.FlushAsync
   nameWithType: CopyStream.FlushAsync
 - uid: StreamExtended.Network.CopyStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
-  name: PeekByteAsync(Int32, CancellationToken)
+  name: PeekByteAsync(int, CancellationToken)
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekByteAsync_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.CopyStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
-  fullName: StreamExtended.Network.CopyStream.PeekByteAsync(System.Int32, System.Threading.CancellationToken)
-  nameWithType: CopyStream.PeekByteAsync(Int32, CancellationToken)
+  name.vb: PeekByteAsync(Integer, CancellationToken)
+  fullName: StreamExtended.Network.CopyStream.PeekByteAsync(int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CopyStream.PeekByteAsync(Integer, System.Threading.CancellationToken)
+  nameWithType: CopyStream.PeekByteAsync(int, CancellationToken)
+  nameWithType.vb: CopyStream.PeekByteAsync(Integer, CancellationToken)
 - uid: StreamExtended.Network.CopyStream.PeekByteAsync*
   name: PeekByteAsync
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekByteAsync_
@@ -433,11 +511,14 @@ references:
   fullName: StreamExtended.Network.CopyStream.PeekByteAsync
   nameWithType: CopyStream.PeekByteAsync
 - uid: StreamExtended.Network.CopyStream.PeekByteFromBuffer(System.Int32)
-  name: PeekByteFromBuffer(Int32)
+  name: PeekByteFromBuffer(int)
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekByteFromBuffer_System_Int32_
   commentId: M:StreamExtended.Network.CopyStream.PeekByteFromBuffer(System.Int32)
-  fullName: StreamExtended.Network.CopyStream.PeekByteFromBuffer(System.Int32)
-  nameWithType: CopyStream.PeekByteFromBuffer(Int32)
+  name.vb: PeekByteFromBuffer(Integer)
+  fullName: StreamExtended.Network.CopyStream.PeekByteFromBuffer(int)
+  fullName.vb: StreamExtended.Network.CopyStream.PeekByteFromBuffer(Integer)
+  nameWithType: CopyStream.PeekByteFromBuffer(int)
+  nameWithType.vb: CopyStream.PeekByteFromBuffer(Integer)
 - uid: StreamExtended.Network.CopyStream.PeekByteFromBuffer*
   name: PeekByteFromBuffer
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekByteFromBuffer_
@@ -445,15 +526,31 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.CopyStream.PeekByteFromBuffer
   nameWithType: CopyStream.PeekByteFromBuffer
+- uid: StreamExtended.Network.CopyStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(int, int, CancellationToken)
+  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CopyStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name.vb: PeekBytesAsync(Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CopyStream.PeekBytesAsync(int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CopyStream.PeekBytesAsync(Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: CopyStream.PeekBytesAsync(int, int, CancellationToken)
+  nameWithType.vb: CopyStream.PeekBytesAsync(Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.CopyStream.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.CopyStream.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.CopyStream.PeekBytesAsync
+  nameWithType: CopyStream.PeekBytesAsync
 - uid: StreamExtended.Network.CopyStream.Read(System.Byte[],System.Int32,System.Int32)
-  name: Read(Byte[], Int32, Int32)
+  name: Read(byte[], int, int)
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_Read_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.CopyStream.Read(System.Byte[],System.Int32,System.Int32)
-  name.vb: Read(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.CopyStream.Read(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.CopyStream.Read(System.Byte(), System.Int32, System.Int32)
-  nameWithType: CopyStream.Read(Byte[], Int32, Int32)
-  nameWithType.vb: CopyStream.Read(Byte(), Int32, Int32)
+  name.vb: Read(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.CopyStream.Read(byte[], int, int)
+  fullName.vb: StreamExtended.Network.CopyStream.Read(Byte(), Integer, Integer)
+  nameWithType: CopyStream.Read(byte[], int, int)
+  nameWithType.vb: CopyStream.Read(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.CopyStream.Read*
   name: Read
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_Read_
@@ -462,14 +559,14 @@ references:
   fullName: StreamExtended.Network.CopyStream.Read
   nameWithType: CopyStream.Read
 - uid: StreamExtended.Network.CopyStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name: ReadAsync(Byte[], Int32, Int32, CancellationToken)
+  name: ReadAsync(byte[], int, int, CancellationToken)
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.CopyStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name.vb: ReadAsync(Byte(), Int32, Int32, CancellationToken)
-  fullName: StreamExtended.Network.CopyStream.ReadAsync(System.Byte[], System.Int32, System.Int32, System.Threading.CancellationToken)
-  fullName.vb: StreamExtended.Network.CopyStream.ReadAsync(System.Byte(), System.Int32, System.Int32, System.Threading.CancellationToken)
-  nameWithType: CopyStream.ReadAsync(Byte[], Int32, Int32, CancellationToken)
-  nameWithType.vb: CopyStream.ReadAsync(Byte(), Int32, Int32, CancellationToken)
+  name.vb: ReadAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CopyStream.ReadAsync(byte[], int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CopyStream.ReadAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: CopyStream.ReadAsync(byte[], int, int, CancellationToken)
+  nameWithType.vb: CopyStream.ReadAsync(Byte(), Integer, Integer, CancellationToken)
 - uid: StreamExtended.Network.CopyStream.ReadAsync*
   name: ReadAsync
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_ReadAsync_
@@ -522,19 +619,25 @@ references:
   commentId: T:StreamExtended.Network.CustomBufferedStream
   fullName: StreamExtended.Network.CustomBufferedStream
   nameWithType: CustomBufferedStream
-- uid: StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.IBufferPool,System.Int32,System.Boolean)
-  name: CustomBufferedStream(Stream, IBufferPool, Int32, Boolean)
-  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_StreamExtended_IBufferPool_System_Int32_System_Boolean_
-  commentId: M:StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.IBufferPool,System.Int32,System.Boolean)
-  fullName: StreamExtended.Network.CustomBufferedStream.CustomBufferedStream(System.IO.Stream, StreamExtended.IBufferPool, System.Int32, System.Boolean)
-  nameWithType: CustomBufferedStream.CustomBufferedStream(Stream, IBufferPool, Int32, Boolean)
+- uid: StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.BufferPool.IBufferPool,System.Int32,System.Boolean)
+  name: CustomBufferedStream(Stream, IBufferPool, int, bool)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream__ctor_System_IO_Stream_StreamExtended_BufferPool_IBufferPool_System_Int32_System_Boolean_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.#ctor(System.IO.Stream,StreamExtended.BufferPool.IBufferPool,System.Int32,System.Boolean)
+  name.vb: New(Stream, IBufferPool, Integer, Boolean)
+  fullName: StreamExtended.Network.CustomBufferedStream.CustomBufferedStream(System.IO.Stream, StreamExtended.BufferPool.IBufferPool, int, bool)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.New(System.IO.Stream, StreamExtended.BufferPool.IBufferPool, Integer, Boolean)
+  nameWithType: CustomBufferedStream.CustomBufferedStream(Stream, IBufferPool, int, bool)
+  nameWithType.vb: CustomBufferedStream.New(Stream, IBufferPool, Integer, Boolean)
 - uid: StreamExtended.Network.CustomBufferedStream.#ctor*
   name: CustomBufferedStream
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream__ctor_
   commentId: Overload:StreamExtended.Network.CustomBufferedStream.#ctor
   isSpec: "True"
+  name.vb: New
   fullName: StreamExtended.Network.CustomBufferedStream.CustomBufferedStream
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.New
   nameWithType: CustomBufferedStream.CustomBufferedStream
+  nameWithType.vb: CustomBufferedStream.New
 - uid: StreamExtended.Network.CustomBufferedStream.Available
   name: Available
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Available
@@ -614,11 +717,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.CanWrite
   nameWithType: CustomBufferedStream.CanWrite
 - uid: StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
-  name: CopyToAsync(Stream, Int32, CancellationToken)
+  name: CopyToAsync(Stream, int, CancellationToken)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_CopyToAsync_System_IO_Stream_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)
-  fullName: StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream, System.Int32, System.Threading.CancellationToken)
-  nameWithType: CustomBufferedStream.CopyToAsync(Stream, Int32, CancellationToken)
+  name.vb: CopyToAsync(Stream, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream, Integer, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.CopyToAsync(Stream, int, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.CopyToAsync(Stream, Integer, CancellationToken)
 - uid: StreamExtended.Network.CustomBufferedStream.CopyToAsync*
   name: CopyToAsync
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_CopyToAsync_
@@ -652,11 +758,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.DataWrite
   nameWithType: CustomBufferedStream.DataWrite
 - uid: StreamExtended.Network.CustomBufferedStream.Dispose(System.Boolean)
-  name: Dispose(Boolean)
+  name: Dispose(bool)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Dispose_System_Boolean_
   commentId: M:StreamExtended.Network.CustomBufferedStream.Dispose(System.Boolean)
-  fullName: StreamExtended.Network.CustomBufferedStream.Dispose(System.Boolean)
-  nameWithType: CustomBufferedStream.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  fullName: StreamExtended.Network.CustomBufferedStream.Dispose(bool)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.Dispose(Boolean)
+  nameWithType: CustomBufferedStream.Dispose(bool)
+  nameWithType.vb: CustomBufferedStream.Dispose(Boolean)
 - uid: StreamExtended.Network.CustomBufferedStream.Dispose*
   name: Dispose
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Dispose_
@@ -716,6 +825,19 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.CustomBufferedStream.FlushAsync
   nameWithType: CustomBufferedStream.FlushAsync
+- uid: StreamExtended.Network.CustomBufferedStream.IsClosed
+  name: IsClosed
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_IsClosed
+  commentId: P:StreamExtended.Network.CustomBufferedStream.IsClosed
+  fullName: StreamExtended.Network.CustomBufferedStream.IsClosed
+  nameWithType: CustomBufferedStream.IsClosed
+- uid: StreamExtended.Network.CustomBufferedStream.IsClosed*
+  name: IsClosed
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_IsClosed_
+  commentId: Overload:StreamExtended.Network.CustomBufferedStream.IsClosed
+  isSpec: "True"
+  fullName: StreamExtended.Network.CustomBufferedStream.IsClosed
+  nameWithType: CustomBufferedStream.IsClosed
 - uid: StreamExtended.Network.CustomBufferedStream.Length
   name: Length
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Length
@@ -730,14 +852,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.Length
   nameWithType: CustomBufferedStream.Length
 - uid: StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte[],System.Int32,System.Int32)
-  name: OnDataRead(Byte[], Int32, Int32)
+  name: OnDataRead(byte[], int, int)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_OnDataRead_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte[],System.Int32,System.Int32)
-  name.vb: OnDataRead(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte(), System.Int32, System.Int32)
-  nameWithType: CustomBufferedStream.OnDataRead(Byte[], Int32, Int32)
-  nameWithType.vb: CustomBufferedStream.OnDataRead(Byte(), Int32, Int32)
+  name.vb: OnDataRead(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.CustomBufferedStream.OnDataRead(byte[], int, int)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.OnDataRead(Byte(), Integer, Integer)
+  nameWithType: CustomBufferedStream.OnDataRead(byte[], int, int)
+  nameWithType.vb: CustomBufferedStream.OnDataRead(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.CustomBufferedStream.OnDataRead*
   name: OnDataRead
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_OnDataRead_
@@ -746,14 +868,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.OnDataRead
   nameWithType: CustomBufferedStream.OnDataRead
 - uid: StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte[],System.Int32,System.Int32)
-  name: OnDataWrite(Byte[], Int32, Int32)
+  name: OnDataWrite(byte[], int, int)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_OnDataWrite_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte[],System.Int32,System.Int32)
-  name.vb: OnDataWrite(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte(), System.Int32, System.Int32)
-  nameWithType: CustomBufferedStream.OnDataWrite(Byte[], Int32, Int32)
-  nameWithType.vb: CustomBufferedStream.OnDataWrite(Byte(), Int32, Int32)
+  name.vb: OnDataWrite(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.CustomBufferedStream.OnDataWrite(byte[], int, int)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.OnDataWrite(Byte(), Integer, Integer)
+  nameWithType: CustomBufferedStream.OnDataWrite(byte[], int, int)
+  nameWithType.vb: CustomBufferedStream.OnDataWrite(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.CustomBufferedStream.OnDataWrite*
   name: OnDataWrite
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_OnDataWrite_
@@ -762,11 +884,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.OnDataWrite
   nameWithType: CustomBufferedStream.OnDataWrite
 - uid: StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
-  name: PeekByteAsync(Int32, CancellationToken)
+  name: PeekByteAsync(int, CancellationToken)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekByteAsync_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
-  fullName: StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32, System.Threading.CancellationToken)
-  nameWithType: CustomBufferedStream.PeekByteAsync(Int32, CancellationToken)
+  name.vb: PeekByteAsync(Integer, CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekByteAsync(int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.PeekByteAsync(Integer, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.PeekByteAsync(int, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.PeekByteAsync(Integer, CancellationToken)
 - uid: StreamExtended.Network.CustomBufferedStream.PeekByteAsync*
   name: PeekByteAsync
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekByteAsync_
@@ -775,11 +900,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.PeekByteAsync
   nameWithType: CustomBufferedStream.PeekByteAsync
 - uid: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(System.Int32)
-  name: PeekByteFromBuffer(Int32)
+  name: PeekByteFromBuffer(int)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_System_Int32_
   commentId: M:StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(System.Int32)
-  fullName: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(System.Int32)
-  nameWithType: CustomBufferedStream.PeekByteFromBuffer(Int32)
+  name.vb: PeekByteFromBuffer(Integer)
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(int)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(Integer)
+  nameWithType: CustomBufferedStream.PeekByteFromBuffer(int)
+  nameWithType.vb: CustomBufferedStream.PeekByteFromBuffer(Integer)
 - uid: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer*
   name: PeekByteFromBuffer
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_
@@ -787,6 +915,31 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer
   nameWithType: CustomBufferedStream.PeekByteFromBuffer
+- uid: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Byte[],System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(byte[], int, int, int, CancellationToken)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Byte___System_Int32_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Byte[],System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)
+  name.vb: PeekBytesAsync(Byte(), Integer, Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(byte[], int, int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(Byte(), Integer, Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.PeekBytesAsync(byte[], int, int, int, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.PeekBytesAsync(Byte(), Integer, Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(int, int, CancellationToken)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name.vb: PeekBytesAsync(Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.PeekBytesAsync(int, int, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.PeekBytesAsync(Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.CustomBufferedStream.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.CustomBufferedStream.PeekBytesAsync
+  nameWithType: CustomBufferedStream.PeekBytesAsync
 - uid: StreamExtended.Network.CustomBufferedStream.Position
   name: Position
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Position
@@ -801,14 +954,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.Position
   nameWithType: CustomBufferedStream.Position
 - uid: StreamExtended.Network.CustomBufferedStream.Read(System.Byte[],System.Int32,System.Int32)
-  name: Read(Byte[], Int32, Int32)
+  name: Read(byte[], int, int)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Read_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.CustomBufferedStream.Read(System.Byte[],System.Int32,System.Int32)
-  name.vb: Read(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.CustomBufferedStream.Read(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.CustomBufferedStream.Read(System.Byte(), System.Int32, System.Int32)
-  nameWithType: CustomBufferedStream.Read(Byte[], Int32, Int32)
-  nameWithType.vb: CustomBufferedStream.Read(Byte(), Int32, Int32)
+  name.vb: Read(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.CustomBufferedStream.Read(byte[], int, int)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.Read(Byte(), Integer, Integer)
+  nameWithType: CustomBufferedStream.Read(byte[], int, int)
+  nameWithType.vb: CustomBufferedStream.Read(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.CustomBufferedStream.Read*
   name: Read
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Read_
@@ -830,14 +983,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.ReadAndIgnoreAllLinesAsync
   nameWithType: CustomBufferedStream.ReadAndIgnoreAllLinesAsync
 - uid: StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name: ReadAsync(Byte[], Int32, Int32, CancellationToken)
+  name: ReadAsync(byte[], int, int, CancellationToken)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name.vb: ReadAsync(Byte(), Int32, Int32, CancellationToken)
-  fullName: StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte[], System.Int32, System.Int32, System.Threading.CancellationToken)
-  fullName.vb: StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte(), System.Int32, System.Int32, System.Threading.CancellationToken)
-  nameWithType: CustomBufferedStream.ReadAsync(Byte[], Int32, Int32, CancellationToken)
-  nameWithType.vb: CustomBufferedStream.ReadAsync(Byte(), Int32, Int32, CancellationToken)
+  name.vb: ReadAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.ReadAsync(byte[], int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.ReadAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.ReadAsync(byte[], int, int, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.ReadAsync(Byte(), Integer, Integer, CancellationToken)
 - uid: StreamExtended.Network.CustomBufferedStream.ReadAsync*
   name: ReadAsync
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_ReadAsync_
@@ -898,11 +1051,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.ReadTimeout
   nameWithType: CustomBufferedStream.ReadTimeout
 - uid: StreamExtended.Network.CustomBufferedStream.Seek(System.Int64,System.IO.SeekOrigin)
-  name: Seek(Int64, SeekOrigin)
+  name: Seek(long, SeekOrigin)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Seek_System_Int64_System_IO_SeekOrigin_
   commentId: M:StreamExtended.Network.CustomBufferedStream.Seek(System.Int64,System.IO.SeekOrigin)
-  fullName: StreamExtended.Network.CustomBufferedStream.Seek(System.Int64, System.IO.SeekOrigin)
-  nameWithType: CustomBufferedStream.Seek(Int64, SeekOrigin)
+  name.vb: Seek(Long, SeekOrigin)
+  fullName: StreamExtended.Network.CustomBufferedStream.Seek(long, System.IO.SeekOrigin)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.Seek(Long, System.IO.SeekOrigin)
+  nameWithType: CustomBufferedStream.Seek(long, SeekOrigin)
+  nameWithType.vb: CustomBufferedStream.Seek(Long, SeekOrigin)
 - uid: StreamExtended.Network.CustomBufferedStream.Seek*
   name: Seek
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Seek_
@@ -911,11 +1067,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.Seek
   nameWithType: CustomBufferedStream.Seek
 - uid: StreamExtended.Network.CustomBufferedStream.SetLength(System.Int64)
-  name: SetLength(Int64)
+  name: SetLength(long)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_SetLength_System_Int64_
   commentId: M:StreamExtended.Network.CustomBufferedStream.SetLength(System.Int64)
-  fullName: StreamExtended.Network.CustomBufferedStream.SetLength(System.Int64)
-  nameWithType: CustomBufferedStream.SetLength(Int64)
+  name.vb: SetLength(Long)
+  fullName: StreamExtended.Network.CustomBufferedStream.SetLength(long)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.SetLength(Long)
+  nameWithType: CustomBufferedStream.SetLength(long)
+  nameWithType.vb: CustomBufferedStream.SetLength(Long)
 - uid: StreamExtended.Network.CustomBufferedStream.SetLength*
   name: SetLength
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_SetLength_
@@ -924,14 +1083,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.SetLength
   nameWithType: CustomBufferedStream.SetLength
 - uid: StreamExtended.Network.CustomBufferedStream.Write(System.Byte[],System.Int32,System.Int32)
-  name: Write(Byte[], Int32, Int32)
+  name: Write(byte[], int, int)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Write_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.CustomBufferedStream.Write(System.Byte[],System.Int32,System.Int32)
-  name.vb: Write(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.CustomBufferedStream.Write(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.CustomBufferedStream.Write(System.Byte(), System.Int32, System.Int32)
-  nameWithType: CustomBufferedStream.Write(Byte[], Int32, Int32)
-  nameWithType.vb: CustomBufferedStream.Write(Byte(), Int32, Int32)
+  name.vb: Write(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.CustomBufferedStream.Write(byte[], int, int)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.Write(Byte(), Integer, Integer)
+  nameWithType: CustomBufferedStream.Write(byte[], int, int)
+  nameWithType.vb: CustomBufferedStream.Write(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.CustomBufferedStream.Write*
   name: Write
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_Write_
@@ -940,14 +1099,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.Write
   nameWithType: CustomBufferedStream.Write
 - uid: StreamExtended.Network.CustomBufferedStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name: WriteAsync(Byte[], Int32, Int32, CancellationToken)
+  name: WriteAsync(byte[], int, int, CancellationToken)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_WriteAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.CustomBufferedStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name.vb: WriteAsync(Byte(), Int32, Int32, CancellationToken)
-  fullName: StreamExtended.Network.CustomBufferedStream.WriteAsync(System.Byte[], System.Int32, System.Int32, System.Threading.CancellationToken)
-  fullName.vb: StreamExtended.Network.CustomBufferedStream.WriteAsync(System.Byte(), System.Int32, System.Int32, System.Threading.CancellationToken)
-  nameWithType: CustomBufferedStream.WriteAsync(Byte[], Int32, Int32, CancellationToken)
-  nameWithType.vb: CustomBufferedStream.WriteAsync(Byte(), Int32, Int32, CancellationToken)
+  name.vb: WriteAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.WriteAsync(byte[], int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.WriteAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.WriteAsync(byte[], int, int, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.WriteAsync(Byte(), Integer, Integer, CancellationToken)
 - uid: StreamExtended.Network.CustomBufferedStream.WriteAsync*
   name: WriteAsync
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_WriteAsync_
@@ -956,11 +1115,14 @@ references:
   fullName: StreamExtended.Network.CustomBufferedStream.WriteAsync
   nameWithType: CustomBufferedStream.WriteAsync
 - uid: StreamExtended.Network.CustomBufferedStream.WriteByte(System.Byte)
-  name: WriteByte(Byte)
+  name: WriteByte(byte)
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_WriteByte_System_Byte_
   commentId: M:StreamExtended.Network.CustomBufferedStream.WriteByte(System.Byte)
-  fullName: StreamExtended.Network.CustomBufferedStream.WriteByte(System.Byte)
-  nameWithType: CustomBufferedStream.WriteByte(Byte)
+  name.vb: WriteByte(Byte)
+  fullName: StreamExtended.Network.CustomBufferedStream.WriteByte(byte)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.WriteByte(Byte)
+  nameWithType: CustomBufferedStream.WriteByte(byte)
+  nameWithType.vb: CustomBufferedStream.WriteByte(Byte)
 - uid: StreamExtended.Network.CustomBufferedStream.WriteByte*
   name: WriteByte
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_WriteByte_
@@ -988,21 +1150,24 @@ references:
   fullName: StreamExtended.Network.DataEventArgs
   nameWithType: DataEventArgs
 - uid: StreamExtended.Network.DataEventArgs.#ctor(System.Byte[],System.Int32,System.Int32)
-  name: DataEventArgs(Byte[], Int32, Int32)
+  name: DataEventArgs(byte[], int, int)
   href: api/StreamExtended.Network.DataEventArgs.html#StreamExtended_Network_DataEventArgs__ctor_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.DataEventArgs.#ctor(System.Byte[],System.Int32,System.Int32)
-  name.vb: DataEventArgs(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.DataEventArgs.DataEventArgs(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.DataEventArgs.DataEventArgs(System.Byte(), System.Int32, System.Int32)
-  nameWithType: DataEventArgs.DataEventArgs(Byte[], Int32, Int32)
-  nameWithType.vb: DataEventArgs.DataEventArgs(Byte(), Int32, Int32)
+  name.vb: New(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.DataEventArgs.DataEventArgs(byte[], int, int)
+  fullName.vb: StreamExtended.Network.DataEventArgs.New(Byte(), Integer, Integer)
+  nameWithType: DataEventArgs.DataEventArgs(byte[], int, int)
+  nameWithType.vb: DataEventArgs.New(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.DataEventArgs.#ctor*
   name: DataEventArgs
   href: api/StreamExtended.Network.DataEventArgs.html#StreamExtended_Network_DataEventArgs__ctor_
   commentId: Overload:StreamExtended.Network.DataEventArgs.#ctor
   isSpec: "True"
+  name.vb: New
   fullName: StreamExtended.Network.DataEventArgs.DataEventArgs
+  fullName.vb: StreamExtended.Network.DataEventArgs.New
   nameWithType: DataEventArgs.DataEventArgs
+  nameWithType.vb: DataEventArgs.New
 - uid: StreamExtended.Network.DataEventArgs.Buffer
   name: Buffer
   href: api/StreamExtended.Network.DataEventArgs.html#StreamExtended_Network_DataEventArgs_Buffer
@@ -1101,11 +1266,14 @@ references:
   fullName: StreamExtended.Network.ICustomStreamReader.FillBufferAsync
   nameWithType: ICustomStreamReader.FillBufferAsync
 - uid: StreamExtended.Network.ICustomStreamReader.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
-  name: PeekByteAsync(Int32, CancellationToken)
+  name: PeekByteAsync(int, CancellationToken)
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekByteAsync_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.ICustomStreamReader.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
-  fullName: StreamExtended.Network.ICustomStreamReader.PeekByteAsync(System.Int32, System.Threading.CancellationToken)
-  nameWithType: ICustomStreamReader.PeekByteAsync(Int32, CancellationToken)
+  name.vb: PeekByteAsync(Integer, CancellationToken)
+  fullName: StreamExtended.Network.ICustomStreamReader.PeekByteAsync(int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.ICustomStreamReader.PeekByteAsync(Integer, System.Threading.CancellationToken)
+  nameWithType: ICustomStreamReader.PeekByteAsync(int, CancellationToken)
+  nameWithType.vb: ICustomStreamReader.PeekByteAsync(Integer, CancellationToken)
 - uid: StreamExtended.Network.ICustomStreamReader.PeekByteAsync*
   name: PeekByteAsync
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekByteAsync_
@@ -1114,11 +1282,14 @@ references:
   fullName: StreamExtended.Network.ICustomStreamReader.PeekByteAsync
   nameWithType: ICustomStreamReader.PeekByteAsync
 - uid: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer(System.Int32)
-  name: PeekByteFromBuffer(Int32)
+  name: PeekByteFromBuffer(int)
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekByteFromBuffer_System_Int32_
   commentId: M:StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer(System.Int32)
-  fullName: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer(System.Int32)
-  nameWithType: ICustomStreamReader.PeekByteFromBuffer(Int32)
+  name.vb: PeekByteFromBuffer(Integer)
+  fullName: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer(int)
+  fullName.vb: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer(Integer)
+  nameWithType: ICustomStreamReader.PeekByteFromBuffer(int)
+  nameWithType.vb: ICustomStreamReader.PeekByteFromBuffer(Integer)
 - uid: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer*
   name: PeekByteFromBuffer
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekByteFromBuffer_
@@ -1126,15 +1297,31 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.ICustomStreamReader.PeekByteFromBuffer
   nameWithType: ICustomStreamReader.PeekByteFromBuffer
+- uid: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(int, int, CancellationToken)
+  href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name.vb: PeekBytesAsync(Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync(Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: ICustomStreamReader.PeekBytesAsync(int, int, CancellationToken)
+  nameWithType.vb: ICustomStreamReader.PeekBytesAsync(Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.ICustomStreamReader.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.ICustomStreamReader.PeekBytesAsync
+  nameWithType: ICustomStreamReader.PeekBytesAsync
 - uid: StreamExtended.Network.ICustomStreamReader.Read(System.Byte[],System.Int32,System.Int32)
-  name: Read(Byte[], Int32, Int32)
+  name: Read(byte[], int, int)
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_Read_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.ICustomStreamReader.Read(System.Byte[],System.Int32,System.Int32)
-  name.vb: Read(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.ICustomStreamReader.Read(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.ICustomStreamReader.Read(System.Byte(), System.Int32, System.Int32)
-  nameWithType: ICustomStreamReader.Read(Byte[], Int32, Int32)
-  nameWithType.vb: ICustomStreamReader.Read(Byte(), Int32, Int32)
+  name.vb: Read(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.ICustomStreamReader.Read(byte[], int, int)
+  fullName.vb: StreamExtended.Network.ICustomStreamReader.Read(Byte(), Integer, Integer)
+  nameWithType: ICustomStreamReader.Read(byte[], int, int)
+  nameWithType.vb: ICustomStreamReader.Read(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.ICustomStreamReader.Read*
   name: Read
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_Read_
@@ -1143,14 +1330,14 @@ references:
   fullName: StreamExtended.Network.ICustomStreamReader.Read
   nameWithType: ICustomStreamReader.Read
 - uid: StreamExtended.Network.ICustomStreamReader.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name: ReadAsync(Byte[], Int32, Int32, CancellationToken)
+  name: ReadAsync(byte[], int, int, CancellationToken)
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.ICustomStreamReader.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name.vb: ReadAsync(Byte(), Int32, Int32, CancellationToken)
-  fullName: StreamExtended.Network.ICustomStreamReader.ReadAsync(System.Byte[], System.Int32, System.Int32, System.Threading.CancellationToken)
-  fullName.vb: StreamExtended.Network.ICustomStreamReader.ReadAsync(System.Byte(), System.Int32, System.Int32, System.Threading.CancellationToken)
-  nameWithType: ICustomStreamReader.ReadAsync(Byte[], Int32, Int32, CancellationToken)
-  nameWithType.vb: ICustomStreamReader.ReadAsync(Byte(), Int32, Int32, CancellationToken)
+  name.vb: ReadAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.ICustomStreamReader.ReadAsync(byte[], int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.ICustomStreamReader.ReadAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: ICustomStreamReader.ReadAsync(byte[], int, int, CancellationToken)
+  nameWithType.vb: ICustomStreamReader.ReadAsync(Byte(), Integer, Integer, CancellationToken)
 - uid: StreamExtended.Network.ICustomStreamReader.ReadAsync*
   name: ReadAsync
   href: api/StreamExtended.Network.ICustomStreamReader.html#StreamExtended_Network_ICustomStreamReader_ReadAsync_
@@ -1191,14 +1378,14 @@ references:
   fullName: StreamExtended.Network.ICustomStreamWriter
   nameWithType: ICustomStreamWriter
 - uid: StreamExtended.Network.ICustomStreamWriter.Write(System.Byte[],System.Int32,System.Int32)
-  name: Write(Byte[], Int32, Int32)
+  name: Write(byte[], int, int)
   href: api/StreamExtended.Network.ICustomStreamWriter.html#StreamExtended_Network_ICustomStreamWriter_Write_System_Byte___System_Int32_System_Int32_
   commentId: M:StreamExtended.Network.ICustomStreamWriter.Write(System.Byte[],System.Int32,System.Int32)
-  name.vb: Write(Byte(), Int32, Int32)
-  fullName: StreamExtended.Network.ICustomStreamWriter.Write(System.Byte[], System.Int32, System.Int32)
-  fullName.vb: StreamExtended.Network.ICustomStreamWriter.Write(System.Byte(), System.Int32, System.Int32)
-  nameWithType: ICustomStreamWriter.Write(Byte[], Int32, Int32)
-  nameWithType.vb: ICustomStreamWriter.Write(Byte(), Int32, Int32)
+  name.vb: Write(Byte(), Integer, Integer)
+  fullName: StreamExtended.Network.ICustomStreamWriter.Write(byte[], int, int)
+  fullName.vb: StreamExtended.Network.ICustomStreamWriter.Write(Byte(), Integer, Integer)
+  nameWithType: ICustomStreamWriter.Write(byte[], int, int)
+  nameWithType.vb: ICustomStreamWriter.Write(Byte(), Integer, Integer)
 - uid: StreamExtended.Network.ICustomStreamWriter.Write*
   name: Write
   href: api/StreamExtended.Network.ICustomStreamWriter.html#StreamExtended_Network_ICustomStreamWriter_Write_
@@ -1207,14 +1394,14 @@ references:
   fullName: StreamExtended.Network.ICustomStreamWriter.Write
   nameWithType: ICustomStreamWriter.Write
 - uid: StreamExtended.Network.ICustomStreamWriter.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name: WriteAsync(Byte[], Int32, Int32, CancellationToken)
+  name: WriteAsync(byte[], int, int, CancellationToken)
   href: api/StreamExtended.Network.ICustomStreamWriter.html#StreamExtended_Network_ICustomStreamWriter_WriteAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_
   commentId: M:StreamExtended.Network.ICustomStreamWriter.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)
-  name.vb: WriteAsync(Byte(), Int32, Int32, CancellationToken)
-  fullName: StreamExtended.Network.ICustomStreamWriter.WriteAsync(System.Byte[], System.Int32, System.Int32, System.Threading.CancellationToken)
-  fullName.vb: StreamExtended.Network.ICustomStreamWriter.WriteAsync(System.Byte(), System.Int32, System.Int32, System.Threading.CancellationToken)
-  nameWithType: ICustomStreamWriter.WriteAsync(Byte[], Int32, Int32, CancellationToken)
-  nameWithType.vb: ICustomStreamWriter.WriteAsync(Byte(), Int32, Int32, CancellationToken)
+  name.vb: WriteAsync(Byte(), Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.ICustomStreamWriter.WriteAsync(byte[], int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.ICustomStreamWriter.WriteAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: ICustomStreamWriter.WriteAsync(byte[], int, int, CancellationToken)
+  nameWithType.vb: ICustomStreamWriter.WriteAsync(Byte(), Integer, Integer, CancellationToken)
 - uid: StreamExtended.Network.ICustomStreamWriter.WriteAsync*
   name: WriteAsync
   href: api/StreamExtended.Network.ICustomStreamWriter.html#StreamExtended_Network_ICustomStreamWriter_WriteAsync_
@@ -1222,12 +1409,85 @@ references:
   isSpec: "True"
   fullName: StreamExtended.Network.ICustomStreamWriter.WriteAsync
   nameWithType: ICustomStreamWriter.WriteAsync
+- uid: StreamExtended.Network.IPeekStream
+  name: IPeekStream
+  href: api/StreamExtended.Network.IPeekStream.html
+  commentId: T:StreamExtended.Network.IPeekStream
+  fullName: StreamExtended.Network.IPeekStream
+  nameWithType: IPeekStream
+- uid: StreamExtended.Network.IPeekStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
+  name: PeekByteAsync(int, CancellationToken)
+  href: api/StreamExtended.Network.IPeekStream.html#StreamExtended_Network_IPeekStream_PeekByteAsync_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.IPeekStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)
+  name.vb: PeekByteAsync(Integer, CancellationToken)
+  fullName: StreamExtended.Network.IPeekStream.PeekByteAsync(int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.IPeekStream.PeekByteAsync(Integer, System.Threading.CancellationToken)
+  nameWithType: IPeekStream.PeekByteAsync(int, CancellationToken)
+  nameWithType.vb: IPeekStream.PeekByteAsync(Integer, CancellationToken)
+- uid: StreamExtended.Network.IPeekStream.PeekByteAsync*
+  name: PeekByteAsync
+  href: api/StreamExtended.Network.IPeekStream.html#StreamExtended_Network_IPeekStream_PeekByteAsync_
+  commentId: Overload:StreamExtended.Network.IPeekStream.PeekByteAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.IPeekStream.PeekByteAsync
+  nameWithType: IPeekStream.PeekByteAsync
+- uid: StreamExtended.Network.IPeekStream.PeekByteFromBuffer(System.Int32)
+  name: PeekByteFromBuffer(int)
+  href: api/StreamExtended.Network.IPeekStream.html#StreamExtended_Network_IPeekStream_PeekByteFromBuffer_System_Int32_
+  commentId: M:StreamExtended.Network.IPeekStream.PeekByteFromBuffer(System.Int32)
+  name.vb: PeekByteFromBuffer(Integer)
+  fullName: StreamExtended.Network.IPeekStream.PeekByteFromBuffer(int)
+  fullName.vb: StreamExtended.Network.IPeekStream.PeekByteFromBuffer(Integer)
+  nameWithType: IPeekStream.PeekByteFromBuffer(int)
+  nameWithType.vb: IPeekStream.PeekByteFromBuffer(Integer)
+- uid: StreamExtended.Network.IPeekStream.PeekByteFromBuffer*
+  name: PeekByteFromBuffer
+  href: api/StreamExtended.Network.IPeekStream.html#StreamExtended_Network_IPeekStream_PeekByteFromBuffer_
+  commentId: Overload:StreamExtended.Network.IPeekStream.PeekByteFromBuffer
+  isSpec: "True"
+  fullName: StreamExtended.Network.IPeekStream.PeekByteFromBuffer
+  nameWithType: IPeekStream.PeekByteFromBuffer
+- uid: StreamExtended.Network.IPeekStream.PeekBytesAsync(System.Byte[],System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: PeekBytesAsync(byte[], int, int, int, CancellationToken)
+  href: api/StreamExtended.Network.IPeekStream.html#StreamExtended_Network_IPeekStream_PeekBytesAsync_System_Byte___System_Int32_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.IPeekStream.PeekBytesAsync(System.Byte[],System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)
+  name.vb: PeekBytesAsync(Byte(), Integer, Integer, Integer, CancellationToken)
+  fullName: StreamExtended.Network.IPeekStream.PeekBytesAsync(byte[], int, int, int, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.IPeekStream.PeekBytesAsync(Byte(), Integer, Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: IPeekStream.PeekBytesAsync(byte[], int, int, int, CancellationToken)
+  nameWithType.vb: IPeekStream.PeekBytesAsync(Byte(), Integer, Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.IPeekStream.PeekBytesAsync*
+  name: PeekBytesAsync
+  href: api/StreamExtended.Network.IPeekStream.html#StreamExtended_Network_IPeekStream_PeekBytesAsync_
+  commentId: Overload:StreamExtended.Network.IPeekStream.PeekBytesAsync
+  isSpec: "True"
+  fullName: StreamExtended.Network.IPeekStream.PeekBytesAsync
+  nameWithType: IPeekStream.PeekBytesAsync
 - uid: StreamExtended.ServerHelloInfo
   name: ServerHelloInfo
   href: api/StreamExtended.ServerHelloInfo.html
   commentId: T:StreamExtended.ServerHelloInfo
   fullName: StreamExtended.ServerHelloInfo
   nameWithType: ServerHelloInfo
+- uid: StreamExtended.ServerHelloInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Byte[],System.Byte[],System.Int32,System.Int32)
+  name: ServerHelloInfo(int, int, int, byte[], byte[], int, int)
+  href: api/StreamExtended.ServerHelloInfo.html#StreamExtended_ServerHelloInfo__ctor_System_Int32_System_Int32_System_Int32_System_Byte___System_Byte___System_Int32_System_Int32_
+  commentId: M:StreamExtended.ServerHelloInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Byte[],System.Byte[],System.Int32,System.Int32)
+  name.vb: New(Integer, Integer, Integer, Byte(), Byte(), Integer, Integer)
+  fullName: StreamExtended.ServerHelloInfo.ServerHelloInfo(int, int, int, byte[], byte[], int, int)
+  fullName.vb: StreamExtended.ServerHelloInfo.New(Integer, Integer, Integer, Byte(), Byte(), Integer, Integer)
+  nameWithType: ServerHelloInfo.ServerHelloInfo(int, int, int, byte[], byte[], int, int)
+  nameWithType.vb: ServerHelloInfo.New(Integer, Integer, Integer, Byte(), Byte(), Integer, Integer)
+- uid: StreamExtended.ServerHelloInfo.#ctor*
+  name: ServerHelloInfo
+  href: api/StreamExtended.ServerHelloInfo.html#StreamExtended_ServerHelloInfo__ctor_
+  commentId: Overload:StreamExtended.ServerHelloInfo.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: StreamExtended.ServerHelloInfo.ServerHelloInfo
+  fullName.vb: StreamExtended.ServerHelloInfo.New
+  nameWithType: ServerHelloInfo.ServerHelloInfo
+  nameWithType.vb: ServerHelloInfo.New
 - uid: StreamExtended.ServerHelloInfo.CipherSuite
   name: CipherSuite
   href: api/StreamExtended.ServerHelloInfo.html#StreamExtended_ServerHelloInfo_CipherSuite
@@ -1364,12 +1624,12 @@ references:
   commentId: T:StreamExtended.SslTools
   fullName: StreamExtended.SslTools
   nameWithType: SslTools
-- uid: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  name: IsClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsClientHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
-  nameWithType: SslTools.IsClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
+- uid: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  name: IsClientHello(IPeekStream, IBufferPool, CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsClientHello_StreamExtended_Network_IPeekStream_StreamExtended_BufferPool_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.IsClientHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.IsClientHello(StreamExtended.Network.IPeekStream, StreamExtended.BufferPool.IBufferPool, System.Threading.CancellationToken)
+  nameWithType: SslTools.IsClientHello(IPeekStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.IsClientHello*
   name: IsClientHello
   href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsClientHello_
@@ -1377,12 +1637,12 @@ references:
   isSpec: "True"
   fullName: StreamExtended.SslTools.IsClientHello
   nameWithType: SslTools.IsClientHello
-- uid: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  name: IsServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsServerHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
-  nameWithType: SslTools.IsServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
+- uid: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  name: IsServerHello(IPeekStream, IBufferPool, CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsServerHello_StreamExtended_Network_IPeekStream_StreamExtended_BufferPool_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.IsServerHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.IsServerHello(StreamExtended.Network.IPeekStream, StreamExtended.BufferPool.IBufferPool, System.Threading.CancellationToken)
+  nameWithType: SslTools.IsServerHello(IPeekStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.IsServerHello*
   name: IsServerHello
   href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_IsServerHello_
@@ -1390,12 +1650,12 @@ references:
   isSpec: "True"
   fullName: StreamExtended.SslTools.IsServerHello
   nameWithType: SslTools.IsServerHello
-- uid: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  name: PeekClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekClientHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
-  nameWithType: SslTools.PeekClientHello(CustomBufferedStream, IBufferPool, CancellationToken)
+- uid: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  name: PeekClientHello(IPeekStream, IBufferPool, CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekClientHello_StreamExtended_Network_IPeekStream_StreamExtended_BufferPool_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.PeekClientHello(StreamExtended.Network.IPeekStream, StreamExtended.BufferPool.IBufferPool, System.Threading.CancellationToken)
+  nameWithType: SslTools.PeekClientHello(IPeekStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.PeekClientHello*
   name: PeekClientHello
   href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekClientHello_
@@ -1403,12 +1663,12 @@ references:
   isSpec: "True"
   fullName: StreamExtended.SslTools.PeekClientHello
   nameWithType: SslTools.PeekClientHello
-- uid: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  name: PeekServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
-  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekServerHello_StreamExtended_Network_CustomBufferedStream_StreamExtended_IBufferPool_System_Threading_CancellationToken_
-  commentId: M:StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream,StreamExtended.IBufferPool,System.Threading.CancellationToken)
-  fullName: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.CustomBufferedStream, StreamExtended.IBufferPool, System.Threading.CancellationToken)
-  nameWithType: SslTools.PeekServerHello(CustomBufferedStream, IBufferPool, CancellationToken)
+- uid: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  name: PeekServerHello(IPeekStream, IBufferPool, CancellationToken)
+  href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekServerHello_StreamExtended_Network_IPeekStream_StreamExtended_BufferPool_IBufferPool_System_Threading_CancellationToken_
+  commentId: M:StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.IPeekStream,StreamExtended.BufferPool.IBufferPool,System.Threading.CancellationToken)
+  fullName: StreamExtended.SslTools.PeekServerHello(StreamExtended.Network.IPeekStream, StreamExtended.BufferPool.IBufferPool, System.Threading.CancellationToken)
+  nameWithType: SslTools.PeekServerHello(IPeekStream, IBufferPool, CancellationToken)
 - uid: StreamExtended.SslTools.PeekServerHello*
   name: PeekServerHello
   href: api/StreamExtended.SslTools.html#StreamExtended_SslTools_PeekServerHello_
