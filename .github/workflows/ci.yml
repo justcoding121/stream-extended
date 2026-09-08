@@ -5,29 +5,27 @@ on:
     branches: [master, main, develop, beta, stable]
     paths-ignore:
       - 'docs/**'
+      - 'wiki/**'
   pull_request:
     branches: [master, main, develop, beta, stable]
     paths-ignore:
       - 'docs/**'
+      - 'wiki/**'
 
 permissions:
   contents: read
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     timeout-minutes: 30
     permissions:
-      # write: Publish Documentation (EndBug/add-and-commit) pushes DocFX output to develop.
-      contents: write
+      contents: read
       pull-requests: write
       checks: write
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      RUN_SONAR: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -38,21 +36,13 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Install DocFX
-        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
-        shell: pwsh
-        run: |
-          # Prefer the .NET tool over Chocolatey (matches titanium-web-proxy).
-          dotnet tool install --global docfx
-          Add-Content -Path $env:GITHUB_PATH -Value "$HOME/.dotnet/tools"
-
       - name: Install SonarScanner
-        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         shell: pwsh
         run: dotnet tool install --tool-path .sonar/scanner dotnet-sonarscanner
 
       - name: Install coverage tool
-        if: matrix.os == 'windows-latest'
+        if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         shell: pwsh
         run: dotnet tool install --tool-path .coverage/tools dotnet-coverage
 
@@ -63,7 +53,7 @@ jobs:
         run: dotnet build src/StreamExtended.sln --configuration Release --no-restore
 
       - name: Begin SonarCloud analysis
-        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         shell: pwsh
         run: >
           .\.sonar\scanner\dotnet-sonarscanner begin
@@ -72,30 +62,52 @@ jobs:
           /d:sonar.token="$env:SONAR_TOKEN"
           /d:sonar.host.url="https://sonarcloud.io"
           /d:sonar.cs.vscoveragexml.reportsPaths="coverage/coverage.xml"
-          /d:sonar.exclusions="**/docs/**,**/.github/**"
+          /d:sonar.exclusions="**/docs/**,**/.github/**,**/wiki/**"
 
       - name: Build for SonarCloud analysis
-        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         run: dotnet build src/StreamExtended.sln --configuration Release --no-restore --no-incremental --disable-build-servers
 
-      - name: Test
-        if: matrix.os != 'windows-latest'
-        run: dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo
-
-      - name: Test with coverage
-        if: matrix.os == 'windows-latest'
+      - name: Unit tests
         shell: pwsh
         run: |
-          dotnet test src/StreamExtended.sln --configuration Release --no-build --no-restore --nologo --collect:"Code Coverage" --results-directory coverage/unit
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $collect = $env:RUN_SONAR -eq 'true' -and $env:SONAR_TOKEN
+          $results = if ($collect) { 'coverage/unit' } else { '' }
+          .\.github\scripts\run-test-suite.ps1 `
+            -Project tests/StreamExtended.Tests/StreamExtended.Tests.csproj `
+            -ResultsDirectory $results
+
+      - name: Integration tests
+        shell: pwsh
+        run: |
+          $collect = $env:RUN_SONAR -eq 'true' -and $env:SONAR_TOKEN
+          $results = if ($collect) { 'coverage/integration' } else { '' }
+          .\.github\scripts\run-test-suite.ps1 `
+            -Project tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj `
+            -Filter 'TestCategory=Integration' `
+            -ResultsDirectory $results `
+            -Retries 2 `
+            -HangBlame
+
+      - name: E2E tests
+        shell: pwsh
+        run: |
+          $collect = $env:RUN_SONAR -eq 'true' -and $env:SONAR_TOKEN
+          $results = if ($collect) { 'coverage/e2e' } else { '' }
+          .\.github\scripts\run-test-suite.ps1 `
+            -Project tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj `
+            -Filter 'TestCategory=E2E' `
+            -ResultsDirectory $results `
+            -Retries 2 `
+            -HangBlame
 
       - name: Merge code coverage
-        if: matrix.os == 'windows-latest'
+        if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         shell: pwsh
         run: .\.coverage\tools\dotnet-coverage merge "coverage\**\*.coverage" --output coverage/coverage.xml --output-format xml
 
       - name: Complete SonarCloud analysis
-        if: matrix.os == 'windows-latest' && env.SONAR_TOKEN != ''
+        if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         shell: pwsh
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
 
@@ -127,18 +139,86 @@ jobs:
           Write-Host "Packed $($pkg.Name)"
 
       - name: Upload nupkg
-        if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
         with:
           name: streamextended-nupkg
           path: artifacts/${{ steps.ver.outputs.nupkg }}
 
+  test:
+    name: test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore src/StreamExtended.sln
+
+      - name: Build
+        run: dotnet build src/StreamExtended.sln --configuration Release --no-restore
+
+      - name: Unit tests
+        shell: pwsh
+        run: |
+          ./.github/scripts/run-test-suite.ps1 `
+            -Project tests/StreamExtended.Tests/StreamExtended.Tests.csproj
+
+      - name: Integration tests
+        shell: pwsh
+        run: |
+          ./.github/scripts/run-test-suite.ps1 `
+            -Project tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj `
+            -Filter 'TestCategory=Integration' `
+            -Retries 2 `
+            -HangBlame
+
+      - name: E2E tests
+        shell: pwsh
+        run: |
+          ./.github/scripts/run-test-suite.ps1 `
+            -Project tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj `
+            -Filter 'TestCategory=E2E' `
+            -Retries 2 `
+            -HangBlame
+
+  docs:
+    name: docs
+    needs: [build, test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install DocFX
+        shell: pwsh
+        run: |
+          # Prefer the .NET tool over Chocolatey (matches titanium-web-proxy).
+          dotnet tool install --global docfx
+          Add-Content -Path $env:GITHUB_PATH -Value "$HOME/.dotnet/tools"
+
       - name: Update Documentation
-        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
         run: docfx .github/docfx.json
 
       - name: Publish Documentation
-        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push' && github.ref == 'refs/heads/develop'
         uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9
         with:
           default_author: github_actions
@@ -152,7 +232,7 @@ jobs:
 
   publish:
     name: Publish NuGet package
-    needs: build
+    needs: [build, test]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/beta' || github.ref == 'refs/heads/stable')
     runs-on: ubuntu-latest
     timeout-minutes: 30
