@@ -95,11 +95,11 @@ public class CustomBufferedStreamCoverageTests
         await using var inner = new MemoryStream(new byte[] { 1 });
         await using var stream = new CustomBufferedStream(inner, CreatePool(), 8);
 
-        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
+        await Assert.ThrowsExactlyAsync<ArgumentOutOfRangeException>(
             () => stream.PeekByteAsync(16));
-        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(
+        await Assert.ThrowsExactlyAsync<ArgumentOutOfRangeException>(
             () => stream.PeekBytesAsync(0, 16)!);
-        await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
+        await Assert.ThrowsExactlyAsync<ArgumentOutOfRangeException>(async () =>
         {
             var into = new byte[16];
             await stream.PeekBytesAsync(into, 0, 0, 16);
@@ -112,10 +112,10 @@ public class CustomBufferedStreamCoverageTests
         using var inner = new MemoryStream(new byte[] { 1, 2 });
         using var stream = new CustomBufferedStream(inner, CreatePool(), 32);
         Assert.IsTrue(stream.FillBuffer());
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => stream.PeekByteFromBuffer(10));
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => stream.PeekByteFromBuffer(10));
         _ = stream.ReadByteFromBuffer();
         _ = stream.ReadByteFromBuffer();
-        Assert.ThrowsException<InvalidOperationException>(() => stream.ReadByteFromBuffer());
+        Assert.ThrowsExactly<InvalidOperationException>(() => stream.ReadByteFromBuffer());
     }
 
     [TestMethod]
