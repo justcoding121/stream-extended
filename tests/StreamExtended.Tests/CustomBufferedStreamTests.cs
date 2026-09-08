@@ -23,7 +23,7 @@ public class CustomBufferedStreamTests
         Assert.AreEqual(0x30, await stream.PeekByteAsync(2));
 
         var buffer = new byte[4];
-        var read = await stream.ReadAsync(buffer, 0, 4);
+        var read = await stream.ReadAsync(buffer.AsMemory(0, 4));
 
         Assert.AreEqual(4, read);
         CollectionAssert.AreEqual(payload, buffer);

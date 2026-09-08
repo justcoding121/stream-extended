@@ -10,7 +10,7 @@ namespace StreamExtended.Network
 {
     /// <summary>
     ///     A custom network stream inherited from stream
-    ///     with an underlying read buffer supporting both read/write 
+    ///     with an underlying read buffer supporting both read/write
     ///     of UTF-8 encoded string or raw bytes asynchronously from last read position.
     /// </summary>
     /// <seealso cref="System.IO.Stream" />
@@ -57,22 +57,13 @@ namespace StreamExtended.Network
             this.bufferPool = bufferPool;
         }
 
-        /// <summary>
-        /// When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
-        /// </summary>
+        /// <inheritdoc />
         public override void Flush()
         {
             baseStream.Flush();
         }
 
-        /// <summary>
-        /// When overridden in a derived class, sets the position within the current stream.
-        /// </summary>
-        /// <param name="offset">A byte offset relative to the <paramref name="origin" /> parameter.</param>
-        /// <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin" /> indicating the reference point used to obtain the new position.</param>
-        /// <returns>
-        /// The new position within the current stream.
-        /// </returns>
+        /// <inheritdoc />
         public override long Seek(long offset, SeekOrigin origin)
         {
             bufferLength = 0;
@@ -80,24 +71,13 @@ namespace StreamExtended.Network
             return baseStream.Seek(offset, origin);
         }
 
-        /// <summary>
-        /// When overridden in a derived class, sets the length of the current stream.
-        /// </summary>
-        /// <param name="value">The desired length of the current stream in bytes.</param>
+        /// <inheritdoc />
         public override void SetLength(long value)
         {
             baseStream.SetLength(value);
         }
 
-        /// <summary>
-        /// When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
-        /// </summary>
-        /// <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset" /> and (<paramref name="offset" /> + <paramref name="count" /> - 1) replaced by the bytes read from the current source.</param>
-        /// <param name="offset">The zero-based byte offset in <paramref name="buffer" /> at which to begin storing the data read from the current stream.</param>
-        /// <param name="count">The maximum number of bytes to be read from the current stream.</param>
-        /// <returns>
-        /// The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
-        /// </returns>
+        /// <inheritdoc />
         public override int Read(byte[] buffer, int offset, int count)
         {
             if (bufferLength == 0)
@@ -116,12 +96,7 @@ namespace StreamExtended.Network
             return available;
         }
 
-        /// <summary>
-        /// When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
-        /// </summary>
-        /// <param name="buffer">An array of bytes. This method copies <paramref name="count" /> bytes from <paramref name="buffer" /> to the current stream.</param>
-        /// <param name="offset">The zero-based byte offset in <paramref name="buffer" /> at which to begin copying bytes to the current stream.</param>
-        /// <param name="count">The number of bytes to be written to the current stream.</param>
+        /// <inheritdoc />
         [DebuggerStepThrough]
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -129,20 +104,12 @@ namespace StreamExtended.Network
             baseStream.Write(buffer, offset, count);
         }
 
-        /// <summary>
-        /// Asynchronously reads the bytes from the current stream and writes them to another stream, using a specified buffer size and cancellation token.
-        /// </summary>
-        /// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
-        /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 81920.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-        /// <returns>
-        /// A task that represents the asynchronous copy operation.
-        /// </returns>
-        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken = default(CancellationToken))
+        /// <inheritdoc />
+        public override async Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
         {
             if (bufferLength > 0)
             {
-                await destination.WriteAsync(streamBuffer, bufferPos, bufferLength, cancellationToken);
+                await destination.WriteAsync(streamBuffer.AsMemory(bufferPos, bufferLength), cancellationToken);
 
                 bufferLength = 0;
             }
@@ -150,49 +117,30 @@ namespace StreamExtended.Network
             await base.CopyToAsync(destination, bufferSize, cancellationToken);
         }
 
-        /// <summary>
-        /// Asynchronously clears all buffers for this stream, causes any buffered data to be written to the underlying device, and monitors cancellation requests.
-        /// </summary>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-        /// <returns>
-        /// A task that represents the asynchronous flush operation.
-        /// </returns>
-        public override Task FlushAsync(CancellationToken cancellationToken = default(CancellationToken))
+        /// <inheritdoc />
+        public override Task FlushAsync(CancellationToken cancellationToken)
         {
             return baseStream.FlushAsync(cancellationToken);
         }
 
-        /// <summary>
-        /// Asynchronously reads a sequence of bytes from the current stream,
-        /// advances the position within the stream by the number of bytes read,
-        /// and monitors cancellation requests.
-        /// </summary>
-        /// <param name="buffer">The buffer to write the data into.</param>
-        /// <param name="offset">The byte offset in <paramref name="buffer" /> at which 
-        /// to begin writing data from the stream.</param>
-        /// <param name="count">The maximum number of bytes to read.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. 
-        /// The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-        /// <returns>
-        /// A task that represents the asynchronous read operation.
-        /// The value of the parameter contains the total 
-        /// number of bytes read into the buffer.
-        /// The result value can be less than the number of bytes
-        /// requested if the number of bytes currently available is
-        /// less than the requested number, or it can be 0 (zero)
-        /// if the end of the stream has been reached.
-        /// </returns>
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
+        /// <inheritdoc />
+        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        {
+            return await ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
+        }
+
+        /// <inheritdoc />
+        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
         {
             if (bufferLength == 0)
             {
                 await FillBufferAsync(cancellationToken);
             }
 
-            int available = Math.Min(bufferLength, count);
+            int available = Math.Min(bufferLength, buffer.Length);
             if (available > 0)
             {
-                Buffer.BlockCopy(streamBuffer, bufferPos, buffer, offset, available);
+                streamBuffer.AsSpan(bufferPos, available).CopyTo(buffer.Span);
                 bufferPos += available;
                 bufferLength -= available;
             }
@@ -200,12 +148,7 @@ namespace StreamExtended.Network
             return available;
         }
 
-        /// <summary>
-        /// Reads a byte from the stream and advances the position within the stream by one byte, or returns -1 if at the end of the stream.
-        /// </summary>
-        /// <returns>
-        /// The unsigned byte cast to an Int32, or -1 if at the end of the stream.
-        /// </returns>
+        /// <inheritdoc />
         public override int ReadByte()
         {
             if (bufferLength == 0)
@@ -225,10 +168,7 @@ namespace StreamExtended.Network
         /// <summary>
         /// Peeks a byte asynchronous.
         /// </summary>
-        /// <param name="index">The index.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns></returns>
-        public async Task<int> PeekByteAsync(int index, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> PeekByteAsync(int index, CancellationToken cancellationToken = default)
         {
             while (Available <= index)
             {
@@ -238,13 +178,12 @@ namespace StreamExtended.Network
                 }
             }
 
-            //When index is greater than the buffer size
             if (streamBuffer.Length <= index)
             {
-                throw new Exception("Requested Peek index exceeds the buffer size. Consider increasing the buffer size.");
+                throw new ArgumentOutOfRangeException(nameof(index),
+                    "Requested Peek index exceeds the buffer size. Consider increasing the buffer size.");
             }
 
-            //When index is greater than the buffer size
             if (Available <= index)
             {
                 return -1;
@@ -261,11 +200,7 @@ namespace StreamExtended.Network
         /// <summary>
         /// Peeks bytes asynchronous.
         /// </summary>
-        /// <param name="index">The index.</param>
-        /// <param name="size">The number of bytes to peek.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns></returns>
-        public async Task<byte[]?> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<byte[]?> PeekBytesAsync(int index, int size, CancellationToken cancellationToken = default)
         {
             while (Available <= index + size)
             {
@@ -275,10 +210,10 @@ namespace StreamExtended.Network
                 }
             }
 
-            //When index is greater than the buffer size
             if (streamBuffer.Length <= (index + size))
             {
-                throw new Exception("Requested Peek index and size exceeds the buffer size. Consider increasing the buffer size.");
+                throw new ArgumentOutOfRangeException(nameof(size),
+                    "Requested Peek index and size exceeds the buffer size. Consider increasing the buffer size.");
             }
 
             if (Available <= (index + size))
@@ -307,7 +242,7 @@ namespace StreamExtended.Network
 
             if (streamBuffer.Length <= index + count)
             {
-                throw new Exception(
+                throw new ArgumentOutOfRangeException(nameof(count),
                     "Requested Peek index and size exceeds the buffer size. Consider increasing the buffer size.");
             }
 
@@ -324,14 +259,11 @@ namespace StreamExtended.Network
         /// <summary>
         /// Peeks a byte from buffer.
         /// </summary>
-        /// <param name="index">The index.</param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Index is out of buffer size</exception>
         public byte PeekByteFromBuffer(int index)
         {
             if (bufferLength <= index)
             {
-                throw new Exception("Index is out of buffer size");
+                throw new ArgumentOutOfRangeException(nameof(index), "Index is out of buffer size");
             }
 
             return streamBuffer[bufferPos + index];
@@ -340,41 +272,46 @@ namespace StreamExtended.Network
         /// <summary>
         /// Reads a byte from buffer.
         /// </summary>
-        /// <returns></returns>
-        /// <exception cref="Exception">Buffer is empty</exception>
         public byte ReadByteFromBuffer()
         {
             if (bufferLength == 0)
             {
-                throw new Exception("Buffer is empty");
+                throw new InvalidOperationException("Buffer is empty");
             }
 
             bufferLength--;
             return streamBuffer[bufferPos++];
         }
 
-        /// <summary>
-        /// Asynchronously writes a sequence of bytes to the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.
-        /// </summary>
-        /// <param name="buffer">The buffer to write data from.</param>
-        /// <param name="offset">The zero-based byte offset in <paramref name="buffer" /> from which to begin copying bytes to the stream.</param>
-        /// <param name="count">The maximum number of bytes to write.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-        /// <returns>
-        /// A task that represents the asynchronous write operation.
-        /// </returns>
+        /// <inheritdoc />
         [DebuggerStepThrough]
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
         {
-            OnDataWrite(buffer, offset, count);
-
-            await baseStream.WriteAsync(buffer, offset, count, cancellationToken);
+            await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
         }
 
-        /// <summary>
-        /// Writes a byte to the current position in the stream and advances the position within the stream by one byte.
-        /// </summary>
-        /// <param name="value">The byte to write to the stream.</param>
+        /// <inheritdoc />
+        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        {
+            if (!buffer.IsEmpty)
+            {
+                // Events still expose array-based buffers for compatibility.
+                if (System.Runtime.InteropServices.MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> segment)
+                    && segment.Array != null)
+                {
+                    OnDataWrite(segment.Array, segment.Offset, segment.Count);
+                }
+                else
+                {
+                    var rented = buffer.ToArray();
+                    OnDataWrite(rented, 0, rented.Length);
+                }
+            }
+
+            await baseStream.WriteAsync(buffer, cancellationToken);
+        }
+
+        /// <inheritdoc />
         public override void WriteByte(byte value)
         {
             var buffer = bufferPool.GetBuffer(BufferSize);
@@ -400,50 +337,42 @@ namespace StreamExtended.Network
             DataRead?.Invoke(this, new DataEventArgs(buffer, offset, count));
         }
 
-        /// <summary>
-        /// Releases the unmanaged resources used by the <see cref="T:System.IO.Stream" /> and optionally releases the managed resources.
-        /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
             {
                 disposed = true;
                 closed = true;
-                if (!leaveOpen)
+                if (disposing)
                 {
-                    baseStream.Dispose();
-                }
+                    if (!leaveOpen)
+                    {
+                        baseStream.Dispose();
+                    }
 
-                var buffer = streamBuffer;
-                streamBuffer = null!;
-                bufferPool.ReturnBuffer(buffer);
+                    var buffer = streamBuffer;
+                    streamBuffer = null!;
+                    bufferPool.ReturnBuffer(buffer);
+                }
             }
+
+            base.Dispose(disposing);
         }
 
-        /// <summary>
-        /// When overridden in a derived class, gets a value indicating whether the current stream supports reading.
-        /// </summary>
+        /// <inheritdoc />
         public override bool CanRead => baseStream.CanRead;
 
-        /// <summary>
-        /// When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
-        /// </summary>
+        /// <inheritdoc />
         public override bool CanSeek => baseStream.CanSeek;
 
-        /// <summary>
-        /// When overridden in a derived class, gets a value indicating whether the current stream supports writing.
-        /// </summary>
+        /// <inheritdoc />
         public override bool CanWrite => baseStream.CanWrite;
 
-        /// <summary>
-        /// Gets a value that determines whether the current stream can time out.
-        /// </summary>
+        /// <inheritdoc />
         public override bool CanTimeout => baseStream.CanTimeout;
 
-        /// <summary>
-        /// When overridden in a derived class, gets the length in bytes of the stream.
-        /// </summary>
+        /// <inheritdoc />
         public override long Length => baseStream.Length;
 
         /// <summary>
@@ -456,27 +385,21 @@ namespace StreamExtended.Network
         /// </summary>
         public int Available => bufferLength;
 
-        /// <summary>
-        /// When overridden in a derived class, gets or sets the position within the current stream.
-        /// </summary>
+        /// <inheritdoc />
         public override long Position
         {
             get => baseStream.Position;
             set => baseStream.Position = value;
         }
 
-        /// <summary>
-        /// Gets or sets a value, in miliseconds, that determines how long the stream will attempt to read before timing out.
-        /// </summary>
+        /// <inheritdoc />
         public override int ReadTimeout
         {
             get => baseStream.ReadTimeout;
             set => baseStream.ReadTimeout = value;
         }
 
-        /// <summary>
-        /// Gets or sets a value, in miliseconds, that determines how long the stream will attempt to write before timing out.
-        /// </summary>
+        /// <inheritdoc />
         public override int WriteTimeout
         {
             get => baseStream.WriteTimeout;
@@ -496,7 +419,7 @@ namespace StreamExtended.Network
             if (bufferLength > 0)
             {
                 //normally we fill the buffer only when it is empty, but sometimes we need more data
-                //move the remanining data to the beginning of the buffer 
+                //move the remanining data to the beginning of the buffer
                 Buffer.BlockCopy(streamBuffer, bufferPos, streamBuffer, 0, bufferLength);
             }
 
@@ -515,15 +438,12 @@ namespace StreamExtended.Network
             }
 
             return result;
-
         }
 
         /// <summary>
         /// Fills the buffer asynchronous.
         /// </summary>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns></returns>
-        public async Task<bool> FillBufferAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<bool> FillBufferAsync(CancellationToken cancellationToken = default)
         {
             if (closed)
             {
@@ -533,7 +453,7 @@ namespace StreamExtended.Network
             if (bufferLength > 0)
             {
                 //normally we fill the buffer only when it is empty, but sometimes we need more data
-                //move the remanining data to the beginning of the buffer 
+                //move the remanining data to the beginning of the buffer
                 Buffer.BlockCopy(streamBuffer, bufferPos, streamBuffer, 0, bufferLength);
             }
 
@@ -545,7 +465,7 @@ namespace StreamExtended.Network
 
             bufferPos = 0;
 
-            int readBytes = await baseStream.ReadAsync(streamBuffer, bufferLength, bytesToRead, cancellationToken);
+            int readBytes = await baseStream.ReadAsync(streamBuffer.AsMemory(bufferLength, bytesToRead), cancellationToken);
             bool result = readBytes > 0;
             if (result)
             {
@@ -558,14 +478,12 @@ namespace StreamExtended.Network
             }
 
             return result;
-
         }
 
         /// <summary>
         /// Read a line from the byte stream
         /// </summary>
-        /// <returns></returns>
-        public Task<string?> ReadLineAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public Task<string?> ReadLineAsync(CancellationToken cancellationToken = default)
         {
             return ReadLineInternalAsync(this, bufferPool, cancellationToken);
         }
@@ -573,10 +491,9 @@ namespace StreamExtended.Network
         /// <summary>
         /// Read a line from the byte stream
         /// </summary>
-        /// <returns></returns>
-        internal static async Task<string?> ReadLineInternalAsync(ICustomStreamReader reader, IBufferPool bufferPool, CancellationToken cancellationToken = default(CancellationToken))
+        internal static async Task<string?> ReadLineInternalAsync(ICustomStreamReader reader, IBufferPool bufferPool, CancellationToken cancellationToken = default)
         {
-            byte lastChar = default(byte);
+            byte lastChar = default;
 
             int bufferDataLength = 0;
 
@@ -629,19 +546,21 @@ namespace StreamExtended.Network
         /// <summary>
         /// Read until the last new line, ignores the result
         /// </summary>
-        /// <returns></returns>
-        public async Task ReadAndIgnoreAllLinesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task ReadAndIgnoreAllLinesAsync(CancellationToken cancellationToken = default)
         {
-            while (!string.IsNullOrEmpty(await ReadLineAsync(cancellationToken)))
+            while (true)
             {
+                var line = await ReadLineAsync(cancellationToken);
+                if (string.IsNullOrEmpty(line))
+                {
+                    break;
+                }
             }
         }
 
         /// <summary>
         /// Increase size of buffer and copy existing content to new buffer
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="size"></param>
         private static void ResizeBuffer(ref byte[] buffer, long size)
         {
             var newBuffer = new byte[size];

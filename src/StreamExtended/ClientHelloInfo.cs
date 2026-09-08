@@ -13,12 +13,6 @@ namespace StreamExtended;
 /// </summary>
 public class ClientHelloInfo
 {
-    private static readonly string[] compressions =
-    {
-        "null",
-        "DEFLATE"
-    };
-
     internal ClientHelloInfo(int handshakeVersion, int majorVersion, int minorVersion, byte[] random, byte[] sessionId,
         int[] ciphers, int clientHelloLength)
     {
@@ -39,20 +33,7 @@ public class ClientHelloInfo
 
     public byte[] Random { get; }
 
-    public DateTime Time
-    {
-        get
-        {
-            var time = DateTime.MinValue;
-            if (Random.Length > 3)
-                // RFC 5246: gmt_unix_time is the first 4 bytes of Random, big-endian.
-                time = DateTime.UnixEpoch
-                    .AddSeconds(((uint)Random[0] << 24) + ((uint)Random[1] << 16) + ((uint)Random[2] << 8) + Random[3])
-                    .ToLocalTime();
-
-            return time;
-        }
-    }
+    public DateTime Time => SslHelloFormatting.GetGmtUnixTime(Random);
 
     public byte[] SessionId { get; }
 
@@ -83,76 +64,42 @@ public class ClientHelloInfo
                 return SslProtocols.Tls12;
             }
 
+            // Map ClientHello-advertised versions for reporting only (does not enable these protocols).
+#pragma warning disable S4423
+#pragma warning disable SYSLIB0039
+#pragma warning disable 618
             if (major == 3 && minor == 2)
-#pragma warning disable SYSLIB0039 // Report the legacy protocol advertised by this ClientHello.
                 return SslProtocols.Tls11;
-#pragma warning restore SYSLIB0039
 
             if (major == 3 && minor == 1)
-#pragma warning disable SYSLIB0039 // Report the legacy protocol advertised by this ClientHello.
                 return SslProtocols.Tls;
-#pragma warning restore SYSLIB0039
 
-#pragma warning disable 618
             if (major == 3 && minor == 0)
                 return SslProtocols.Ssl3;
 
             if (major == 2 && minor == 0)
                 return SslProtocols.Ssl2;
 #pragma warning restore 618
+#pragma warning restore SYSLIB0039
+#pragma warning restore S4423
 
             return SslProtocols.None;
         }
     }
 
-    private static string SslVersionToString(int major, int minor)
-    {
-        var str = "Unknown";
-        if (major == 3 && minor == 3)
-            str = "TLS/1.2";
-        else if (major == 3 && minor == 2)
-            str = "TLS/1.1";
-        else if (major == 3 && minor == 1)
-            str = "TLS/1.0";
-        else if (major == 3 && minor == 0)
-            str = "SSL/3.0";
-        else if (major == 2 && minor == 0)
-            str = "SSL/2.0";
-
-        return $"{major}.{minor} ({str})";
-    }
-
     /// <summary>
     ///     Returns a <see cref="System.String" /> that represents this instance.
     /// </summary>
-    /// <returns>
-    ///     A <see cref="System.String" /> that represents this instance.
-    /// </returns>
     public override string ToString()
     {
         var sb = new StringBuilder();
-        sb.AppendLine(
-            $"A SSLv{HandshakeVersion}-compatible ClientHello handshake was found. The following parameters were extracted.");
-        sb.AppendLine();
-        sb.AppendLine($"Version: {SslVersionToString(MajorVersion, MinorVersion)}");
-        sb.AppendLine($"Random: {((ReadOnlySpan<byte>)Random).ByteArrayToHexString()}");
-        sb.AppendLine($"\"Time\": {Time}");
-        sb.AppendLine($"SessionID: {((ReadOnlySpan<byte>)SessionId).ByteArrayToHexString()}");
-
-        if (Extensions != null)
-        {
-            sb.AppendLine("Extensions:");
-            foreach (var extension in Extensions.Values.OrderBy(x => x.Position))
-                sb.AppendLine($"{extension.Name}: {extension.Data}");
-        }
+        SslHelloFormatting.AppendHelloPreamble(
+            sb, "ClientHello", HandshakeVersion, MajorVersion, MinorVersion, Random, SessionId);
+        SslHelloFormatting.AppendExtensions(sb, Extensions);
 
         if (CompressionData != null && CompressionData.Length > 0)
         {
-            int compressionMethod = CompressionData[0];
-            var compression = compressions.Length > compressionMethod
-                ? compressions[compressionMethod]
-                : $"unknown [0x{compressionMethod:X2}]";
-            sb.AppendLine($"Compression: {compression}");
+            sb.AppendLine($"Compression: {SslHelloFormatting.CompressionLabel(CompressionData[0])}");
         }
 
         if (Ciphers.Length > 0)
@@ -160,7 +107,10 @@ public class ClientHelloInfo
             sb.AppendLine("Ciphers:");
             foreach (var cipherSuite in Ciphers)
             {
-                if (!SslCiphers.Ciphers.TryGetValue(cipherSuite, out var cipherStr)) cipherStr = "unknown";
+                if (!SslCiphers.Ciphers.TryGetValue(cipherSuite, out var cipherStr))
+                {
+                    cipherStr = "unknown";
+                }
 
                 sb.AppendLine($"[0x{cipherSuite:X4}] {cipherStr}");
             }

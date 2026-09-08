@@ -27,10 +27,6 @@ public static class SslTools
     /// <summary>
     ///     Peek the SSL client hello information.
     /// </summary>
-    /// <param name="clientStream"></param>
-    /// <param name="bufferPool"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     public static async Task<ClientHelloInfo?> PeekClientHello(IPeekStream clientStream, IBufferPool bufferPool,
         CancellationToken cancellationToken = default)
     {
@@ -38,132 +34,171 @@ public static class SslTools
         // https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
         var recordType = await clientStream.PeekByteAsync(0, cancellationToken);
-        if (recordType == -1) return null;
+        if (recordType == -1)
+        {
+            return null;
+        }
 
         if ((recordType & 0x80) == 0x80)
         {
-            // SSL 2
-            var peekStream = new PeekStreamReader(clientStream, 1);
-
-            // length value + minimum length
-            if (!await peekStream.EnsureBufferLength(10, cancellationToken)) return null;
-
-            var recordLength = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
-            if (recordLength < 9)
-                // Message body too short.
-                return null;
-
-            if (peekStream.ReadByte() != 0x01)
-                // should be ClientHello
-                return null;
-
-            var majorVersion = peekStream.ReadByte();
-            var minorVersion = peekStream.ReadByte();
-
-            var cipherSpecsLength = peekStream.ReadInt16();
-            var sessionIdLength = peekStream.ReadInt16();
-            var randomLength = peekStream.ReadInt16();
-
-            if (cipherSpecsLength % 3 != 0)
-                return null;
-
-            var payloadLength = cipherSpecsLength + sessionIdLength + randomLength;
-            if (payloadLength > 0 &&
-                !await peekStream.EnsureBufferLength(payloadLength, cancellationToken))
-                return null;
-
-            var ciphersCount = cipherSpecsLength / 3;
-            var ciphers = new int[ciphersCount];
-            for (var i = 0; i < ciphers.Length; i++)
-                ciphers[i] = (peekStream.ReadByte() << 16) + (peekStream.ReadByte() << 8) + peekStream.ReadByte();
-
-            var sessionId = sessionIdLength > 0 ? peekStream.ReadBytes(sessionIdLength) : Array.Empty<byte>();
-            var random = randomLength > 0 ? peekStream.ReadBytes(randomLength) : Array.Empty<byte>();
-
-            var clientHelloInfo = new ClientHelloInfo(2, majorVersion, minorVersion, random, sessionId, ciphers,
-                peekStream.Position);
-
-            return clientHelloInfo;
+            return await PeekSsl2ClientHello(clientStream, recordType, cancellationToken);
         }
 
         if (recordType == 0x16)
         {
-            var peekStream = new PeekStreamReader(clientStream, 1);
-
-            // should contain at least 43 bytes
-            // 2 version + 2 length + 1 type + 3 length(?) + 2 version +  32 random + 1 sessionid length
-            if (!await peekStream.EnsureBufferLength(43, cancellationToken)) return null;
-
-            // SSL 3.0 or TLS 1.0, 1.1 and 1.2
-            _ = peekStream.ReadByte();
-            _ = peekStream.ReadByte();
-
-            var recordLength = peekStream.ReadInt16();
-
-            if (peekStream.ReadByte() != 0x01)
-                // should be ClientHello
-                return null;
-
-            _ = peekStream.ReadInt24();
-
-            var majorVersion = peekStream.ReadByte();
-            var minorVersion = peekStream.ReadByte();
-
-            var random = peekStream.ReadBytes(32);
-            var length = peekStream.ReadByte();
-
-            // sessionid + 2 ciphersData length
-            if (!await peekStream.EnsureBufferLength(length + 2, cancellationToken)) return null;
-
-            var sessionId = peekStream.ReadBytes(length);
-
-            var ciphersLength = peekStream.ReadInt16();
-            if ((ciphersLength & 1) != 0)
-                return null;
-
-            // ciphersData + compressionData length
-            if (!await peekStream.EnsureBufferLength(ciphersLength + 1, cancellationToken)) return null;
-
-            var ciphers = new int[ciphersLength / 2];
-            for (var i = 0; i < ciphers.Length; i++) ciphers[i] = peekStream.ReadInt16();
-
-            length = peekStream.ReadByte();
-            if (length < 1) return null;
-
-            // compressionData
-            if (!await peekStream.EnsureBufferLength(length, cancellationToken)) return null;
-
-            var compressionData = peekStream.ReadBytes(length);
-
-            var extensionsStartPosition = peekStream.Position;
-
-            Dictionary<string, SslExtension>? extensions = null;
-
-            if (extensionsStartPosition < recordLength + 5)
-                extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, cancellationToken);
-
-            var clientHelloInfo = new ClientHelloInfo(3, majorVersion, minorVersion, random, sessionId, ciphers,
-                peekStream.Position)
-            {
-                ExtensionsStartPosition = extensionsStartPosition,
-                CompressionData = compressionData,
-                Extensions = extensions
-            };
-
-            return clientHelloInfo;
+            return await PeekTlsClientHello(clientStream, cancellationToken);
         }
 
         return null;
     }
 
+    private static async Task<ClientHelloInfo?> PeekSsl2ClientHello(IPeekStream clientStream, int recordType,
+        CancellationToken cancellationToken)
+    {
+        var peekStream = new PeekStreamReader(clientStream, 1);
+
+        // length value + minimum length
+        if (!await peekStream.EnsureBufferLength(10, cancellationToken))
+        {
+            return null;
+        }
+
+        var recordLength = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
+        if (recordLength < 9)
+        {
+            // Message body too short.
+            return null;
+        }
+
+        if (peekStream.ReadByte() != 0x01)
+        {
+            // should be ClientHello
+            return null;
+        }
+
+        var majorVersion = peekStream.ReadByte();
+        var minorVersion = peekStream.ReadByte();
+
+        var cipherSpecsLength = peekStream.ReadInt16();
+        var sessionIdLength = peekStream.ReadInt16();
+        var randomLength = peekStream.ReadInt16();
+
+        if (cipherSpecsLength % 3 != 0)
+        {
+            return null;
+        }
+
+        var payloadLength = cipherSpecsLength + sessionIdLength + randomLength;
+        if (payloadLength > 0 &&
+            !await peekStream.EnsureBufferLength(payloadLength, cancellationToken))
+        {
+            return null;
+        }
+
+        var ciphers = new int[cipherSpecsLength / 3];
+        for (var i = 0; i < ciphers.Length; i++)
+        {
+            ciphers[i] = (peekStream.ReadByte() << 16) + (peekStream.ReadByte() << 8) + peekStream.ReadByte();
+        }
+
+        var sessionId = sessionIdLength > 0 ? peekStream.ReadBytes(sessionIdLength) : Array.Empty<byte>();
+        var random = randomLength > 0 ? peekStream.ReadBytes(randomLength) : Array.Empty<byte>();
+
+        return new ClientHelloInfo(2, majorVersion, minorVersion, random, sessionId, ciphers, peekStream.Position);
+    }
+
+    private static async Task<ClientHelloInfo?> PeekTlsClientHello(IPeekStream clientStream,
+        CancellationToken cancellationToken)
+    {
+        var peekStream = new PeekStreamReader(clientStream, 1);
+
+        // should contain at least 43 bytes
+        // 2 version + 2 length + 1 type + 3 length(?) + 2 version +  32 random + 1 sessionid length
+        if (!await peekStream.EnsureBufferLength(43, cancellationToken))
+        {
+            return null;
+        }
+
+        // SSL 3.0 or TLS 1.0, 1.1 and 1.2
+        _ = peekStream.ReadByte();
+        _ = peekStream.ReadByte();
+
+        var recordLength = peekStream.ReadInt16();
+
+        if (peekStream.ReadByte() != 0x01)
+        {
+            // should be ClientHello
+            return null;
+        }
+
+        _ = peekStream.ReadInt24();
+
+        var majorVersion = peekStream.ReadByte();
+        var minorVersion = peekStream.ReadByte();
+
+        var random = peekStream.ReadBytes(32);
+        var length = peekStream.ReadByte();
+
+        // sessionid + 2 ciphersData length
+        if (!await peekStream.EnsureBufferLength(length + 2, cancellationToken))
+        {
+            return null;
+        }
+
+        var sessionId = peekStream.ReadBytes(length);
+
+        var ciphersLength = peekStream.ReadInt16();
+        if ((ciphersLength & 1) != 0)
+        {
+            return null;
+        }
+
+        // ciphersData + compressionData length
+        if (!await peekStream.EnsureBufferLength(ciphersLength + 1, cancellationToken))
+        {
+            return null;
+        }
+
+        var ciphers = new int[ciphersLength / 2];
+        for (var i = 0; i < ciphers.Length; i++)
+        {
+            ciphers[i] = peekStream.ReadInt16();
+        }
+
+        length = peekStream.ReadByte();
+        if (length < 1)
+        {
+            return null;
+        }
+
+        // compressionData
+        if (!await peekStream.EnsureBufferLength(length, cancellationToken))
+        {
+            return null;
+        }
+
+        var compressionData = peekStream.ReadBytes(length);
+
+        var extensionsStartPosition = peekStream.Position;
+
+        Dictionary<string, SslExtension>? extensions = null;
+
+        if (extensionsStartPosition < recordLength + 5)
+        {
+            extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, cancellationToken);
+        }
+
+        return new ClientHelloInfo(3, majorVersion, minorVersion, random, sessionId, ciphers, peekStream.Position)
+        {
+            ExtensionsStartPosition = extensionsStartPosition,
+            CompressionData = compressionData,
+            Extensions = extensions
+        };
+    }
 
     /// <summary>
     ///     Is the given stream starts with an SSL server hello?
     /// </summary>
-    /// <param name="stream"></param>
-    /// <param name="bufferPool"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     public static async Task<bool> IsServerHello(IPeekStream stream, IBufferPool bufferPool,
         CancellationToken cancellationToken)
     {
@@ -174,10 +209,6 @@ public static class SslTools
     /// <summary>
     ///     Peek the SSL server hello information.
     /// </summary>
-    /// <param name="serverStream"></param>
-    /// <param name="bufferPool"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     public static async Task<ServerHelloInfo?> PeekServerHello(IPeekStream serverStream, IBufferPool bufferPool,
         CancellationToken cancellationToken = default)
     {
@@ -185,120 +216,156 @@ public static class SslTools
         // https://stackoverflow.com/questions/3897883/how-to-detect-an-incoming-ssl-https-handshake-ssl-wire-format
 
         var recordType = await serverStream.PeekByteAsync(0, cancellationToken);
-        if (recordType == -1) return null;
+        if (recordType == -1)
+        {
+            return null;
+        }
 
         if ((recordType & 0x80) == 0x80)
         {
-            // SSL 2 SERVER-HELLO layout (deprecated):
-            // SESSION-ID-HIT, CERTIFICATE-TYPE, VERSION(2),
-            // CERTIFICATE-LENGTH(2), CIPHER-SPECS-LENGTH(2), CONNECTION-ID-LENGTH(2),
-            // then certificate, 3-byte cipher-specs, connection-id.
-            var peekStream = new PeekStreamReader(serverStream, 1);
-
-            // length byte + msg type + 10-byte fixed header
-            if (!await peekStream.EnsureBufferLength(12, cancellationToken)) return null;
-
-            var recordLength = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
-            if (recordLength < 11)
-                // Message body too short.
-                return null;
-
-            if (peekStream.ReadByte() != 0x04)
-                // should be ServerHello
-                return null;
-
-            _ = peekStream.ReadByte(); // SESSION-ID-HIT
-            _ = peekStream.ReadByte(); // CERTIFICATE-TYPE
-            var majorVersion = peekStream.ReadByte();
-            var minorVersion = peekStream.ReadByte();
-
-            var certificateLength = peekStream.ReadInt16();
-            var cipherSpecsLength = peekStream.ReadInt16();
-            var connectionIdLength = peekStream.ReadInt16();
-
-            if (cipherSpecsLength % 3 != 0)
-                return null;
-
-            var payloadLength = certificateLength + cipherSpecsLength + connectionIdLength;
-            if (payloadLength > 0 &&
-                !await peekStream.EnsureBufferLength(payloadLength, cancellationToken))
-                return null;
-
-            if (certificateLength > 0)
-                _ = peekStream.ReadBytes(certificateLength);
-
-            var cipherSuite = 0;
-            if (cipherSpecsLength >= 3)
-            {
-                cipherSuite = (peekStream.ReadByte() << 16) + (peekStream.ReadByte() << 8) + peekStream.ReadByte();
-                if (cipherSpecsLength > 3)
-                    _ = peekStream.ReadBytes(cipherSpecsLength - 3);
-            }
-
-            var sessionId = connectionIdLength > 0
-                ? peekStream.ReadBytes(connectionIdLength)
-                : Array.Empty<byte>();
-
-            // SSL 2 has no TLS-style 32-byte random field.
-            var serverHelloInfo = new ServerHelloInfo(2, majorVersion, minorVersion, Array.Empty<byte>(), sessionId,
-                cipherSuite, peekStream.Position);
-
-            return serverHelloInfo;
+            return await PeekSsl2ServerHello(serverStream, recordType, cancellationToken);
         }
 
         if (recordType == 0x16)
         {
-            var peekStream = new PeekStreamReader(serverStream, 1);
-
-            // should contain at least 43 bytes
-            // 2 version + 2 length + 1 type + 3 length(?) + 2 version +  32 random + 1 sessionid length
-            if (!await peekStream.EnsureBufferLength(43, cancellationToken)) return null;
-
-            // SSL 3.0 or TLS 1.0, 1.1 and 1.2
-            _ = peekStream.ReadByte();
-            _ = peekStream.ReadByte();
-
-            var recordLength = peekStream.ReadInt16();
-
-            if (peekStream.ReadByte() != 0x02)
-                // should be ServerHello
-                return null;
-
-            _ = peekStream.ReadInt24();
-
-            var majorVersion = peekStream.ReadByte();
-            var minorVersion = peekStream.ReadByte();
-
-            var random = peekStream.ReadBytes(32);
-            var length = peekStream.ReadByte();
-
-            // sessionid + cipherSuite + compressionMethod
-            if (!await peekStream.EnsureBufferLength(length + 2 + 1, cancellationToken)) return null;
-
-            var sessionId = peekStream.ReadBytes(length);
-
-            var cipherSuite = peekStream.ReadInt16();
-            var compressionMethod = peekStream.ReadByte();
-
-            var extensionsStartPosition = peekStream.Position;
-
-            Dictionary<string, SslExtension>? extensions = null;
-
-            if (extensionsStartPosition < recordLength + 5)
-                extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, cancellationToken);
-
-            var serverHelloInfo = new ServerHelloInfo(3, majorVersion, minorVersion, random, sessionId, cipherSuite,
-                peekStream.Position)
-            {
-                CompressionMethod = compressionMethod,
-                ExtensionsStartPosition = extensionsStartPosition,
-                Extensions = extensions
-            };
-
-            return serverHelloInfo;
+            return await PeekTlsServerHello(serverStream, cancellationToken);
         }
 
         return null;
+    }
+
+    private static async Task<ServerHelloInfo?> PeekSsl2ServerHello(IPeekStream serverStream, int recordType,
+        CancellationToken cancellationToken)
+    {
+        // SSL 2 SERVER-HELLO layout (deprecated):
+        // SESSION-ID-HIT, CERTIFICATE-TYPE, VERSION(2),
+        // CERTIFICATE-LENGTH(2), CIPHER-SPECS-LENGTH(2), CONNECTION-ID-LENGTH(2),
+        // then certificate, 3-byte cipher-specs, connection-id.
+        var peekStream = new PeekStreamReader(serverStream, 1);
+
+        // length byte + msg type + 10-byte fixed header
+        if (!await peekStream.EnsureBufferLength(12, cancellationToken))
+        {
+            return null;
+        }
+
+        var recordLength = ((recordType & 0x7f) << 8) + peekStream.ReadByte();
+        if (recordLength < 11)
+        {
+            // Message body too short.
+            return null;
+        }
+
+        if (peekStream.ReadByte() != 0x04)
+        {
+            // should be ServerHello
+            return null;
+        }
+
+        _ = peekStream.ReadByte(); // SESSION-ID-HIT
+        _ = peekStream.ReadByte(); // CERTIFICATE-TYPE
+        var majorVersion = peekStream.ReadByte();
+        var minorVersion = peekStream.ReadByte();
+
+        var certificateLength = peekStream.ReadInt16();
+        var cipherSpecsLength = peekStream.ReadInt16();
+        var connectionIdLength = peekStream.ReadInt16();
+
+        if (cipherSpecsLength % 3 != 0)
+        {
+            return null;
+        }
+
+        var payloadLength = certificateLength + cipherSpecsLength + connectionIdLength;
+        if (payloadLength > 0 &&
+            !await peekStream.EnsureBufferLength(payloadLength, cancellationToken))
+        {
+            return null;
+        }
+
+        if (certificateLength > 0)
+        {
+            _ = peekStream.ReadBytes(certificateLength);
+        }
+
+        var cipherSuite = 0;
+        if (cipherSpecsLength >= 3)
+        {
+            cipherSuite = (peekStream.ReadByte() << 16) + (peekStream.ReadByte() << 8) + peekStream.ReadByte();
+            if (cipherSpecsLength > 3)
+            {
+                _ = peekStream.ReadBytes(cipherSpecsLength - 3);
+            }
+        }
+
+        var sessionId = connectionIdLength > 0
+            ? peekStream.ReadBytes(connectionIdLength)
+            : Array.Empty<byte>();
+
+        // SSL 2 has no TLS-style 32-byte random field.
+        return new ServerHelloInfo(2, majorVersion, minorVersion, Array.Empty<byte>(), sessionId,
+            cipherSuite, peekStream.Position);
+    }
+
+    private static async Task<ServerHelloInfo?> PeekTlsServerHello(IPeekStream serverStream,
+        CancellationToken cancellationToken)
+    {
+        var peekStream = new PeekStreamReader(serverStream, 1);
+
+        // should contain at least 43 bytes
+        // 2 version + 2 length + 1 type + 3 length(?) + 2 version +  32 random + 1 sessionid length
+        if (!await peekStream.EnsureBufferLength(43, cancellationToken))
+        {
+            return null;
+        }
+
+        // SSL 3.0 or TLS 1.0, 1.1 and 1.2
+        _ = peekStream.ReadByte();
+        _ = peekStream.ReadByte();
+
+        var recordLength = peekStream.ReadInt16();
+
+        if (peekStream.ReadByte() != 0x02)
+        {
+            // should be ServerHello
+            return null;
+        }
+
+        _ = peekStream.ReadInt24();
+
+        var majorVersion = peekStream.ReadByte();
+        var minorVersion = peekStream.ReadByte();
+
+        var random = peekStream.ReadBytes(32);
+        var length = peekStream.ReadByte();
+
+        // sessionid + cipherSuite + compressionMethod
+        if (!await peekStream.EnsureBufferLength(length + 2 + 1, cancellationToken))
+        {
+            return null;
+        }
+
+        var sessionId = peekStream.ReadBytes(length);
+
+        var cipherSuite = peekStream.ReadInt16();
+        var compressionMethod = peekStream.ReadByte();
+
+        var extensionsStartPosition = peekStream.Position;
+
+        Dictionary<string, SslExtension>? extensions = null;
+
+        if (extensionsStartPosition < recordLength + 5)
+        {
+            extensions = await ReadExtensions(majorVersion, minorVersion, peekStream, cancellationToken);
+        }
+
+        return new ServerHelloInfo(3, majorVersion, minorVersion, random, sessionId, cipherSuite,
+            peekStream.Position)
+        {
+            CompressionMethod = compressionMethod,
+            ExtensionsStartPosition = extensionsStartPosition,
+            Extensions = extensions
+        };
     }
 
     private static async Task<Dictionary<string, SslExtension>?> ReadExtensions(int majorVersion, int minorVersion,
@@ -321,8 +388,10 @@ public static class SslTools
                     var id = BinaryPrimitives.ReadUInt16BigEndian(extensionsData.Span);
                     var length = BinaryPrimitives.ReadUInt16BigEndian(extensionsData.Span.Slice(2));
                     if (extensionsData.Length < 4 + length)
-                        // Truncated or oversize extension  keep extensions parsed so far.
+                    {
+                        // Truncated or oversize extension — keep extensions parsed so far.
                         break;
+                    }
 
                     var extension = new SslExtension(id, extensionsData.Slice(4, length), idx++);
                     extensions[extension.Name] = extension;
