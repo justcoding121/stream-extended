@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -6,7 +6,7 @@
     <LangVersion>latest</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <VersionPrefix>2.0.2</VersionPrefix>
     <Authors>justcoding121</Authors>
     <Description>Peek TLS ClientHello/ServerHello (SNI, ALPN, extensions) from a stream before SslStream authentication.</Description>
     <PackageId>StreamExtended</PackageId>
