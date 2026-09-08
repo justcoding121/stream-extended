@@ -23,7 +23,19 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Check wiki repository exists
+        id: wiki
+        shell: bash
+        run: |
+          if git ls-remote "https://github.com/${GITHUB_REPOSITORY}.wiki.git" HEAD >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::GitHub wiki is not initialized. Open https://github.com/${GITHUB_REPOSITORY}/wiki, create the first page once, then re-run this workflow."
+          fi
+
       - name: Publish wiki
+        if: steps.wiki.outputs.exists == 'true'
         uses: Andrew-Chen-Wang/github-wiki-action@1bbb4280446f9630e8e21a18012cbacf3b0f992e # v5
         with:
           path: wiki
