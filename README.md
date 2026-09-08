@@ -79,6 +79,7 @@ dotnet test src/StreamExtended.sln -c Release
 dotnet test tests/StreamExtended.Tests/StreamExtended.Tests.csproj -c Release
 dotnet test tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj -c Release --filter TestCategory=Integration
 dotnet test tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj -c Release --filter TestCategory=E2E
+dotnet run --project examples/StreamExtended.Peek.Example -c Release
 dotnet pack src/StreamExtended/StreamExtended.csproj -c Release
 ```
 

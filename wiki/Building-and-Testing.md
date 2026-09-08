@@ -21,6 +21,12 @@ dotnet test tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Te
 dotnet test tests/StreamExtended.Integration.Tests/StreamExtended.Integration.Tests.csproj -c Release --filter TestCategory=E2E
 ```
 
+Peek + handshake demo (loopback ClientHello SNI/ALPN, then `SslStream`):
+
+```bash
+dotnet run --project examples/StreamExtended.Peek.Example -c Release
+```
+
 ```bash
 dotnet pack src/StreamExtended/StreamExtended.csproj -c Release
 ```
