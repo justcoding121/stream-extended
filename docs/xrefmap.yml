@@ -448,6 +448,15 @@ references:
   commentId: M:StreamExtended.Network.CopyStream.Dispose
   fullName: StreamExtended.Network.CopyStream.Dispose()
   nameWithType: CopyStream.Dispose()
+- uid: StreamExtended.Network.CopyStream.Dispose(System.Boolean)
+  name: Dispose(bool)
+  href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_Dispose_System_Boolean_
+  commentId: M:StreamExtended.Network.CopyStream.Dispose(System.Boolean)
+  name.vb: Dispose(Boolean)
+  fullName: StreamExtended.Network.CopyStream.Dispose(bool)
+  fullName.vb: StreamExtended.Network.CopyStream.Dispose(Boolean)
+  nameWithType: CopyStream.Dispose(bool)
+  nameWithType.vb: CopyStream.Dispose(Boolean)
 - uid: StreamExtended.Network.CopyStream.Dispose*
   name: Dispose
   href: api/StreamExtended.Network.CopyStream.html#StreamExtended_Network_CopyStream_Dispose_
@@ -991,6 +1000,15 @@ references:
   fullName.vb: StreamExtended.Network.CustomBufferedStream.ReadAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
   nameWithType: CustomBufferedStream.ReadAsync(byte[], int, int, CancellationToken)
   nameWithType.vb: CustomBufferedStream.ReadAsync(Byte(), Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  name: ReadAsync(Memory<byte>, CancellationToken)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Memory_System_Byte__System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)
+  name.vb: ReadAsync(Memory(Of Byte), CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Memory<byte>, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Memory(Of Byte), System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.ReadAsync(Memory<byte>, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.ReadAsync(Memory(Of Byte), CancellationToken)
 - uid: StreamExtended.Network.CustomBufferedStream.ReadAsync*
   name: ReadAsync
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_ReadAsync_
@@ -1107,6 +1125,15 @@ references:
   fullName.vb: StreamExtended.Network.CustomBufferedStream.WriteAsync(Byte(), Integer, Integer, System.Threading.CancellationToken)
   nameWithType: CustomBufferedStream.WriteAsync(byte[], int, int, CancellationToken)
   nameWithType.vb: CustomBufferedStream.WriteAsync(Byte(), Integer, Integer, CancellationToken)
+- uid: StreamExtended.Network.CustomBufferedStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+  name: WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_
+  commentId: M:StreamExtended.Network.CustomBufferedStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)
+  name.vb: WriteAsync(ReadOnlyMemory(Of Byte), CancellationToken)
+  fullName: StreamExtended.Network.CustomBufferedStream.WriteAsync(System.ReadOnlyMemory<byte>, System.Threading.CancellationToken)
+  fullName.vb: StreamExtended.Network.CustomBufferedStream.WriteAsync(System.ReadOnlyMemory(Of Byte), System.Threading.CancellationToken)
+  nameWithType: CustomBufferedStream.WriteAsync(ReadOnlyMemory<byte>, CancellationToken)
+  nameWithType.vb: CustomBufferedStream.WriteAsync(ReadOnlyMemory(Of Byte), CancellationToken)
 - uid: StreamExtended.Network.CustomBufferedStream.WriteAsync*
   name: WriteAsync
   href: api/StreamExtended.Network.CustomBufferedStream.html#StreamExtended_Network_CustomBufferedStream_WriteAsync_

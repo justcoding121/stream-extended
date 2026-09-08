@@ -157,9 +157,6 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-byte()-system-int32-system-int32)">Stream.ReadAsync(byte[], int, int)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-memory((system-byte))-system-threading-cancellationtoken)">Stream.ReadAsync(Memory&lt;byte&gt;, CancellationToken)</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast(Span&lt;byte&gt;, int, bool)</a>
     </div>
     <div>
@@ -191,9 +188,6 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-byte()-system-int32-system-int32)">Stream.WriteAsync(byte[], int, int)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-readonlymemory((system-byte))-system-threading-cancellationtoken)">Stream.WriteAsync(ReadOnlyMemory&lt;byte&gt;, CancellationToken)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.marshalbyrefobject.getlifetimeservice">MarshalByRefObject.GetLifetimeService()</a>
@@ -293,7 +287,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Available.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Available%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L457">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L386">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Available_" data-uid="StreamExtended.Network.CustomBufferedStream.Available*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Available" data-uid="StreamExtended.Network.CustomBufferedStream.Available">Available</h4>
@@ -354,7 +348,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_CanRead.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.CanRead%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L427">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L364">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_CanRead_" data-uid="StreamExtended.Network.CustomBufferedStream.CanRead*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_CanRead" data-uid="StreamExtended.Network.CustomBufferedStream.CanRead">CanRead</h4>
@@ -376,7 +370,8 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the stream supports reading; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -387,7 +382,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_CanSeek.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.CanSeek%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L432">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L367">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_CanSeek_" data-uid="StreamExtended.Network.CustomBufferedStream.CanSeek*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_CanSeek" data-uid="StreamExtended.Network.CustomBufferedStream.CanSeek">CanSeek</h4>
@@ -409,7 +404,8 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the stream supports seeking; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -420,7 +416,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_CanTimeout.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.CanTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L442">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L373">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_CanTimeout_" data-uid="StreamExtended.Network.CustomBufferedStream.CanTimeout*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_CanTimeout" data-uid="StreamExtended.Network.CustomBufferedStream.CanTimeout">CanTimeout</h4>
@@ -442,7 +438,8 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
+        <td><p>A value that determines whether the current stream can time out.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -453,7 +450,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_CanWrite.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.CanWrite%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L437">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L370">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_CanWrite_" data-uid="StreamExtended.Network.CustomBufferedStream.CanWrite*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_CanWrite" data-uid="StreamExtended.Network.CustomBufferedStream.CanWrite">CanWrite</h4>
@@ -475,7 +472,8 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the stream supports writing; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -486,7 +484,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_DataAvailable.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.DataAvailable%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L452">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L381">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_DataAvailable_" data-uid="StreamExtended.Network.CustomBufferedStream.DataAvailable*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_DataAvailable" data-uid="StreamExtended.Network.CustomBufferedStream.DataAvailable">DataAvailable</h4>
@@ -547,7 +545,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Length.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Length%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L447">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L376">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Length_" data-uid="StreamExtended.Network.CustomBufferedStream.Length*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Length" data-uid="StreamExtended.Network.CustomBufferedStream.Length">Length</h4>
@@ -569,18 +567,40 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
-        <td></td>
+        <td><p>A long value representing the length of the stream in bytes.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.length">Stream.Length</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>A class derived from <code>Stream</code> does not support seeking and the length is unknown.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Position.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Position%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L462">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L389">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Position_" data-uid="StreamExtended.Network.CustomBufferedStream.Position*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Position" data-uid="StreamExtended.Network.CustomBufferedStream.Position">Position</h4>
@@ -602,22 +622,49 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></td>
-        <td></td>
+        <td><p>The current position within the stream.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.position">Stream.Position</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support seeking.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadTimeout.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L471">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L396">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_ReadTimeout_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadTimeout*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadTimeout" data-uid="StreamExtended.Network.CustomBufferedStream.ReadTimeout">ReadTimeout</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value, in miliseconds, that determines how long the stream will attempt to read before timing out.</p>
+  <div class="markdown level1 summary"><p>Gets or sets a value, in milliseconds, that determines how long the stream will attempt to read before timing out.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -635,22 +682,39 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td></td>
+        <td><p>A value, in milliseconds, that determines how long the stream will attempt to read before timing out.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readtimeout">Stream.ReadTimeout</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readtimeout">ReadTimeout</a> method always throws an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_WriteTimeout.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.WriteTimeout%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L480">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L403">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_WriteTimeout_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteTimeout*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_WriteTimeout" data-uid="StreamExtended.Network.CustomBufferedStream.WriteTimeout">WriteTimeout</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a value, in miliseconds, that determines how long the stream will attempt to write before timing out.</p>
+  <div class="markdown level1 summary"><p>Gets or sets a value, in milliseconds, that determines how long the stream will attempt to write before timing out.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -668,12 +732,29 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td></td>
+        <td><p>A value, in milliseconds, that determines how long the stream will attempt to write before timing out.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writetimeout">Stream.WriteTimeout</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writetimeout">WriteTimeout</a> method always throws an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
 </h3>
   <span class="small pull-right mobile-hide">
@@ -681,16 +762,16 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_CopyToAsync_System_IO_Stream_System_Int32_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream%2CSystem.Int32%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L141">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L108">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_CopyToAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.CopyToAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_CopyToAsync_System_IO_Stream_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">CopyToAsync(Stream, int, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously reads the bytes from the current stream and writes them to another stream, using a specified buffer size and cancellation token.</p>
+  <div class="markdown level1 summary"><p>Asynchronously reads the bytes from the current stream and writes them to another stream, using a specified buffer size and cancellation token. Both streams positions are advanced by the number of bytes copied.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -740,12 +821,48 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.copytoasync#system-io-stream-copytoasync(system-io-stream-system-int32-system-threading-cancellationtoken)">Stream.CopyToAsync(Stream, int, CancellationToken)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p><code class="paramref">destination</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
+        <td><p><code class="paramref">bufferSize</code> is negative or zero.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Either the current stream or the destination stream is disposed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The current stream does not support reading, or the destination stream does not support writing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The cancellation token was canceled. This exception is stored into the returned task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L407">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L341">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Dispose_" data-uid="StreamExtended.Network.CustomBufferedStream.Dispose*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Dispose_System_Boolean_" data-uid="StreamExtended.Network.CustomBufferedStream.Dispose(System.Boolean)">Dispose(bool)</h4>
@@ -769,7 +886,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
         <td><span class="parametername">disposing</span></td>
-        <td><p>true to release both managed and unmanaged resources; false to release only unmanaged resources.</p>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> to release both managed and unmanaged resources; <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> to release only unmanaged resources.</p>
 </td>
       </tr>
     </tbody>
@@ -781,7 +898,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_FillBuffer.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.FillBuffer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L489">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L412">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_FillBuffer_" data-uid="StreamExtended.Network.CustomBufferedStream.FillBuffer*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_FillBuffer" data-uid="StreamExtended.Network.CustomBufferedStream.FillBuffer">FillBuffer()</h4>
@@ -812,7 +929,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_FillBufferAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.FillBufferAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L526">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L446">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_FillBufferAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.FillBufferAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_FillBufferAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.FillBufferAsync(System.Threading.CancellationToken)">FillBufferAsync(CancellationToken)</h4>
@@ -836,8 +953,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td><p>The cancellation token.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -861,7 +977,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Flush.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Flush%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L63">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L61">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Flush_" data-uid="StreamExtended.Network.CustomBufferedStream.Flush*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Flush" data-uid="StreamExtended.Network.CustomBufferedStream.Flush">Flush()</h4>
@@ -874,12 +990,28 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
   </div>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.flush">Stream.Flush()</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurs.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_FlushAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.FlushAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L160">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L121">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_FlushAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.FlushAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_FlushAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.FlushAsync(System.Threading.CancellationToken)">FlushAsync(CancellationToken)</h4>
@@ -888,7 +1020,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task FlushAsync(CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task FlushAsync(CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -926,12 +1058,33 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.flushasync#system-io-stream-flushasync(system-threading-cancellationtoken)">Stream.FlushAsync(CancellationToken)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>The stream has been disposed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The cancellation token was canceled. This exception is stored into the returned task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_OnDataRead_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L398">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L335">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_OnDataRead_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataRead*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataRead_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataRead(System.Byte[],System.Int32,System.Int32)">OnDataRead(byte[], int, int)</h4>
@@ -973,7 +1126,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_OnDataWrite_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L393">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L330">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_OnDataWrite_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataWrite*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_OnDataWrite_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.OnDataWrite(System.Byte[],System.Int32,System.Int32)">OnDataWrite(byte[], int, int)</h4>
@@ -1015,7 +1168,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_PeekByteAsync_System_Int32_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L231">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L171">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_PeekByteAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_PeekByteAsync_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteAsync(System.Int32,System.Threading.CancellationToken)">PeekByteAsync(int, CancellationToken)</h4>
@@ -1039,14 +1192,12 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The index.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td><p>The cancellation token.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -1070,7 +1221,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_System_Int32_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(System.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L330">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L262">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_PeekByteFromBuffer_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekByteFromBuffer(System.Int32)">PeekByteFromBuffer(int)</h4>
@@ -1094,8 +1245,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The index.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -1114,28 +1264,12 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
-        <td><p>Index is out of buffer size</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Byte___System_Int32_System_Int32_System_Int32_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L297">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L232">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekBytesAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Byte___System_Int32_System_Int32_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Byte[],System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">PeekBytesAsync(byte[], int, int, int, CancellationToken)</h4>
@@ -1203,7 +1337,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32%2CSystem.Int32%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L268">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L203">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekBytesAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_PeekBytesAsync_System_Int32_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.PeekBytesAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">PeekBytesAsync(int, int, CancellationToken)</h4>
@@ -1227,20 +1361,17 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The index.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
         <td><span class="parametername">size</span></td>
-        <td><p>The number of bytes to peek.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td><p>The cancellation token.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -1264,7 +1395,7 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Read_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Read(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L101">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L81">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Read_" data-uid="StreamExtended.Network.CustomBufferedStream.Read*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Read_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.Read(System.Byte[],System.Int32,System.Int32)">Read(byte[], int, int)</h4>
@@ -1316,19 +1447,60 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td><p>The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.</p>
+        <td><p>The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if <code class="paramref">count</code> is 0 or the end of the stream has been reached.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.read#system-io-stream-read(system-byte()-system-int32-system-int32)">Stream.Read(byte[], int, int)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>The sum of <code class="paramref">offset</code> and <code class="paramref">count</code> is larger than the buffer length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p><code class="paramref">buffer</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
+        <td><p><code class="paramref">offset</code> or <code class="paramref">count</code> is negative.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support reading.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadAndIgnoreAllLinesAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadAndIgnoreAllLinesAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L633">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L549">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_ReadAndIgnoreAllLinesAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAndIgnoreAllLinesAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadAndIgnoreAllLinesAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAndIgnoreAllLinesAsync(System.Threading.CancellationToken)">ReadAndIgnoreAllLinesAsync(CancellationToken)</h4>
@@ -1376,18 +1548,16 @@ of UTF-8 encoded string or raw bytes asynchronously from last read position.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L185">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L127">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_ReadAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">ReadAsync(byte[], int, int, CancellationToken)</h4>
-  <div class="markdown level1 summary"><p>Asynchronously reads a sequence of bytes from the current stream,
-advances the position within the stream by the number of bytes read,
-and monitors cancellation requests.</p>
+  <div class="markdown level1 summary"><p>Asynchronously reads a sequence of bytes from the current stream, advances the position within the stream by the number of bytes read, and monitors cancellation requests.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task&lt;int&gt; ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task&lt;int&gt; ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1408,8 +1578,7 @@ and monitors cancellation requests.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
         <td><span class="parametername">offset</span></td>
-        <td><p>The byte offset in <code class="paramref">buffer</code> at which
-to begin writing data from the stream.</p>
+        <td><p>The byte offset in <code class="paramref">buffer</code> at which to begin writing data from the stream.</p>
 </td>
       </tr>
       <tr>
@@ -1421,8 +1590,7 @@ to begin writing data from the stream.</p>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td><p>The token to monitor for cancellation requests.
-The default value is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>.</p>
+        <td><p>The token to monitor for cancellation requests. The default value is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -1438,25 +1606,139 @@ The default value is <a class="xref" href="https://learn.microsoft.com/dotnet/ap
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;</td>
-        <td><p>A task that represents the asynchronous read operation.
-The value of the parameter contains the total
-number of bytes read into the buffer.
-The result value can be less than the number of bytes
-requested if the number of bytes currently available is
-less than the requested number, or it can be 0 (zero)
-if the end of the stream has been reached.</p>
+        <td><p>A task that represents the asynchronous read operation. The value of the <code class="paramref">TResult</code> parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if <code class="paramref">count</code> is 0 or if the end of the stream has been reached.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)">Stream.ReadAsync(byte[], int, int, CancellationToken)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p><code class="paramref">buffer</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
+        <td><p><code class="paramref">offset</code> or <code class="paramref">count</code> is negative.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>The sum of <code class="paramref">offset</code> and <code class="paramref">count</code> is larger than the buffer length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support reading.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>The stream has been disposed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The stream is currently in use by a previous read operation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The cancellation token was canceled. This exception is stored into the returned task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Memory_System_Byte__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Memory%7BSystem.Byte%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L133">View Source</a>
+  </span>
+  <a id="StreamExtended_Network_CustomBufferedStream_ReadAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAsync*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_ReadAsync_System_Memory_System_Byte__System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">ReadAsync(Memory&lt;byte&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously reads a sequence of bytes from the current stream, advances the position within the stream by the number of bytes read, and monitors cancellation requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ValueTask&lt;int&gt; ReadAsync(Memory&lt;byte&gt; buffer, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.memory-1">Memory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The region of memory to write the data into.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests. The default value is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;</td>
+        <td><p>A task that represents the asynchronous read operation. The value of its <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1.result">Result</a> property contains the total number of bytes read into the buffer. The result value can be less than the length of the buffer if that many bytes are not currently available, or it can be 0 (zero) if the length of the buffer is 0 or if the end of the stream has been reached.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readasync#system-io-stream-readasync(system-memory((system-byte))-system-threading-cancellationtoken)">Stream.ReadAsync(Memory&lt;byte&gt;, CancellationToken)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The cancellation token was canceled. This exception is stored into the returned task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadByte.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadByte%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L209">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L152">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_ReadByte_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadByte*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadByte" data-uid="StreamExtended.Network.CustomBufferedStream.ReadByte">ReadByte()</h4>
@@ -1478,19 +1760,40 @@ if the end of the stream has been reached.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td><p>The unsigned byte cast to an Int32, or -1 if at the end of the stream.</p>
+        <td><p>The unsigned byte cast to an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, or -1 if at the end of the stream.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.readbyte">Stream.ReadByte()</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support reading.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadByteFromBuffer.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadByteFromBuffer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L345">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L275">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_ReadByteFromBuffer_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadByteFromBuffer*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadByteFromBuffer" data-uid="StreamExtended.Network.CustomBufferedStream.ReadByteFromBuffer">ReadByteFromBuffer()</h4>
@@ -1516,28 +1819,12 @@ if the end of the stream has been reached.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></td>
-        <td><p>Buffer is empty</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_ReadLineAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.ReadLineAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L568">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L486">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_ReadLineAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadLineAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_ReadLineAsync_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.ReadLineAsync(System.Threading.CancellationToken)">ReadLineAsync(CancellationToken)</h4>
@@ -1585,7 +1872,7 @@ if the end of the stream has been reached.</p>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Seek_System_Int64_System_IO_SeekOrigin_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Seek(System.Int64%2CSystem.IO.SeekOrigin)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L76">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L67">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Seek_" data-uid="StreamExtended.Network.CustomBufferedStream.Seek*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Seek_System_Int64_System_IO_SeekOrigin_" data-uid="StreamExtended.Network.CustomBufferedStream.Seek(System.Int64,System.IO.SeekOrigin)">Seek(long, SeekOrigin)</h4>
@@ -1638,12 +1925,38 @@ if the end of the stream has been reached.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.seek">Stream.Seek(long, SeekOrigin)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support seeking, such as if the stream is constructed from a pipe or console output.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_SetLength_System_Int64_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.SetLength(System.Int64)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L87">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L75">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_SetLength_" data-uid="StreamExtended.Network.CustomBufferedStream.SetLength*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_SetLength_System_Int64_" data-uid="StreamExtended.Network.CustomBufferedStream.SetLength(System.Int64)">SetLength(long)</h4>
@@ -1674,12 +1987,38 @@ if the end of the stream has been reached.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.setlength">Stream.SetLength(long)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support both writing and seeking, such as if the stream is constructed from a pipe or console output.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_Write_System_Byte___System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.Write(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L125">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L100">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_Write_" data-uid="StreamExtended.Network.CustomBufferedStream.Write*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_Write_System_Byte___System_Int32_System_Int32_" data-uid="StreamExtended.Network.CustomBufferedStream.Write(System.Byte[],System.Int32,System.Int32)">Write(byte[], int, int)</h4>
@@ -1722,12 +2061,53 @@ if the end of the stream has been reached.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.write#system-io-stream-write(system-byte()-system-int32-system-int32)">Stream.Write(byte[], int, int)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>The sum of <code class="paramref">offset</code> and <code class="paramref">count</code> is greater than the buffer length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p><code class="paramref">buffer</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
+        <td><p><code class="paramref">offset</code> or <code class="paramref">count</code> is negative.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurred, such as the specified file cannot be found.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support writing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.write#system-io-stream-write(system-byte()-system-int32-system-int32)">Write(byte[], int, int)</a> was called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_WriteAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.WriteAsync(System.Byte%5B%5D%2CSystem.Int32%2CSystem.Int32%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L366">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L287">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_WriteAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteAsync*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_WriteAsync_System_Byte___System_Int32_System_Int32_System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">WriteAsync(byte[], int, int, CancellationToken)</h4>
@@ -1736,7 +2116,7 @@ if the end of the stream has been reached.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -1792,12 +2172,132 @@ if the end of the stream has been reached.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-byte()-system-int32-system-int32-system-threading-cancellationtoken)">Stream.WriteAsync(byte[], int, int, CancellationToken)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p><code class="paramref">buffer</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></td>
+        <td><p><code class="paramref">offset</code> or <code class="paramref">count</code> is negative.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
+        <td><p>The sum of <code class="paramref">offset</code> and <code class="paramref">count</code> is larger than the buffer length.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support writing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>The stream has been disposed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The stream is currently in use by a previous write operation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The cancellation token was canceled. This exception is stored into the returned task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.WriteAsync(System.ReadOnlyMemory%7BSystem.Byte%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L294">View Source</a>
+  </span>
+  <a id="StreamExtended_Network_CustomBufferedStream_WriteAsync_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteAsync*"></a>
+  <h4 id="StreamExtended_Network_CustomBufferedStream_WriteAsync_System_ReadOnlyMemory_System_Byte__System_Threading_CancellationToken_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">WriteAsync(ReadOnlyMemory&lt;byte&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Asynchronously writes a sequence of bytes to the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ValueTask WriteAsync(ReadOnlyMemory&lt;byte&gt; buffer, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlymemory-1">ReadOnlyMemory</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>The region of memory to write data from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The token to monitor for cancellation requests. The default value is <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask">ValueTask</a></td>
+        <td><p>A task that represents the asynchronous write operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writeasync#system-io-stream-writeasync(system-readonlymemory((system-byte))-system-threading-cancellationtoken)">Stream.WriteAsync(ReadOnlyMemory&lt;byte&gt;, CancellationToken)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.operationcanceledexception">OperationCanceledException</a></td>
+        <td><p>The cancellation token was canceled. This exception is stored into the returned task.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/justcoding121/stream-extended/new/develop/apiSpec/new?filename=StreamExtended_Network_CustomBufferedStream_WriteByte_System_Byte_.md&amp;value=---%0Auid%3A%20StreamExtended.Network.CustomBufferedStream.WriteByte(System.Byte)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L378">View Source</a>
+    <a href="https://github.com/justcoding121/stream-extended/blob/develop/src/StreamExtended/Network/CustomBufferedStream.cs/#L315">View Source</a>
   </span>
   <a id="StreamExtended_Network_CustomBufferedStream_WriteByte_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteByte*"></a>
   <h4 id="StreamExtended_Network_CustomBufferedStream_WriteByte_System_Byte_" data-uid="StreamExtended.Network.CustomBufferedStream.WriteByte(System.Byte)">WriteByte(byte)</h4>
@@ -1828,6 +2328,32 @@ if the end of the stream has been reached.</p>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream.writebyte">Stream.WriteByte(byte)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.ioexception">IOException</a></td>
+        <td><p>An I/O error occurs.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></td>
+        <td><p>The stream does not support writing, or the stream is already closed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></td>
+        <td><p>Methods were called after the stream was closed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="events">Events
 </h3>
   <span class="small pull-right mobile-hide">
