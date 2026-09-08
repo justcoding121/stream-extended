@@ -16,20 +16,6 @@ Works on **Windows, Linux, and macOS** (.NET 10).
 - Read SNI, ALPN, and other hello extensions before choosing a certificate
 - `CustomBufferedStream` implements `IPeekStream` so peeked bytes stay available for `SslStream`
 
-## Code Quality
-
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=alert_status)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=coverage)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=ncloc)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=bugs)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=code_smells)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=security_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=sqale_index)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
-
 ## Install
 
 ```bash
@@ -84,6 +70,20 @@ dotnet pack src/StreamExtended/StreamExtended.csproj -c Release
 ```
 
 CI runs unit, integration, and e2e on Windows (`build`) plus Linux and macOS (`test` matrix). See [Building and testing](https://github.com/justcoding121/stream-extended/wiki/Building-and-Testing).
+
+## Code quality
+
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=alert_status)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=coverage)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=ncloc)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=bugs)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=code_smells)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=security_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Duplicated Lines](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=justcoding121_stream-extended&metric=sqale_index)](https://sonarcloud.io/summary/overall?id=justcoding121_stream-extended&branch=develop)
 
 ## License
 
