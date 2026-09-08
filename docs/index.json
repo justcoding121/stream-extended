@@ -82,6 +82,6 @@
   "index.html": {
     "href": "index.html",
     "title": "StreamExtended | StreamExtended",
-    "summary": "StreamExtended .NET library for peeking TLS ClientHello / ServerHello (SNI, ALPN, and other extensions) before SslStream authentication. API Browse the API documentation. Install dotnet add package StreamExtended Source github.com/justcoding121/stream-extended"
+    "summary": "StreamExtended .NET library for peeking TLS ClientHello / ServerHello (SNI, ALPN, and other extensions) before SslStream authentication. Works on Windows, Linux, and macOS with .NET 10. API Browse the API documentation. How-to pages live on the GitHub Wiki. Install dotnet add package StreamExtended Source github.com/justcoding121/stream-extended"
   }
 }
