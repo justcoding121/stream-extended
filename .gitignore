@@ -219,3 +219,6 @@ omnisharp.json
 .sonarqube/
 .coverage/
 coverage/
+
+# Local Cursor agent rules / config (not shared)
+.cursor/
