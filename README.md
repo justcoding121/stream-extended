@@ -4,7 +4,7 @@ Actively maintained .NET library for peeking TLS **ClientHello** / **ServerHello
 
 Works on **Windows, Linux, and macOS** (.NET 10).
 
-[![Build](https://github.com/justcoding121/stream-extended/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/justcoding121/stream-extended/actions/workflows/ci.yml)
+[![Build](https://github.com/justcoding121/stream-extended/actions/workflows/ci.yml/badge.svg?branch=develop&event=push)](https://github.com/justcoding121/stream-extended/actions/workflows/ci.yml?query=branch%3Adevelop+event%3Apush)
 [![NuGet](https://img.shields.io/nuget/v/StreamExtended.svg)](https://www.nuget.org/packages/StreamExtended)
 [![NuGet downloads](https://img.shields.io/nuget/dt/StreamExtended.svg)](https://www.nuget.org/packages/StreamExtended)
 
