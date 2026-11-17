@@ -39,7 +39,8 @@ jobs:
       - name: Install SonarScanner
         if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
         shell: pwsh
-        run: dotnet tool install --tool-path .sonar/scanner dotnet-sonarscanner
+        # Pin to 11.3: scanner 12.x fails SonarCloud begin with "Authentication with the server has failed."
+        run: dotnet tool install --tool-path .sonar/scanner dotnet-sonarscanner --version 11.3.0
 
       - name: Install coverage tool
         if: env.RUN_SONAR == 'true' && env.SONAR_TOKEN != ''
